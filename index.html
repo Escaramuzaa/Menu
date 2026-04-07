@@ -14,7 +14,6 @@
       min-height: 100vh;
     }
 
-    /* ── IDIOMAS ── */
     #lang-bar {
       display: flex;
       flex-wrap: wrap;
@@ -39,32 +38,24 @@
       color: #5a3e28;
       transition: all 0.2s;
     }
-
     .lang-btn:hover { background: #e8dfd3; }
     .lang-btn.active { background: #2c1a0e; color: #fff; }
 
-    /* ── HEADER ── */
     header {
       text-align: center;
       padding: 40px 20px 28px;
     }
-
     header img {
       max-width: 320px;
       width: 80%;
-      margin-bottom: 16px;
+      margin: 0 auto 16px;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
-
     .header-line {
-      width: 48px;
-      height: 2px;
+      width: 48px; height: 2px;
       background: #c8a97e;
       margin: 12px auto;
     }
-
     header p {
       font-size: 0.78rem;
       letter-spacing: 4px;
@@ -72,7 +63,6 @@
       font-style: italic;
     }
 
-    /* ── TABS ── */
     #tab-bar {
       display: flex;
       flex-wrap: wrap;
@@ -82,7 +72,6 @@
       max-width: 960px;
       margin: 0 auto;
     }
-
     .tab-btn {
       display: flex;
       align-items: center;
@@ -98,18 +87,19 @@
       transition: all 0.25s;
       font-family: Georgia, serif;
     }
-
     .tab-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
     .tab-btn:hover { background: #f5ede3; }
-    .tab-btn.active { background: #2c1a0e; color: #fff; border-color: #2c1a0e; box-shadow: 0 4px 14px rgba(44,26,14,0.18); }
+    .tab-btn.active {
+      background: #2c1a0e; color: #fff;
+      border-color: #2c1a0e;
+      box-shadow: 0 4px 14px rgba(44,26,14,0.18);
+    }
 
-    /* ── CARD ── */
     #menu-card {
       max-width: 900px;
       margin: 0 auto 48px;
       padding: 0 16px;
     }
-
     .card-inner {
       background: #fff;
       border-radius: 32px;
@@ -118,7 +108,6 @@
       padding: clamp(24px, 6vw, 56px);
       min-height: 480px;
     }
-
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -127,7 +116,6 @@
       padding-bottom: 24px;
       margin-bottom: 32px;
     }
-
     .card-title {
       display: flex;
       align-items: center;
@@ -136,9 +124,7 @@
       font-weight: 300;
       color: #2c1a0e;
     }
-
     .card-title svg { width: 24px; height: 24px; flex-shrink: 0; }
-
     .card-price-global {
       font-size: 1.5rem;
       color: #ccc0b0;
@@ -146,30 +132,31 @@
       font-weight: 300;
     }
 
-    /* ── ITEMS GRID ── */
+    /* ── ITEMS CON DESCRIPCIÓN ── */
     .items-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 0 56px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px 56px;
     }
-
     .menu-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #f5f0ea;
+    }
+    .menu-item-top {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
-      padding-bottom: 16px;
-      margin-bottom: 4px;
-      border-bottom: 1px solid #f5f0ea;
     }
-
     .menu-item-name {
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
       color: #2c1a0e;
       line-height: 1.4;
     }
-
     .menu-item-price {
       color: #b0a090;
       font-style: italic;
@@ -177,77 +164,89 @@
       white-space: nowrap;
       flex-shrink: 0;
     }
+    .menu-item-desc {
+      font-size: 0.8rem;
+      color: #9a8070;
+      line-height: 1.5;
+      font-style: italic;
+    }
 
-    /* ── SUBCATEGORIES (Tés) ── */
+    /* ── TÉS ── */
     .sub-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
     }
-
-    .subcat {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .subcat-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
+    .subcat { display: flex; flex-direction: column; gap: 12px; }
+    .subcat-header { display: flex; align-items: center; gap: 12px; }
     .subcat-dot {
-      width: 14px;
-      height: 14px;
+      width: 16px; height: 16px;
       border-radius: 50%;
       flex-shrink: 0;
     }
-
     .dot-black  { background: #3f3f46; }
     .dot-green  { background: #10b981; }
     .dot-gold   { background: #fbbf24; }
     .dot-amber  { background: #ea580c; }
 
     .subcat-name {
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: #2c1a0e;
     }
-
     .subcat-tag {
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #9a8070;
     }
-
     .subcat-profile {
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       color: #7a6a58;
       font-style: italic;
       line-height: 1.5;
       background: #f9f5f0;
       border-left: 3px solid #ddd3c7;
-      padding: 8px 12px;
+      padding: 10px 14px;
       border-radius: 0 8px 8px 0;
     }
-
-    .subcat ul { list-style: none; display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
-
+    .subcat ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 4px;
+    }
     .subcat li {
       display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .subcat-li-top {
+      display: flex;
       justify-content: space-between;
-      font-size: 0.88rem;
-      color: #4a3828;
+      align-items: baseline;
+    }
+    .subcat-li-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #2c1a0e;
+    }
+    .subcat-li-price {
+      font-size: 0.85rem;
+      color: #c0b0a0;
+      font-style: italic;
+    }
+    .subcat-li-desc {
+      font-size: 0.78rem;
+      color: #9a8070;
+      font-style: italic;
+      line-height: 1.4;
     }
 
-    .subcat li span.p { color: #c0b0a0; font-style: italic; }
-
-    /* ── NOTA ── */
     .card-note {
       margin-top: 40px;
       padding: 16px 20px;
@@ -261,10 +260,8 @@
       color: #7a6a58;
       font-weight: 500;
     }
-
     .card-note svg { width: 18px; height: 18px; color: #b0a090; flex-shrink: 0; }
 
-    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 20px;
@@ -275,7 +272,7 @@
     }
 
     @media (max-width: 520px) {
-      .items-grid { grid-template-columns: 1fr; gap: 0; }
+      .items-grid { grid-template-columns: 1fr; }
       .sub-grid   { grid-template-columns: 1fr; }
     }
   </style>
@@ -300,14 +297,14 @@
 
 <script>
 const languages = [
-  { code:'es', name:'Español',    flag:'🇪🇸' },
-  { code:'en', name:'English',    flag:'🇬🇧' },
-  { code:'de', name:'Deutsch',    flag:'🇩🇪' },
-  { code:'ja', name:'日本語',     flag:'🇯🇵' },
-  { code:'fr', name:'Français',   flag:'🇫🇷' },
-  { code:'it', name:'Italiano',   flag:'🇮🇹' },
-  { code:'nl', name:'Nederlands', flag:'🇳🇱' },
-  { code:'ru', name:'Русский',    flag:'🇷🇺' }
+  {code:'es',name:'Español',flag:'🇪🇸'},
+  {code:'en',name:'English',flag:'🇬🇧'},
+  {code:'de',name:'Deutsch',flag:'🇩🇪'},
+  {code:'ja',name:'日本語',flag:'🇯🇵'},
+  {code:'fr',name:'Français',flag:'🇫🇷'},
+  {code:'it',name:'Italiano',flag:'🇮🇹'},
+  {code:'nl',name:'Nederlands',flag:'🇳🇱'},
+  {code:'ru',name:'Русский',flag:'🇷🇺'}
 ];
 
 const T = {
@@ -317,19 +314,53 @@ const T = {
     supplement:"Suplemento leche de Avena o Almendra: +0,30 €",
     categories:["Cafetería","Matcha Bar","Limonadas","Tés e Infusiones","Fríos y Jugos","Refrescos","Vinos y Cervezas"],
     items:{
-      "Espresso Doble / Cortado":"Espresso Doble / Cortado","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Capuccino / Latte","Chocolate Caliente":"Chocolate Caliente","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Matcha Latte Clásico","Iced Matcha Mango":"Iced Matcha Mango",
-      "Iced Matcha Frutos Rojos":"Iced Matcha Frutos Rojos","Iced Matcha Coco":"Iced Matcha Coco",
-      "Iced Matcha Maracuyá":"Iced Matcha Maracuyá","Iced Matcha Escaramuza":"Iced Matcha Escaramuza",
-      "Limonada Clásica":"Limonada Clásica","Limonada de Frambuesa":"Limonada de Frambuesa",
-      "Limonada de Mango":"Limonada de Mango","Limonada de Coco":"Limonada de Coco",
-      "Limonada de Maracuyá":"Limonada de Maracuyá","Limonada de Menta y Jengibre":"Limonada de Menta y Jengibre",
-      "Cold Brew Puro":"Cold Brew Puro","Iced Latte":"Iced Latte (Normal, Vainilla o Caramelo)",
-      "Jugo de Naranja Natural":"Jugo de Naranja Natural","Coca-Cola":"Coca-Cola (Normal o Zero)",
-      "Agua":"Agua (Con o Sin gas)","Cerveza":"Cerveza (Normal o 0.0)",
-      "Tinto de Verano":"Tinto de Verano","Vino Blanco":"Vino Blanco (Seco, Semi-dulce o Dulce)",
-      "Vino Tinto":"Vino Tinto","Jengibre y Limón":"Jengibre y Limón","Lavanda":"Lavanda"
+      "Espresso Doble / Cortado":{name:"Espresso Doble / Cortado",desc:"Concentrado y potente. El alma del café."},
+      "Americano":{name:"Americano",desc:"Espresso suavizado con agua caliente. Limpio y largo."},
+      "Flat White":{name:"Flat White",desc:"Doble espresso con leche sedosa. Intenso y cremoso."},
+      "Capuccino / Latte":{name:"Capuccino / Latte",desc:"Espresso con leche vaporizada y espuma aterciopelada."},
+      "Chocolate Caliente":{name:"Chocolate Caliente",desc:"Cacao puro con leche caliente. Cremoso y reconfortante."},
+      "Chai Latte":{name:"Chai Latte",desc:"Especias orientales, canela y cardamomo con leche vaporizada."},
+      "Matcha Latte Clásico":{name:"Matcha Latte Clásico",desc:"Matcha ceremonial con leche suave. Equilibrado y vegetal."},
+      "Iced Matcha Mango":{name:"Iced Matcha Mango",desc:"Matcha frío con coulis de mango tropical. Vibrante y refrescante."},
+      "Iced Matcha Frutos Rojos":{name:"Iced Matcha Frutos Rojos",desc:"Matcha con frambuesa y frutos del bosque. Ácido y goloso."},
+      "Iced Matcha Coco":{name:"Iced Matcha Coco",desc:"Matcha con leche de coco. Suave, exótico y cremoso."},
+      "Iced Matcha Maracuyá":{name:"Iced Matcha Maracuyá",desc:"Matcha con maracuyá. Un contraste tropical e intenso."},
+      "Iced Matcha Escaramuza":{name:"Iced Matcha Escaramuza",desc:"Nuestra combinación estrella. Fresca, única y especial."},
+      "Limonada Clásica":{name:"Limonada Clásica",desc:"Limón natural, agua y el punto justo de dulzor."},
+      "Limonada de Frambuesa":{name:"Limonada de Frambuesa",desc:"Cítrica y frutal con un toque ácido de frambuesa fresca."},
+      "Limonada de Mango":{name:"Limonada de Mango",desc:"Tropical y refrescante con pulpa de mango natural."},
+      "Limonada de Coco":{name:"Limonada de Coco",desc:"Limón con leche de coco. Cremosa y sorprendente."},
+      "Limonada de Maracuyá":{name:"Limonada de Maracuyá",desc:"Intensa y aromática. El sabor del verano en un vaso."},
+      "Limonada de Menta y Jengibre":{name:"Limonada de Menta y Jengibre",desc:"Fresca y especiada. Limón, menta y jengibre en armonía."},
+      "Cold Brew Puro":{name:"Cold Brew Puro",desc:"Café macerado 24h en frío. Suave, bajo en acidez y muy refrescante."},
+      "Iced Latte":{name:"Iced Latte",desc:"Espresso sobre hielo con leche fría. Normal, vainilla o caramelo."},
+      "Jugo de Naranja Natural":{name:"Jugo de Naranja Natural",desc:"Naranjas exprimidas al momento. Puro y vitamínico."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Normal o Zero. Bien fría, como tiene que ser."},
+      "Agua":{name:"Agua",desc:"Con o sin gas."},
+      "Cerveza":{name:"Cerveza",desc:"Normal o 0.0. Precio según disponibilidad."},
+      "Tinto de Verano":{name:"Tinto de Verano",desc:"Vino tinto con gaseosa y limón. El clásico del verano."},
+      "Vino Blanco":{name:"Vino Blanco",desc:"Seco, semi-dulce o dulce. Precio según selección."},
+      "Vino Tinto":{name:"Vino Tinto",desc:"Selección de la casa. Precio según disponibilidad."},
+      "Jengibre y Limón":{name:"Jengibre y Limón",desc:"Infusión digestiva y estimulante. Cálida y especiada."},
+      "Lavanda":{name:"Lavanda",desc:"Floral y relajante. Perfecta para el final del día."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Robusto y maltoso. El clásico del desayuno británico."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Té negro con bergamota. Aromático y elegante."},
+      "Té Negro Chai":{name:"Chai Negro",desc:"Especias, canela y pimienta. Intenso y reconfortante."},
+      "Té Verde Jazmín":{name:"Té Verde Jazmín",desc:"Delicado y floral. Perfumado con flores de jazmín."},
+      "Té Verde Sakura":{name:"Té Verde Sakura",desc:"Suave y primaveral. Notas florales de cerezo japonés."},
+      "Té Blanco Seda":{name:"Té Blanco Seda",desc:"Muy suave y dulce. El más delicado de nuestra carta."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Noches de Toronto",desc:"Mezcla exclusiva. Fresco, frutal y envolvente."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Blend depurativo. Ligero y equilibrado."},
+      "Manzanilla":{name:"Manzanilla",desc:"Clásica y suave. Digestiva y relajante."},
+      "Jengibre y Limón":{name:"Jengibre y Limón",desc:"Estimulante y cítrica. Perfecta para activar el cuerpo."},
+      "Jengibre y Cúrcuma":{name:"Jengibre y Cúrcuma",desc:"Antiinflamatoria y potente. Warm y especiada."},
+      "Infusión Inmunidad":{name:"Infusión Inmunidad",desc:"Blend de hierbas para reforzar las defensas."},
+      "Infusión Depurativa":{name:"Infusión Depurativa",desc:"Limpia y ligera. Ideal después de las comidas."},
+      "Chai Digestivo":{name:"Chai Digestivo",desc:"Especias suaves y cúrcuma. Reconfortante y saludable."},
+      "Rooibos Clásico / Noches":{name:"Rooibos Clásico / Noches",desc:"Sin teína. Dulce y afrutado. Perfecto para la noche."},
+      "Lavanda":{name:"Lavanda",desc:"Floral y sedante. El abrazo perfecto antes de dormir."}
     },
     gamas:{
       black:{name:"GAMA NEGRA",tag:"Energía y Desayuno",profile:"Alto contenido en teína, sabores robustos y terrosos."},
@@ -344,19 +375,53 @@ const T = {
     supplement:"Oat or Almond milk supplement: +0.30 €",
     categories:["Coffee Bar","Matcha Bar","Lemonades","Teas & Infusions","Cold Drinks","Soft Drinks","Wines & Beers"],
     items:{
-      "Espresso Doble / Cortado":"Double Espresso / Cortado","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Cappuccino / Latte","Chocolate Caliente":"Hot Chocolate","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Classic Matcha Latte","Iced Matcha Mango":"Iced Mango Matcha",
-      "Iced Matcha Frutos Rojos":"Iced Berry Matcha","Iced Matcha Coco":"Iced Coconut Matcha",
-      "Iced Matcha Maracuyá":"Iced Passion Fruit Matcha","Iced Matcha Escaramuza":"Iced Escaramuza Matcha",
-      "Limonada Clásica":"Classic Lemonade","Limonada de Frambuesa":"Raspberry Lemonade",
-      "Limonada de Mango":"Mango Lemonade","Limonada de Coco":"Coconut Lemonade",
-      "Limonada de Maracuyá":"Passion Fruit Lemonade","Limonada de Menta y Jengibre":"Mint & Ginger Lemonade",
-      "Cold Brew Puro":"Pure Cold Brew","Iced Latte":"Iced Latte (Regular, Vanilla or Caramel)",
-      "Jugo de Naranja Natural":"Fresh Orange Juice","Coca-Cola":"Coca-Cola (Regular or Zero)",
-      "Agua":"Water (Still or Sparkling)","Cerveza":"Beer (Regular or 0.0)",
-      "Tinto de Verano":"Red Wine Spritzer","Vino Blanco":"White Wine (Dry, Semi-sweet or Sweet)",
-      "Vino Tinto":"Red Wine","Jengibre y Limón":"Ginger & Lemon","Lavanda":"Lavender"
+      "Espresso Doble / Cortado":{name:"Double Espresso / Cortado",desc:"Concentrated and bold. The soul of coffee."},
+      "Americano":{name:"Americano",desc:"Espresso softened with hot water. Clean and long."},
+      "Flat White":{name:"Flat White",desc:"Double espresso with silky milk. Intense and creamy."},
+      "Capuccino / Latte":{name:"Cappuccino / Latte",desc:"Espresso with steamed milk and velvety foam."},
+      "Chocolate Caliente":{name:"Hot Chocolate",desc:"Pure cocoa with warm milk. Creamy and comforting."},
+      "Chai Latte":{name:"Chai Latte",desc:"Oriental spices, cinnamon and cardamom with steamed milk."},
+      "Matcha Latte Clásico":{name:"Classic Matcha Latte",desc:"Ceremonial matcha with smooth milk. Balanced and vegetal."},
+      "Iced Matcha Mango":{name:"Iced Mango Matcha",desc:"Cold matcha with tropical mango coulis. Vibrant and refreshing."},
+      "Iced Matcha Frutos Rojos":{name:"Iced Berry Matcha",desc:"Matcha with raspberry and forest berries. Tangy and sweet."},
+      "Iced Matcha Coco":{name:"Iced Coconut Matcha",desc:"Matcha with coconut milk. Smooth, exotic and creamy."},
+      "Iced Matcha Maracuyá":{name:"Iced Passion Fruit Matcha",desc:"Matcha with passion fruit. A tropical and intense contrast."},
+      "Iced Matcha Escaramuza":{name:"Iced Escaramuza Matcha",desc:"Our signature combination. Fresh, unique and special."},
+      "Limonada Clásica":{name:"Classic Lemonade",desc:"Fresh lemon, water and just the right sweetness."},
+      "Limonada de Frambuesa":{name:"Raspberry Lemonade",desc:"Citrusy and fruity with a fresh raspberry twist."},
+      "Limonada de Mango":{name:"Mango Lemonade",desc:"Tropical and refreshing with natural mango pulp."},
+      "Limonada de Coco":{name:"Coconut Lemonade",desc:"Lemon with coconut milk. Creamy and surprising."},
+      "Limonada de Maracuyá":{name:"Passion Fruit Lemonade",desc:"Intense and aromatic. Summer in a glass."},
+      "Limonada de Menta y Jengibre":{name:"Mint & Ginger Lemonade",desc:"Fresh and spiced. Lemon, mint and ginger in harmony."},
+      "Cold Brew Puro":{name:"Pure Cold Brew",desc:"Coffee steeped 24h cold. Smooth, low acid and very refreshing."},
+      "Iced Latte":{name:"Iced Latte",desc:"Espresso over ice with cold milk. Regular, vanilla or caramel."},
+      "Jugo de Naranja Natural":{name:"Fresh Orange Juice",desc:"Oranges squeezed to order. Pure and full of vitamins."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Regular or Zero. Ice cold, as it should be."},
+      "Agua":{name:"Water",desc:"Still or sparkling."},
+      "Cerveza":{name:"Beer",desc:"Regular or 0.0. Price according to availability."},
+      "Tinto de Verano":{name:"Red Wine Spritzer",desc:"Red wine with soda and lemon. The classic summer drink."},
+      "Vino Blanco":{name:"White Wine",desc:"Dry, semi-sweet or sweet. Price according to selection."},
+      "Vino Tinto":{name:"Red Wine",desc:"House selection. Price according to availability."},
+      "Jengibre y Limón":{name:"Ginger & Lemon",desc:"Digestive and stimulating infusion. Warm and spiced."},
+      "Lavanda":{name:"Lavender",desc:"Floral and relaxing. Perfect for the end of the day."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Robust and malty. The classic British breakfast tea."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Black tea with bergamot. Aromatic and elegant."},
+      "Té Negro Chai":{name:"Chai Black",desc:"Spices, cinnamon and pepper. Intense and comforting."},
+      "Té Verde Jazmín":{name:"Jasmine Green Tea",desc:"Delicate and floral. Perfumed with jasmine blossoms."},
+      "Té Verde Sakura":{name:"Sakura Green Tea",desc:"Soft and spring-like. Floral notes of Japanese cherry."},
+      "Té Blanco Seda":{name:"White Silk Tea",desc:"Very soft and sweet. The most delicate on our menu."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Toronto Nights",desc:"Exclusive blend. Fresh, fruity and enveloping."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Purifying blend. Light and balanced."},
+      "Manzanilla":{name:"Chamomile",desc:"Classic and gentle. Digestive and relaxing."},
+      "Jengibre y Limón":{name:"Ginger & Lemon",desc:"Stimulating and citrusy. Perfect to energize the body."},
+      "Jengibre y Cúrcuma":{name:"Ginger & Turmeric",desc:"Anti-inflammatory and potent. Warm and spiced."},
+      "Infusión Inmunidad":{name:"Immunity Blend",desc:"Herbal blend to strengthen your defenses."},
+      "Infusión Depurativa":{name:"Purifying Blend",desc:"Clean and light. Ideal after meals."},
+      "Chai Digestivo":{name:"Digestive Chai",desc:"Gentle spices and turmeric. Comforting and healthy."},
+      "Rooibos Clásico / Noches":{name:"Classic Rooibos / Nights",desc:"Caffeine-free. Sweet and fruity. Perfect for the evening."},
+      "Lavanda":{name:"Lavender",desc:"Floral and soothing. The perfect hug before sleep."}
     },
     gamas:{
       black:{name:"BLACK RANGE",tag:"Energy & Breakfast",profile:"High theine content, robust and earthy flavors."},
@@ -366,51 +431,115 @@ const T = {
     }
   },
   de:{
-    subtitle:"GETRÄNKEKARTE",
-    footer:"Preise inkl. MwSt.",
-    supplement:"Zuschlag Hafer- oder Mandelmilch: +0,30 €",
+    subtitle:"GETRÄNKEKARTE",footer:"Preise inkl. MwSt.",supplement:"Zuschlag Hafer- oder Mandelmilch: +0,30 €",
     categories:["Kaffeehaus","Matcha Bar","Limonaden","Tee & Aufgüsse","Kaltgetränke","Erfrischungen","Wein & Bier"],
     items:{
-      "Espresso Doble / Cortado":"Doppelter Espresso / Cortado","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Cappuccino / Latte","Chocolate Caliente":"Heiße Schokolade","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Klassischer Matcha Latte","Iced Matcha Mango":"Eis-Matcha Mango",
-      "Iced Matcha Frutos Rojos":"Eis-Matcha Beeren","Iced Matcha Coco":"Eis-Matcha Kokos",
-      "Iced Matcha Maracuyá":"Eis-Matcha Passionsfrucht","Iced Matcha Escaramuza":"Eis-Matcha Escaramuza",
-      "Limonada Clásica":"Klassische Limonade","Limonada de Frambuesa":"Himbeer-Limonade",
-      "Limonada de Mango":"Mango-Limonade","Limonada de Coco":"Kokos-Limonade",
-      "Limonada de Maracuyá":"Passionsfrucht-Limonade","Limonada de Menta y Jengibre":"Minze & Ingwer Limonade",
-      "Cold Brew Puro":"Pure Cold Brew","Iced Latte":"Iced Latte (Normal, Vanille oder Karamell)",
-      "Jugo de Naranja Natural":"Frischer Orangensaft","Coca-Cola":"Coca-Cola",
-      "Agua":"Wasser","Cerveza":"Bier","Tinto de Verano":"Tinto de Verano",
-      "Vino Blanco":"Weißwein","Vino Tinto":"Rotwein",
-      "Jengibre y Limón":"Ingwer & Zitrone","Lavanda":"Lavendel"
+      "Espresso Doble / Cortado":{name:"Doppelter Espresso / Cortado",desc:"Konzentriert und kräftig. Die Seele des Kaffees."},
+      "Americano":{name:"Americano",desc:"Espresso mit heißem Wasser. Mild und lang."},
+      "Flat White":{name:"Flat White",desc:"Doppelter Espresso mit seidiger Milch."},
+      "Capuccino / Latte":{name:"Cappuccino / Latte",desc:"Espresso mit Milchschaum. Samtig und aromatisch."},
+      "Chocolate Caliente":{name:"Heiße Schokolade",desc:"Reiner Kakao mit warmer Milch. Cremig und wärmend."},
+      "Chai Latte":{name:"Chai Latte",desc:"Orientalische Gewürze mit Milch. Würzig und süß."},
+      "Matcha Latte Clásico":{name:"Klassischer Matcha Latte",desc:"Zeremonieller Matcha mit sanfter Milch."},
+      "Iced Matcha Mango":{name:"Eis-Matcha Mango",desc:"Kalter Matcha mit tropischem Mango-Coulis."},
+      "Iced Matcha Frutos Rojos":{name:"Eis-Matcha Beeren",desc:"Matcha mit Himbeere und Waldfrüchten."},
+      "Iced Matcha Coco":{name:"Eis-Matcha Kokos",desc:"Matcha mit Kokosmilch. Exotisch und cremig."},
+      "Iced Matcha Maracuyá":{name:"Eis-Matcha Passionsfrucht",desc:"Matcha mit Passionsfrucht. Tropisch und intensiv."},
+      "Iced Matcha Escaramuza":{name:"Eis-Matcha Escaramuza",desc:"Unsere Signature-Kombination. Frisch und einzigartig."},
+      "Limonada Clásica":{name:"Klassische Limonade",desc:"Frische Zitrone und die richtige Süße."},
+      "Limonada de Frambuesa":{name:"Himbeer-Limonade",desc:"Fruchtig mit frischer Himbeernote."},
+      "Limonada de Mango":{name:"Mango-Limonade",desc:"Tropisch mit natürlicher Mangopulpe."},
+      "Limonada de Coco":{name:"Kokos-Limonade",desc:"Zitrone mit Kokosmilch. Cremig und überraschend."},
+      "Limonada de Maracuyá":{name:"Passionsfrucht-Limonade",desc:"Intensiv und aromatisch. Sommer im Glas."},
+      "Limonada de Menta y Jengibre":{name:"Minze & Ingwer Limonade",desc:"Frisch und würzig in Harmonie."},
+      "Cold Brew Puro":{name:"Pure Cold Brew",desc:"24h kalt gezogen. Sanft und sehr erfrischend."},
+      "Iced Latte":{name:"Iced Latte",desc:"Espresso über Eis. Normal, Vanille oder Karamell."},
+      "Jugo de Naranja Natural":{name:"Frischer Orangensaft",desc:"Frisch gepresst. Pur und vitaminreich."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Normal oder Zero. Eiskalt serviert."},
+      "Agua":{name:"Wasser",desc:"Still oder sprudelnd."},
+      "Cerveza":{name:"Bier",desc:"Normal oder 0.0. Preis je nach Verfügbarkeit."},
+      "Tinto de Verano":{name:"Tinto de Verano",desc:"Rotwein mit Zitronenlimonade. Sommerklassiker."},
+      "Vino Blanco":{name:"Weißwein",desc:"Trocken, halbtrocken oder süß."},
+      "Vino Tinto":{name:"Rotwein",desc:"Hausauswahl. Preis je nach Verfügbarkeit."},
+      "Jengibre y Limón":{name:"Ingwer & Zitrone",desc:"Verdauungsfördernd und belebend."},
+      "Lavanda":{name:"Lavendel",desc:"Blumig und entspannend. Perfekt zum Abend."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Kräftig und malzig. Der britische Frühstücksklassiker."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Schwarztee mit Bergamotte. Aromatisch und elegant."},
+      "Té Negro Chai":{name:"Chai Schwarz",desc:"Gewürze, Zimt und Pfeffer. Intensiv und wärmend."},
+      "Té Verde Jazmín":{name:"Jasmin Grüntee",desc:"Zart und blumig. Mit Jasminblüten parfümiert."},
+      "Té Verde Sakura":{name:"Sakura Grüntee",desc:"Sanft und frühlingsfrisch. Kirschblütenaromen."},
+      "Té Blanco Seda":{name:"Weißer Seidentee",desc:"Sehr sanft und süßlich. Der feinste auf unserer Karte."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Toronto Nights",desc:"Exklusive Mischung. Frisch, fruchtig und umhüllend."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Entschlackende Mischung. Leicht und ausgewogen."},
+      "Manzanilla":{name:"Kamille",desc:"Klassisch und mild. Verdauungsfördernd und entspannend."},
+      "Jengibre y Limón":{name:"Ingwer & Zitrone",desc:"Anregend und zitrusfrisch. Belebt Körper und Geist."},
+      "Jengibre y Cúrcuma":{name:"Ingwer & Kurkuma",desc:"Entzündungshemmend. Warm und würzig."},
+      "Infusión Inmunidad":{name:"Immunität-Blend",desc:"Kräutermischung zur Stärkung der Abwehrkräfte."},
+      "Infusión Depurativa":{name:"Entschlackungsblend",desc:"Leicht und reinigend. Ideal nach dem Essen."},
+      "Chai Digestivo":{name:"Verdauungs-Chai",desc:"Sanfte Gewürze und Kurkuma. Wohltuend und gesund."},
+      "Rooibos Clásico / Noches":{name:"Rooibos Klassisch / Nächte",desc:"Koffeinfrei. Süß und fruchtig. Perfekt für den Abend."},
+      "Lavanda":{name:"Lavendel",desc:"Blumig und beruhigend. Die perfekte Umarmung vor dem Schlaf."}
     },
     gamas:{
-      black:{name:"SCHWARZE SERIE",tag:"Energie & Frühstück",profile:"Hoher Teeingehalt, kräftige und erdige Aromen."},
-      green:{name:"GRÜNE & WEISSE SERIE",tag:"Antioxidans & Leichtigkeit",profile:"Mäßiges Teein, blumige und frische Aromen."},
-      gold:{name:"GOLDENE SERIE",tag:"Wellness & Verdauung",profile:"Teeinfrei. Zitrus und medizinisch."},
-      amber:{name:"BERNSTEIN & FLORAL",tag:"Entspannung",profile:"Teeinfrei. Süß und warm."}
+      black:{name:"SCHWARZE SERIE",tag:"Energie & Frühstück",profile:"Hoher Teeingehalt, kräftige Aromen."},
+      green:{name:"GRÜNE SERIE",tag:"Antioxidans",profile:"Mäßiges Teein, blumig und frisch."},
+      gold:{name:"GOLDENE SERIE",tag:"Wellness",profile:"Teeinfrei. Zitrus und medizinisch."},
+      amber:{name:"BERNSTEIN SERIE",tag:"Entspannung",profile:"Teeinfrei. Süß und warm."}
     }
   },
   ja:{
-    subtitle:"ドリンクメニュー",
-    footer:"税込価格",
-    supplement:"オーツミルクまたはアーモンドミルク: +0.30 €",
+    subtitle:"ドリンクメニュー",footer:"税込価格",supplement:"オーツミルクまたはアーモンドミルク: +0.30 €",
     categories:["カフェ","抹茶バー","レモネード","ティー","コールドドリンク","ソフトドリンク","ワイン＆ビール"],
     items:{
-      "Espresso Doble / Cortado":"ダブルエスプレッソ / コルタード","Americano":"アメリカーノ","Flat White":"フラットホワイト",
-      "Capuccino / Latte":"カプチーノ / ラテ","Chocolate Caliente":"ホットチョコレート","Chai Latte":"チャイラテ",
-      "Matcha Latte Clásico":"クラシック抹茶ラテ","Iced Matcha Mango":"アイス抹茶マンゴー",
-      "Iced Matcha Frutos Rojos":"アイス抹茶ベリー","Iced Matcha Coco":"アイス抹茶ココナッツ",
-      "Iced Matcha Maracuyá":"アイス抹茶パッションフルーツ","Iced Matcha Escaramuza":"アイス抹茶エスカラムーサ",
-      "Limonada Clásica":"クラシックレモネード","Limonada de Frambuesa":"ラズベリーレモネード",
-      "Limonada de Mango":"マンゴーレモネード","Limonada de Coco":"ココナッツレモネード",
-      "Limonada de Maracuyá":"パッションフルーツレモネード","Limonada de Menta y Jengibre":"ミントとジンジャーのレモネード",
-      "Cold Brew Puro":"コールドブリュー","Iced Latte":"アイスラテ",
-      "Jugo de Naranja Natural":"生搾りオレンジジュース","Coca-Cola":"コカ・コーラ",
-      "Agua":"水","Cerveza":"ビール","Tinto de Verano":"ティント・デ・ベラーノ",
-      "Vino Blanco":"白ワイン","Vino Tinto":"赤ワイン",
-      "Jengibre y Limón":"ジンジャー＆レモン","Lavanda":"ラベンダー"
+      "Espresso Doble / Cortado":{name:"ダブルエスプレッソ / コルタード",desc:"濃厚でパワフル。コーヒーの魂。"},
+      "Americano":{name:"アメリカーノ",desc:"お湯で割ったエスプレッソ。クリーンでさっぱり。"},
+      "Flat White":{name:"フラットホワイト",desc:"ダブルエスプレッソと絹のようなミルク。"},
+      "Capuccino / Latte":{name:"カプチーノ / ラテ",desc:"エスプレッソとスチームミルクの絶妙なバランス。"},
+      "Chocolate Caliente":{name:"ホットチョコレート",desc:"純粋なカカオと温かいミルク。濃厚で癒される一杯。"},
+      "Chai Latte":{name:"チャイラテ",desc:"シナモンとカルダモンのスパイスとスチームミルク。"},
+      "Matcha Latte Clásico":{name:"クラシック抹茶ラテ",desc:"儀式用抹茶とまろやかなミルク。"},
+      "Iced Matcha Mango":{name:"アイス抹茶マンゴー",desc:"冷たい抹茶とトロピカルマンゴー。爽やかで鮮やか。"},
+      "Iced Matcha Frutos Rojos":{name:"アイス抹茶ベリー",desc:"抹茶とラズベリー。甘酸っぱくておいしい。"},
+      "Iced Matcha Coco":{name:"アイス抹茶ココナッツ",desc:"抹茶とココナッツミルク。まろやかでエキゾチック。"},
+      "Iced Matcha Maracuyá":{name:"アイス抹茶パッションフルーツ",desc:"抹茶とパッションフルーツ。トロピカルな対比。"},
+      "Iced Matcha Escaramuza":{name:"アイス抹茶エスカラムーサ",desc:"看板メニュー。フレッシュでユニーク。"},
+      "Limonada Clásica":{name:"クラシックレモネード",desc:"フレッシュレモンとちょうどいい甘さ。"},
+      "Limonada de Frambuesa":{name:"ラズベリーレモネード",desc:"爽やかで甘酸っぱいラズベリー入り。"},
+      "Limonada de Mango":{name:"マンゴーレモネード",desc:"トロピカルなマンゴーピューレ入り。"},
+      "Limonada de Coco":{name:"ココナッツレモネード",desc:"レモンとココナッツミルク。クリーミーで意外性あり。"},
+      "Limonada de Maracuyá":{name:"パッションフルーツレモネード",desc:"濃厚で香り高い。グラスの中の夏。"},
+      "Limonada de Menta y Jengibre":{name:"ミント＆ジンジャーレモネード",desc:"爽やかでスパイシー。調和のとれた一杯。"},
+      "Cold Brew Puro":{name:"コールドブリュー",desc:"24時間冷抽出。まろやかで低酸味。"},
+      "Iced Latte":{name:"アイスラテ",desc:"氷の上のエスプレッソ。プレーン、バニラ、またはキャラメル。"},
+      "Jugo de Naranja Natural":{name:"生搾りオレンジジュース",desc:"注文ごとに搾りたて。フレッシュでビタミン豊富。"},
+      "Coca-Cola":{name:"コカ・コーラ",desc:"レギュラーまたはゼロ。よく冷えてます。"},
+      "Agua":{name:"水",desc:"炭酸あり・なし。"},
+      "Cerveza":{name:"ビール",desc:"レギュラーまたはノンアルコール。"},
+      "Tinto de Verano":{name:"ティント・デ・ベラーノ",desc:"赤ワインとソーダ。夏の定番ドリンク。"},
+      "Vino Blanco":{name:"白ワイン",desc:"辛口、中甘口、甘口からお選びください。"},
+      "Vino Tinto":{name:"赤ワイン",desc:"ハウスセレクション。"},
+      "Jengibre y Limón":{name:"ジンジャー＆レモン",desc:"消化を助ける温かいハーブティー。"},
+      "Lavanda":{name:"ラベンダー",desc:"花の香りでリラックス。就寝前にぴったり。"}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"イングリッシュブレックファスト",desc:"力強くモルティ。英国朝食の定番。"},
+      "Té Negro Earl Grey":{name:"アールグレイ",desc:"ベルガモット香る紅茶。上品で芳醇。"},
+      "Té Negro Chai":{name:"チャイブラック",desc:"スパイスとシナモン。濃厚で温かみのある一杯。"},
+      "Té Verde Jazmín":{name:"ジャスミン緑茶",desc:"繊細で花の香り。ジャスミンの花で香り付け。"},
+      "Té Verde Sakura":{name:"桜緑茶",desc:"やわらかく春らしい。桜の花の香り。"},
+      "Té Blanco Seda":{name:"白茶シルク",desc:"とても柔らかく甘い。メニュー中最も繊細。"},
+      "Té Blanco y Verde Noches de Toronto":{name:"トロント・ナイツ",desc:"独自ブレンド。フレッシュでフルーティー。"},
+      "Té Rojo y Verde Silueta":{name:"シルエタ",desc:"デトックスブレンド。軽くてバランスが良い。"},
+      "Manzanilla":{name:"カモミール",desc:"クラシックで穏やか。消化を助けリラックス効果。"},
+      "Jengibre y Limón":{name:"ジンジャー＆レモン",desc:"体を活性化。さわやかな柑橘系。"},
+      "Jengibre y Cúrcuma":{name:"ジンジャー＆ターメリック",desc:"抗炎症効果。温かくスパイシー。"},
+      "Infusión Inmunidad":{name:"イミュニティブレンド",desc:"免疫力を高めるハーブブレンド。"},
+      "Infusión Depurativa":{name:"デトックスブレンド",desc:"軽くてクリーン。食後に最適。"},
+      "Chai Digestivo":{name:"ダイジェスティブチャイ",desc:"やさしいスパイスとターメリック。"},
+      "Rooibos Clásico / Noches":{name:"ルイボス クラシック / ナイツ",desc:"カフェインフリー。甘くフルーティー。夜にぴったり。"},
+      "Lavanda":{name:"ラベンダー",desc:"花の香りで安眠。就寝前の完璧な一杯。"}
     },
     gamas:{
       black:{name:"ブラック・シリーズ",tag:"エネルギー",profile:"テアニン高め。力強い風味。"},
@@ -420,111 +549,239 @@ const T = {
     }
   },
   fr:{
-    subtitle:"CARTE DES BOISSONS",
-    footer:"Prix TTC.",
-    supplement:"Lait d'avoine ou d'amande : +0,30 €",
+    subtitle:"CARTE DES BOISSONS",footer:"Prix TTC.",supplement:"Lait d'avoine ou d'amande : +0,30 €",
     categories:["Cafétéria","Bar à Matcha","Limonades","Thés & Infusions","Boissons Froides","Rafraîchissements","Vins & Bières"],
     items:{
-      "Espresso Doble / Cortado":"Double Espresso / Cortado","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Cappuccino / Latte","Chocolate Caliente":"Chocolat Chaud","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Matcha Latte Classique","Iced Matcha Mango":"Matcha Glacé Mangue",
-      "Iced Matcha Frutos Rojos":"Matcha Glacé Fruits Rouges","Iced Matcha Coco":"Matcha Glacé Coco",
-      "Iced Matcha Maracuyá":"Matcha Glacé Fruit de la Passion","Iced Matcha Escaramuza":"Matcha Glacé Escaramuza",
-      "Limonada Clásica":"Limonade Classique","Limonada de Frambuesa":"Limonade Framboise",
-      "Limonada de Mango":"Limonade Mangue","Limonada de Coco":"Limonade Coco",
-      "Limonada de Maracuyá":"Limonade Fruit de la Passion","Limonada de Menta y Jengibre":"Limonade Menthe & Gingembre",
-      "Cold Brew Puro":"Cold Brew Pur","Iced Latte":"Latte Glacé (Nature, Vanille ou Caramel)",
-      "Jugo de Naranja Natural":"Jus d'Orange Frais","Coca-Cola":"Coca-Cola",
-      "Agua":"Eau","Cerveza":"Bière","Tinto de Verano":"Tinto de Verano",
-      "Vino Blanco":"Vin Blanc","Vino Tinto":"Vin Rouge",
-      "Jengibre y Limón":"Gingembre & Citron","Lavanda":"Lavande"
+      "Espresso Doble / Cortado":{name:"Double Espresso / Cortado",desc:"Concentré et puissant. L'âme du café."},
+      "Americano":{name:"Americano",desc:"Espresso allongé à l'eau chaude. Propre et long."},
+      "Flat White":{name:"Flat White",desc:"Double espresso avec lait soyeux. Intense et crémeux."},
+      "Capuccino / Latte":{name:"Cappuccino / Latte",desc:"Espresso avec lait vapeur et mousse veloutée."},
+      "Chocolate Caliente":{name:"Chocolat Chaud",desc:"Cacao pur avec lait chaud. Crémeux et réconfortant."},
+      "Chai Latte":{name:"Chai Latte",desc:"Épices orientales, cannelle et cardamome avec lait vapeur."},
+      "Matcha Latte Clásico":{name:"Matcha Latte Classique",desc:"Matcha cérémonial avec lait doux. Équilibré et végétal."},
+      "Iced Matcha Mango":{name:"Matcha Glacé Mangue",desc:"Matcha froid avec coulis de mangue tropicale."},
+      "Iced Matcha Frutos Rojos":{name:"Matcha Glacé Fruits Rouges",desc:"Matcha avec framboise et fruits des bois."},
+      "Iced Matcha Coco":{name:"Matcha Glacé Coco",desc:"Matcha avec lait de coco. Doux et exotique."},
+      "Iced Matcha Maracuyá":{name:"Matcha Glacé Fruit de la Passion",desc:"Matcha avec fruit de la passion. Tropical et intense."},
+      "Iced Matcha Escaramuza":{name:"Matcha Glacé Escaramuza",desc:"Notre combinaison signature. Fraîche et unique."},
+      "Limonada Clásica":{name:"Limonade Classique",desc:"Citron frais et la juste touche de douceur."},
+      "Limonada de Frambuesa":{name:"Limonade Framboise",desc:"Fruitée avec une pointe acidulée de framboise fraîche."},
+      "Limonada de Mango":{name:"Limonade Mangue",desc:"Tropicale et rafraîchissante avec pulpe de mangue."},
+      "Limonada de Coco":{name:"Limonade Coco",desc:"Citron avec lait de coco. Crémeuse et surprenante."},
+      "Limonada de Maracuyá":{name:"Limonade Fruit de la Passion",desc:"Intense et aromatique. L'été dans un verre."},
+      "Limonada de Menta y Jengibre":{name:"Limonade Menthe & Gingembre",desc:"Fraîche et épicée. En parfaite harmonie."},
+      "Cold Brew Puro":{name:"Cold Brew Pur",desc:"Café macéré 24h à froid. Doux et très rafraîchissant."},
+      "Iced Latte":{name:"Latte Glacé",desc:"Espresso sur glace. Nature, vanille ou caramel."},
+      "Jugo de Naranja Natural":{name:"Jus d'Orange Frais",desc:"Oranges pressées à la commande. Pur et vitaminé."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Normal ou Zéro. Bien frais."},
+      "Agua":{name:"Eau",desc:"Plate ou pétillante."},
+      "Cerveza":{name:"Bière",desc:"Normale ou 0.0. Prix selon disponibilité."},
+      "Tinto de Verano":{name:"Tinto de Verano",desc:"Vin rouge avec soda et citron. Le classique de l'été."},
+      "Vino Blanco":{name:"Vin Blanc",desc:"Sec, demi-sec ou doux. Prix selon sélection."},
+      "Vino Tinto":{name:"Vin Rouge",desc:"Sélection maison. Prix selon disponibilité."},
+      "Jengibre y Limón":{name:"Gingembre & Citron",desc:"Infusion digestive et stimulante. Chaude et épicée."},
+      "Lavanda":{name:"Lavande",desc:"Florale et relaxante. Parfaite en fin de journée."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Robuste et malté. Le classique du petit-déjeuner britannique."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Thé noir à la bergamote. Aromatique et élégant."},
+      "Té Negro Chai":{name:"Chai Noir",desc:"Épices, cannelle et poivre. Intense et réconfortant."},
+      "Té Verde Jazmín":{name:"Thé Vert Jasmin",desc:"Délicat et floral. Parfumé aux fleurs de jasmin."},
+      "Té Verde Sakura":{name:"Thé Vert Sakura",desc:"Doux et printanier. Notes florales de cerisier japonais."},
+      "Té Blanco Seda":{name:"Thé Blanc Soie",desc:"Très doux et sucré. Le plus délicat de notre carte."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Nuits de Toronto",desc:"Mélange exclusif. Frais, fruité et enveloppant."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Blend purifiant. Léger et équilibré."},
+      "Manzanilla":{name:"Camomille",desc:"Classique et douce. Digestive et relaxante."},
+      "Jengibre y Limón":{name:"Gingembre & Citron",desc:"Stimulant et citronné. Parfait pour activer le corps."},
+      "Jengibre y Cúrcuma":{name:"Gingembre & Curcuma",desc:"Anti-inflammatoire et puissant. Chaud et épicé."},
+      "Infusión Inmunidad":{name:"Infusion Immunité",desc:"Mélange de plantes pour renforcer les défenses."},
+      "Infusión Depurativa":{name:"Infusion Purifiante",desc:"Légère et propre. Idéale après les repas."},
+      "Chai Digestivo":{name:"Chai Digestif",desc:"Épices douces et curcuma. Réconfortant et sain."},
+      "Rooibos Clásico / Noches":{name:"Rooibos Classique / Nuits",desc:"Sans théine. Doux et fruité. Parfait pour le soir."},
+      "Lavanda":{name:"Lavande",desc:"Florale et apaisante. Le câlin parfait avant de dormir."}
     },
     gamas:{
-      black:{name:"GAMME NOIRE",tag:"Énergie & Petit-déjeuner",profile:"Théine élevée, saveurs robustes et terreuses."},
-      green:{name:"GAMME VERTE & BLANCHE",tag:"Antioxydant & Légèreté",profile:"Théine modérée, saveurs florales et fraîches."},
-      gold:{name:"GAMME DORÉE",tag:"Bien-être & Digestion",profile:"Sans théine. Agrumes et médicinal."},
-      amber:{name:"GAMME AMBRE & FLORALE",tag:"Relaxation",profile:"Sans théine. Doux et chaud."}
+      black:{name:"GAMME NOIRE",tag:"Énergie & Petit-déjeuner",profile:"Théine élevée, saveurs robustes."},
+      green:{name:"GAMME VERTE",tag:"Antioxydant",profile:"Théine modérée, saveurs florales."},
+      gold:{name:"GAMME DORÉE",tag:"Bien-être",profile:"Sans théine. Agrumes."},
+      amber:{name:"GAMME AMBRE",tag:"Relaxation",profile:"Sans théine. Doux et chaud."}
     }
   },
   it:{
-    subtitle:"MENU BEVANDE",
-    footer:"Prezzi IVA inclusa.",
-    supplement:"Latte di avena o mandorla: +0,30 €",
+    subtitle:"MENU BEVANDE",footer:"Prezzi IVA inclusa.",supplement:"Latte di avena o mandorla: +0,30 €",
     categories:["Caffetteria","Matcha Bar","Limonate","Tè e Infusi","Bevande Fredde","Bibite","Vini e Birre"],
     items:{
-      "Espresso Doble / Cortado":"Espresso Doppio / Cortato","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Cappuccino / Latte","Chocolate Caliente":"Cioccolata Calda","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Matcha Latte Classico","Iced Matcha Mango":"Matcha Freddo Mango",
-      "Iced Matcha Frutos Rojos":"Matcha Freddo Frutti Rossi","Iced Matcha Coco":"Matcha Freddo Cocco",
-      "Iced Matcha Maracuyá":"Matcha Freddo Frutto della Passione","Iced Matcha Escaramuza":"Matcha Freddo Escaramuza",
-      "Limonada Clásica":"Limonata Classica","Limonada de Frambuesa":"Limonata al Lampone",
-      "Limonada de Mango":"Limonata al Mango","Limonada de Coco":"Limonata al Cocco",
-      "Limonada de Maracuyá":"Limonata al Frutto della Passione","Limonada de Menta y Jengibre":"Limonata Menta e Zenzero",
-      "Cold Brew Puro":"Cold Brew Puro","Iced Latte":"Latte Freddo (Normale, Vaniglia o Caramello)",
-      "Jugo de Naranja Natural":"Spremuta d'Arancia","Coca-Cola":"Coca-Cola",
-      "Agua":"Acqua","Cerveza":"Birra","Tinto de Verano":"Tinto de Verano",
-      "Vino Blanco":"Vino Bianco","Vino Tinto":"Vino Rosso",
-      "Jengibre y Limón":"Zenzero & Limone","Lavanda":"Lavanda"
+      "Espresso Doble / Cortado":{name:"Espresso Doppio / Cortato",desc:"Concentrato e potente. L'anima del caffè."},
+      "Americano":{name:"Americano",desc:"Espresso allungato con acqua calda. Pulito e lungo."},
+      "Flat White":{name:"Flat White",desc:"Doppio espresso con latte setoso. Intenso e cremoso."},
+      "Capuccino / Latte":{name:"Cappuccino / Latte",desc:"Espresso con latte vaporizzato e schiuma vellutata."},
+      "Chocolate Caliente":{name:"Cioccolata Calda",desc:"Cacao puro con latte caldo. Cremoso e confortante."},
+      "Chai Latte":{name:"Chai Latte",desc:"Spezie orientali, cannella e cardamomo con latte vapore."},
+      "Matcha Latte Clásico":{name:"Matcha Latte Classico",desc:"Matcha cerimoniale con latte delicato. Equilibrato e vegetale."},
+      "Iced Matcha Mango":{name:"Matcha Freddo Mango",desc:"Matcha freddo con coulis di mango tropicale."},
+      "Iced Matcha Frutos Rojos":{name:"Matcha Freddo Frutti Rossi",desc:"Matcha con lampone e frutti di bosco."},
+      "Iced Matcha Coco":{name:"Matcha Freddo Cocco",desc:"Matcha con latte di cocco. Esotico e cremoso."},
+      "Iced Matcha Maracuyá":{name:"Matcha Freddo Frutto della Passione",desc:"Matcha con maracuja. Tropicale e intenso."},
+      "Iced Matcha Escaramuza":{name:"Matcha Freddo Escaramuza",desc:"La nostra combinazione firma. Fresca e unica."},
+      "Limonada Clásica":{name:"Limonata Classica",desc:"Limone fresco e la giusta dolcezza."},
+      "Limonada de Frambuesa":{name:"Limonata al Lampone",desc:"Fruttata con una punta acidula di lampone fresco."},
+      "Limonada de Mango":{name:"Limonata al Mango",desc:"Tropicale e rinfrescante con polpa di mango."},
+      "Limonada de Coco":{name:"Limonata al Cocco",desc:"Limone con latte di cocco. Cremosa e sorprendente."},
+      "Limonada de Maracuyá":{name:"Limonata al Frutto della Passione",desc:"Intensa e aromatica. L'estate in un bicchiere."},
+      "Limonada de Menta y Jengibre":{name:"Limonata Menta e Zenzero",desc:"Fresca e speziata. In perfetta armonia."},
+      "Cold Brew Puro":{name:"Cold Brew Puro",desc:"Caffè macerato 24h a freddo. Delicato e rinfrescante."},
+      "Iced Latte":{name:"Latte Freddo",desc:"Espresso su ghiaccio. Normale, vaniglia o caramello."},
+      "Jugo de Naranja Natural":{name:"Spremuta d'Arancia",desc:"Arance spremute al momento. Pura e vitaminica."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Normale o Zero. Ben fredda."},
+      "Agua":{name:"Acqua",desc:"Naturale o frizzante."},
+      "Cerveza":{name:"Birra",desc:"Normale o analcolica. Prezzo secondo disponibilità."},
+      "Tinto de Verano":{name:"Tinto de Verano",desc:"Vino rosso con gassosa e limone. Il classico dell'estate."},
+      "Vino Blanco":{name:"Vino Bianco",desc:"Secco, semidolce o dolce. Prezzo secondo selezione."},
+      "Vino Tinto":{name:"Vino Rosso",desc:"Selezione della casa. Prezzo secondo disponibilità."},
+      "Jengibre y Limón":{name:"Zenzero & Limone",desc:"Digestivo e stimolante. Caldo e speziato."},
+      "Lavanda":{name:"Lavanda",desc:"Floreale e rilassante. Perfetta a fine giornata."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Robusto e maltato. Il classico della colazione britannica."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Tè nero alla bergamotto. Aromatico ed elegante."},
+      "Té Negro Chai":{name:"Chai Nero",desc:"Spezie, cannella e pepe. Intenso e confortante."},
+      "Té Verde Jazmín":{name:"Tè Verde al Gelsomino",desc:"Delicato e floreale. Profumato con fiori di gelsomino."},
+      "Té Verde Sakura":{name:"Tè Verde Sakura",desc:"Morbido e primaverile. Note floreali di ciliegio giapponese."},
+      "Té Blanco Seda":{name:"Tè Bianco Seta",desc:"Molto morbido e dolce. Il più delicato della nostra carta."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Notti di Toronto",desc:"Blend esclusivo. Fresco, fruttato e avvolgente."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Blend depurativo. Leggero ed equilibrato."},
+      "Manzanilla":{name:"Camomilla",desc:"Classica e delicata. Digestiva e rilassante."},
+      "Jengibre y Limón":{name:"Zenzero & Limone",desc:"Stimolante e agrumato. Perfetto per attivare il corpo."},
+      "Jengibre y Cúrcuma":{name:"Zenzero & Curcuma",desc:"Antinfiammatorio e potente. Caldo e speziato."},
+      "Infusión Inmunidad":{name:"Infuso Immunità",desc:"Blend di erbe per rafforzare le difese."},
+      "Infusión Depurativa":{name:"Infuso Depurativo",desc:"Leggero e pulito. Ideale dopo i pasti."},
+      "Chai Digestivo":{name:"Chai Digestivo",desc:"Spezie delicate e curcuma. Confortante e salutare."},
+      "Rooibos Clásico / Noches":{name:"Rooibos Classico / Notti",desc:"Senza teina. Dolce e fruttato. Perfetto per la sera."},
+      "Lavanda":{name:"Lavanda",desc:"Floreale e sedativa. L'abbraccio perfetto prima di dormire."}
     },
     gamas:{
-      black:{name:"GAMMA NERA",tag:"Energia & Colazione",profile:"Alta teina, sapori robusti e terrosi."},
-      green:{name:"GAMMA VERDE & BIANCA",tag:"Antiossidante & Leggerezza",profile:"Teina moderata, sapori floreali e freschi."},
-      gold:{name:"GAMMA DORATA",tag:"Benessere & Digestione",profile:"Senza teina. Agrumi e medicinali."},
-      amber:{name:"GAMMA AMBRA & FLOREALE",tag:"Relax",profile:"Senza teina. Dolce e caldo."}
+      black:{name:"GAMMA NERA",tag:"Energia",profile:"Alta teina, sapori robusti."},
+      green:{name:"GAMMA VERDE",tag:"Antiossidante",profile:"Teina moderata, floreale."},
+      gold:{name:"GAMMA DORATA",tag:"Benessere",profile:"Senza teina. Agrumi."},
+      amber:{name:"GAMMA AMBRA",tag:"Relax",profile:"Senza teina. Dolce."}
     }
   },
   nl:{
-    subtitle:"DRANKENKAART",
-    footer:"Prijzen incl. BTW.",
-    supplement:"Haver- of amandelmelk: +0,30 €",
+    subtitle:"DRANKENKAART",footer:"Prijzen incl. BTW.",supplement:"Haver- of amandelmelk: +0,30 €",
     categories:["Koffiebar","Matchabar","Limonades","Thee & Infusies","Koude Dranken","Frisdranken","Wijn & Bier"],
     items:{
-      "Espresso Doble / Cortado":"Dubbele Espresso / Cortado","Americano":"Americano","Flat White":"Flat White",
-      "Capuccino / Latte":"Cappuccino / Latte","Chocolate Caliente":"Warme Chocolademelk","Chai Latte":"Chai Latte",
-      "Matcha Latte Clásico":"Klassieke Matcha Latte","Iced Matcha Mango":"Ijs-Matcha Mango",
-      "Iced Matcha Frutos Rojos":"Ijs-Matcha Bosvruchten","Iced Matcha Coco":"Ijs-Matcha Kokos",
-      "Iced Matcha Maracuyá":"Ijs-Matcha Passievrucht","Iced Matcha Escaramuza":"Ijs-Matcha Escaramuza",
-      "Limonada Clásica":"Klassieke Limonade","Limonada de Frambuesa":"Frambozenlimonade",
-      "Limonada de Mango":"Mangolimonade","Limonada de Coco":"Kokoslimonade",
-      "Limonada de Maracuyá":"Passievruchtlimonade","Limonada de Menta y Jengibre":"Munt & Gember Limonade",
-      "Cold Brew Puro":"Pure Cold Brew","Iced Latte":"Ijs-Latte (Normaal, Vanille of Karamel)",
-      "Jugo de Naranja Natural":"Verse Sinaasappelsap","Coca-Cola":"Coca-Cola",
-      "Agua":"Water","Cerveza":"Bier","Tinto de Verano":"Tinto de Verano",
-      "Vino Blanco":"Witte Wijn","Vino Tinto":"Rode Wijn",
-      "Jengibre y Limón":"Gember & Citroen","Lavanda":"Lavendel"
+      "Espresso Doble / Cortado":{name:"Dubbele Espresso / Cortado",desc:"Geconcentreerd en krachtig. De ziel van koffie."},
+      "Americano":{name:"Americano",desc:"Espresso met heet water. Helder en lang."},
+      "Flat White":{name:"Flat White",desc:"Dubbele espresso met zijdezachte melk."},
+      "Capuccino / Latte":{name:"Cappuccino / Latte",desc:"Espresso met gestoomde melk en fluweelzachte schuim."},
+      "Chocolate Caliente":{name:"Warme Chocolademelk",desc:"Pure cacao met warme melk. Romig en troostend."},
+      "Chai Latte":{name:"Chai Latte",desc:"Oosterse kruiden, kaneel en kardemom met gestoomde melk."},
+      "Matcha Latte Clásico":{name:"Klassieke Matcha Latte",desc:"Ceremoniële matcha met zachte melk. Gebalanceerd."},
+      "Iced Matcha Mango":{name:"Ijs-Matcha Mango",desc:"Koude matcha met tropische mangocoulis."},
+      "Iced Matcha Frutos Rojos":{name:"Ijs-Matcha Bosvruchten",desc:"Matcha met framboos en bosvruchten."},
+      "Iced Matcha Coco":{name:"Ijs-Matcha Kokos",desc:"Matcha met kokosmelk. Zacht en exotisch."},
+      "Iced Matcha Maracuyá":{name:"Ijs-Matcha Passievrucht",desc:"Matcha met passievrucht. Tropisch en intens."},
+      "Iced Matcha Escaramuza":{name:"Ijs-Matcha Escaramuza",desc:"Onze signatuurcombinatie. Fris en uniek."},
+      "Limonada Clásica":{name:"Klassieke Limonade",desc:"Verse citroen en precies de juiste zoetheid."},
+      "Limonada de Frambuesa":{name:"Frambozenlimonade",desc:"Fruitig met een frisse frambozentoets."},
+      "Limonada de Mango":{name:"Mangolimonade",desc:"Tropisch en verfrissend met natuurlijk mangopulp."},
+      "Limonada de Coco":{name:"Kokoslimonade",desc:"Citroen met kokosmelk. Romig en verrassend."},
+      "Limonada de Maracuyá":{name:"Passievruchtlimonade",desc:"Intens en aromatisch. Zomer in een glas."},
+      "Limonada de Menta y Jengibre":{name:"Munt & Gember Limonade",desc:"Fris en pittig. In perfecte harmonie."},
+      "Cold Brew Puro":{name:"Pure Cold Brew",desc:"24u koud gezet. Zacht, laag in zuur en verfrissend."},
+      "Iced Latte":{name:"Ijs-Latte",desc:"Espresso op ijs. Normaal, vanille of karamel."},
+      "Jugo de Naranja Natural":{name:"Verse Sinaasappelsap",desc:"Op bestelling geperst. Puur en vitaminenrijk."},
+      "Coca-Cola":{name:"Coca-Cola",desc:"Normaal of Zero. Lekker koud."},
+      "Agua":{name:"Water",desc:"Plat of bruisend."},
+      "Cerveza":{name:"Bier",desc:"Normaal of alcoholvrij. Prijs op aanvraag."},
+      "Tinto de Verano":{name:"Tinto de Verano",desc:"Rode wijn met soda en citroen. Zomerse klassieker."},
+      "Vino Blanco":{name:"Witte Wijn",desc:"Droog, halfzoet of zoet. Prijs per selectie."},
+      "Vino Tinto":{name:"Rode Wijn",desc:"Huisselectie. Prijs op aanvraag."},
+      "Jengibre y Limón":{name:"Gember & Citroen",desc:"Digestieve en stimulerende infusie."},
+      "Lavanda":{name:"Lavendel",desc:"Bloemig en ontspannend. Perfect voor het einde van de dag."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Krachtig en moutig. De Britse ontbijtklassieker."},
+      "Té Negro Earl Grey":{name:"Earl Grey",desc:"Zwarte thee met bergamot. Aromatisch en elegant."},
+      "Té Negro Chai":{name:"Chai Zwart",desc:"Kruiden, kaneel en peper. Intens en verwarmend."},
+      "Té Verde Jazmín":{name:"Jasmijn Groene Thee",desc:"Delicaat en bloemig. Geparfumeerd met jasmijnbloemen."},
+      "Té Verde Sakura":{name:"Sakura Groene Thee",desc:"Zacht en lentachtig. Bloesemachtige tonen."},
+      "Té Blanco Seda":{name:"Witte Zijdethee",desc:"Zeer zacht en zoet. De meest delicate op onze kaart."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Toronto Nachten",desc:"Exclusieve blend. Fris, fruitig en omhullend."},
+      "Té Rojo y Verde Silueta":{name:"Silueta",desc:"Reinigende blend. Licht en gebalanceerd."},
+      "Manzanilla":{name:"Kamille",desc:"Klassiek en mild. Digestief en ontspannend."},
+      "Jengibre y Limón":{name:"Gember & Citroen",desc:"Stimulerend en citrusachtig. Perfect om het lichaam te activeren."},
+      "Jengibre y Cúrcuma":{name:"Gember & Kurkuma",desc:"Ontstekingsremmend en krachtig. Warm en kruidig."},
+      "Infusión Inmunidad":{name:"Immuniteitsblend",desc:"Kruidenmengsel om de weerstand te versterken."},
+      "Infusión Depurativa":{name:"Zuiverende blend",desc:"Licht en schoon. Ideaal na de maaltijd."},
+      "Chai Digestivo":{name:"Digestieve Chai",desc:"Zachte kruiden en kurkuma. Troostend en gezond."},
+      "Rooibos Clásico / Noches":{name:"Rooibos Klassiek / Nachten",desc:"Cafeïnevrij. Zoet en fruitig. Perfect voor de avond."},
+      "Lavanda":{name:"Lavendel",desc:"Bloemig en kalmerend. De perfecte knuffel voor het slapen."}
     },
     gamas:{
-      black:{name:"ZWARTE SERIE",tag:"Energie & Ontbijt",profile:"Hoog theïnegehalte, krachtige smaken."},
-      green:{name:"GROENE & WITTE SERIE",tag:"Antioxidant & Licht",profile:"Matig theïne, bloemige smaken."},
-      gold:{name:"GOUDEN SERIE",tag:"Welzijn & Spijsvertering",profile:"Theïnevrij. Citrus en medicinaal."},
-      amber:{name:"AMBER & BLOEMEN",tag:"Ontspanning",profile:"Theïnevrij. Zoet en warm."}
+      black:{name:"ZWARTE SERIE",tag:"Energie",profile:"Hoog theïne, krachtige smaken."},
+      green:{name:"GROENE SERIE",tag:"Antioxidant",profile:"Matig theïne, bloemig."},
+      gold:{name:"GOUDEN SERIE",tag:"Welzijn",profile:"Theïnevrij. Citrus."},
+      amber:{name:"AMBER SERIE",tag:"Ontspanning",profile:"Theïnevrij. Zoet."}
     }
   },
   ru:{
-    subtitle:"МЕНЮ НАПИТКОВ",
-    footer:"Цены с НДС.",
-    supplement:"Овсяное или миндальное молоко: +0,30 €",
+    subtitle:"МЕНЮ НАПИТКОВ",footer:"Цены с НДС.",supplement:"Овсяное или миндальное молоко: +0,30 €",
     categories:["Кофейня","Матча-бар","Лимонады","Чай","Холодные напитки","Прохладительные","Вино и пиво"],
     items:{
-      "Espresso Doble / Cortado":"Двойной эспрессо / Кортадо","Americano":"Американо","Flat White":"Флэт уайт",
-      "Capuccino / Latte":"Капучино / Латте","Chocolate Caliente":"Горячий шоколад","Chai Latte":"Чай латте",
-      "Matcha Latte Clásico":"Классический матча латте","Iced Matcha Mango":"Айс-матча манго",
-      "Iced Matcha Frutos Rojos":"Айс-матча ягоды","Iced Matcha Coco":"Айс-матча кокос",
-      "Iced Matcha Maracuyá":"Айс-матча маракуйя","Iced Matcha Escaramuza":"Айс-матча Эскарамуса",
-      "Limonada Clásica":"Классический лимонад","Limonada de Frambuesa":"Малиновый лимонад",
-      "Limonada de Mango":"Манговый лимонад","Limonada de Coco":"Кокосовый лимонад",
-      "Limonada de Maracuyá":"Лимонад маракуйя","Limonada de Menta y Jengibre":"Лимонад мята-имбирь",
-      "Cold Brew Puro":"Холодный кофе","Iced Latte":"Айс-латте (обычный, ваниль или карамель)",
-      "Jugo de Naranja Natural":"Апельсиновый сок","Coca-Cola":"Кока-кола",
-      "Agua":"Вода","Cerveza":"Пиво","Tinto de Verano":"Тинто де верано",
-      "Vino Blanco":"Белое вино","Vino Tinto":"Красное вино",
-      "Jengibre y Limón":"Имбирь и лимон","Lavanda":"Лаванда"
+      "Espresso Doble / Cortado":{name:"Двойной эспрессо / Кортадо",desc:"Концентрированный и насыщенный. Душа кофе."},
+      "Americano":{name:"Американо",desc:"Эспрессо с горячей водой. Чистый и длинный."},
+      "Flat White":{name:"Флэт уайт",desc:"Двойной эспрессо с шелковистым молоком."},
+      "Capuccino / Latte":{name:"Капучино / Латте",desc:"Эспрессо с молочной пеной. Бархатистый и ароматный."},
+      "Chocolate Caliente":{name:"Горячий шоколад",desc:"Чистое какао с тёплым молоком. Кремовый и согревающий."},
+      "Chai Latte":{name:"Чай латте",desc:"Восточные специи, корица и кардамон с молоком."},
+      "Matcha Latte Clásico":{name:"Классический матча латте",desc:"Церемониальная матча с нежным молоком."},
+      "Iced Matcha Mango":{name:"Айс-матча манго",desc:"Холодная матча с тропическим манго. Яркий и освежающий."},
+      "Iced Matcha Frutos Rojos":{name:"Айс-матча ягоды",desc:"Матча с малиной и лесными ягодами."},
+      "Iced Matcha Coco":{name:"Айс-матча кокос",desc:"Матча с кокосовым молоком. Нежный и экзотический."},
+      "Iced Matcha Maracuyá":{name:"Айс-матча маракуйя",desc:"Матча с маракуйей. Тропический и насыщенный."},
+      "Iced Matcha Escaramuza":{name:"Айс-матча Эскарамуса",desc:"Наш фирменный напиток. Свежий и неповторимый."},
+      "Limonada Clásica":{name:"Классический лимонад",desc:"Свежий лимон и правильная сладость."},
+      "Limonada de Frambuesa":{name:"Малиновый лимонад",desc:"Фруктовый с кислинкой свежей малины."},
+      "Limonada de Mango":{name:"Манговый лимонад",desc:"Тропический и освежающий с манго."},
+      "Limonada de Coco":{name:"Кокосовый лимонад",desc:"Лимон с кокосовым молоком. Кремовый и неожиданный."},
+      "Limonada de Maracuyá":{name:"Лимонад маракуйя",desc:"Насыщенный и ароматный. Лето в стакане."},
+      "Limonada de Menta y Jengibre":{name:"Лимонад мята-имбирь",desc:"Свежий и пряный. В идеальной гармонии."},
+      "Cold Brew Puro":{name:"Холодный кофе",desc:"Кофе, настоянный 24ч. Мягкий и очень освежающий."},
+      "Iced Latte":{name:"Айс-латте",desc:"Эспрессо на льду. Классический, ванильный или карамельный."},
+      "Jugo de Naranja Natural":{name:"Апельсиновый сок",desc:"Свежевыжатый. Чистый и витаминный."},
+      "Coca-Cola":{name:"Кока-кола",desc:"Обычная или Zero. Хорошо охлаждённая."},
+      "Agua":{name:"Вода",desc:"Газированная или негазированная."},
+      "Cerveza":{name:"Пиво",desc:"Обычное или безалкогольное. Цена по наличию."},
+      "Tinto de Verano":{name:"Тинто де верано",desc:"Красное вино с содовой и лимоном. Летняя классика."},
+      "Vino Blanco":{name:"Белое вино",desc:"Сухое, полусладкое или сладкое."},
+      "Vino Tinto":{name:"Красное вино",desc:"Выбор заведения. Цена по наличию."},
+      "Jengibre y Limón":{name:"Имбирь и лимон",desc:"Пищеварительный и тонизирующий настой."},
+      "Lavanda":{name:"Лаванда",desc:"Цветочный и расслабляющий. Идеален в конце дня."}
+    },
+    teas:{
+      "Té Negro English Breakfast Eco":{name:"English Breakfast Eco",desc:"Крепкий и солодовый. Британская классика."},
+      "Té Negro Earl Grey":{name:"Эрл Грей",desc:"Чёрный чай с бергамотом. Ароматный и изысканный."},
+      "Té Negro Chai":{name:"Чай масала",desc:"Специи, корица и перец. Насыщенный и согревающий."},
+      "Té Verde Jazmín":{name:"Зелёный чай с жасмином",desc:"Деликатный и цветочный. Ароматизирован жасмином."},
+      "Té Verde Sakura":{name:"Зелёный чай Сакура",desc:"Мягкий и весенний. Цветочные ноты японской вишни."},
+      "Té Blanco Seda":{name:"Белый чай Шёлк",desc:"Очень мягкий и сладкий. Самый деликатный в меню."},
+      "Té Blanco y Verde Noches de Toronto":{name:"Ночи Торонто",desc:"Эксклюзивный купаж. Свежий, фруктовый, обволакивающий."},
+      "Té Rojo y Verde Silueta":{name:"Силуэта",desc:"Очищающий купаж. Лёгкий и сбалансированный."},
+      "Manzanilla":{name:"Ромашка",desc:"Классическая и нежная. Помогает пищеварению."},
+      "Jengibre y Limón":{name:"Имбирь и лимон",desc:"Тонизирующий и цитрусовый. Активизирует тело."},
+      "Jengibre y Cúrcuma":{name:"Имбирь и куркума",desc:"Противовоспалительный. Тёплый и пряный."},
+      "Infusión Inmunidad":{name:"Иммунный купаж",desc:"Травяная смесь для укрепления иммунитета."},
+      "Infusión Depurativa":{name:"Очищающий купаж",desc:"Лёгкий и чистый. Идеально после еды."},
+      "Chai Digestivo":{name:"Пищеварительный чай",desc:"Нежные специи и куркума. Согревающий и полезный."},
+      "Rooibos Clásico / Noches":{name:"Ройбош Классик / Ночи",desc:"Без кофеина. Сладкий и фруктовый. Для вечера."},
+      "Lavanda":{name:"Лаванда",desc:"Цветочный и успокаивающий. Идеален перед сном."}
     },
     gamas:{
-      black:{name:"ЧЁРНАЯ ГАММА",tag:"Энергия и завтрак",profile:"Высокое содержание теина, насыщенный вкус."},
-      green:{name:"ЗЕЛЁНАЯ И БЕЛАЯ ГАММА",tag:"Антиоксиданты",profile:"Умеренный теин, цветочный аромат."},
-      gold:{name:"ЗОЛОТАЯ ГАММА",tag:"Здоровье и пищеварение",profile:"Без теина. Цитрус и травы."},
-      amber:{name:"ЯНТАРНАЯ И ЦВЕТОЧНАЯ",tag:"Релаксация",profile:"Без теина. Сладкий и тёплый."}
+      black:{name:"ЧЁРНАЯ ГАММА",tag:"Энергия",profile:"Высокий теин, насыщенный вкус."},
+      green:{name:"ЗЕЛЁНАЯ ГАММА",tag:"Антиоксиданты",profile:"Умеренный теин, цветочный."},
+      gold:{name:"ЗОЛОТАЯ ГАММА",tag:"Здоровье",profile:"Без теина. Цитрус."},
+      amber:{name:"ЯНТАРНАЯ ГАММА",tag:"Релакс",profile:"Без теина. Сладкий."}
     }
   }
 };
@@ -540,114 +797,107 @@ const ICONS = {
   info:`<svg xmlns="[w3.org](http://www.w3.org/2000/svg)" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v.01M12 11v5"/></svg>`
 };
 
-const ICON_COLORS = [
-  'color:#92400e','color:#16a34a','color:#60a5fa',
-  'color:#d97706','color:#3b82f6','color:#06b6d4','color:#b91c1c'
-];
+const ICON_COLORS=['color:#92400e','color:#16a34a','color:#60a5fa','color:#d97706','color:#3b82f6','color:#06b6d4','color:#b91c1c'];
 
-function getMenu(lang) {
-  const t = T[lang];
-  const i = (k) => t.items[k] || k;
+function getMenu(lang){
+  const t=T[lang];
+  const i=(k)=>t.items[k]||{name:k,desc:''};
+  const tea=(k)=>t.teas[k]||{name:k,desc:''};
   return [
-    {
-      title: t.categories[0], icon: ICONS.coffee, color: ICON_COLORS[0],
-      notes: t.supplement,
-      items: [
-        {name:i("Espresso Doble / Cortado"),price:"2.80 €"},
-        {name:i("Americano"),price:"3.00 €"},
-        {name:i("Flat White"),price:"3.20 €"},
-        {name:i("Capuccino / Latte"),price:"3.20 €"},
-        {name:i("Chocolate Caliente"),price:"4.00 €"},
-        {name:i("Chai Latte"),price:"4.00 €"}
-      ]
-    },
-    {
-      title: t.categories[1], icon: ICONS.leaf, color: ICON_COLORS[1],
-      items: [
-        {name:i("Matcha Latte Clásico"),price:"4.90 €"},
-        {name:i("Iced Matcha Mango"),price:"5.50 €"},
-        {name:i("Iced Matcha Frutos Rojos"),price:"5.50 €"},
-        {name:i("Iced Matcha Coco"),price:"5.50 €"},
-        {name:i("Iced Matcha Maracuyá"),price:"5.50 €"},
-        {name:i("Iced Matcha Escaramuza"),price:"5.50 €"}
-      ]
-    },
-    {
-      title: t.categories[2], icon: ICONS.drop, color: ICON_COLORS[2],
-      globalPrice:"4.00 €",
+    {title:t.categories[0],icon:ICONS.coffee,color:ICON_COLORS[0],notes:t.supplement,
+      items:[
+        {name:i("Espresso Doble / Cortado").name,desc:i("Espresso Doble / Cortado").desc,price:"2.80 €"},
+        {name:i("Americano").name,desc:i("Americano").desc,price:"3.00 €"},
+        {name:i("Flat White").name,desc:i("Flat White").desc,price:"3.20 €"},
+        {name:i("Capuccino / Latte").name,desc:i("Capuccino / Latte").desc,price:"3.20 €"},
+        {name:i("Chocolate Caliente").name,desc:i("Chocolate Caliente").desc,price:"4.00 €"},
+        {name:i("Chai Latte").name,desc:i("Chai Latte").desc,price:"4.00 €"}
+      ]},
+    {title:t.categories[1],icon:ICONS.leaf,color:ICON_COLORS[1],
+      items:[
+        {name:i("Matcha Latte Clásico").name,desc:i("Matcha Latte Clásico").desc,price:"4.90 €"},
+        {name:i("Iced Matcha Mango").name,desc:i("Iced Matcha Mango").desc,price:"5.50 €"},
+        {name:i("Iced Matcha Frutos Rojos").name,desc:i("Iced Matcha Frutos Rojos").desc,price:"5.50 €"},
+        {name:i("Iced Matcha Coco").name,desc:i("Iced Matcha Coco").desc,price:"5.50 €"},
+        {name:i("Iced Matcha Maracuyá").name,desc:i("Iced Matcha Maracuyá").desc,price:"5.50 €"},
+        {name:i("Iced Matcha Escaramuza").name,desc:i("Iced Matcha Escaramuza").desc,price:"5.50 €"}
+      ]},
+    {title:t.categories[2],icon:ICONS.drop,color:ICON_COLORS[2],globalPrice:"4.00 €",
       simpleItems:[
-        i("Limonada Clásica"),i("Limonada de Frambuesa"),i("Limonada de Mango"),
-        i("Limonada de Coco"),i("Limonada de Maracuyá"),i("Limonada de Menta y Jengibre")
-      ]
-    },
-    {
-      title: t.categories[3], icon: ICONS.wind, color: ICON_COLORS[3],
-      globalPrice:"3.80 €",
+        {name:i("Limonada Clásica").name,desc:i("Limonada Clásica").desc},
+        {name:i("Limonada de Frambuesa").name,desc:i("Limonada de Frambuesa").desc},
+        {name:i("Limonada de Mango").name,desc:i("Limonada de Mango").desc},
+        {name:i("Limonada de Coco").name,desc:i("Limonada de Coco").desc},
+        {name:i("Limonada de Maracuyá").name,desc:i("Limonada de Maracuyá").desc},
+        {name:i("Limonada de Menta y Jengibre").name,desc:i("Limonada de Menta y Jengibre").desc}
+      ]},
+    {title:t.categories[3],icon:ICONS.wind,color:ICON_COLORS[3],globalPrice:"3.80 €",
       subcategories:[
         {name:t.gamas.black.name,tag:t.gamas.black.tag,dot:"dot-black",profile:t.gamas.black.profile,
-          items:["Té Negro English Breakfast Eco","Té Negro Earl Grey","Té Negro Chai"]},
+          items:[tea("Té Negro English Breakfast Eco"),tea("Té Negro Earl Grey"),tea("Té Negro Chai")]},
         {name:t.gamas.green.name,tag:t.gamas.green.tag,dot:"dot-green",profile:t.gamas.green.profile,
-          items:["Té Verde Jazmín","Té Verde Sakura","Té Blanco Seda","Té Blanco y Verde Noches de Toronto","Té Rojo y Verde Silueta"]},
+          items:[tea("Té Verde Jazmín"),tea("Té Verde Sakura"),tea("Té Blanco Seda"),tea("Té Blanco y Verde Noches de Toronto"),tea("Té Rojo y Verde Silueta")]},
         {name:t.gamas.gold.name,tag:t.gamas.gold.tag,dot:"dot-gold",profile:t.gamas.gold.profile,
-          items:["Manzanilla",i("Jengibre y Limón"),"Jengibre y Cúrcuma","Infusión Inmunidad","Infusión Depurativa","Chai Digestivo"]},
+          items:[tea("Manzanilla"),tea("Jengibre y Limón"),tea("Jengibre y Cúrcuma"),tea("Infusión Inmunidad"),tea("Infusión Depurativa"),tea("Chai Digestivo")]},
         {name:t.gamas.amber.name,tag:t.gamas.amber.tag,dot:"dot-amber",profile:t.gamas.amber.profile,
-          items:["Rooibos Clásico / Noches",i("Lavanda")]}
-      ]
-    },
-    {
-      title: t.categories[4], icon: ICONS.ice, color: ICON_COLORS[4],
-      globalPrice:"4.00 €",
-      simpleItems:[i("Cold Brew Puro"),i("Iced Latte"),i("Jugo de Naranja Natural")]
-    },
-    {
-      title: t.categories[5], icon: ICONS.bubble, color: ICON_COLORS[5],
-      globalPrice:"3.00 €",
-      simpleItems:[i("Coca-Cola"),"Fanta","Nestea","7up","Tónica","Energizante",i("Agua")]
-    },
-    {
-      title: t.categories[6], icon: ICONS.wine, color: ICON_COLORS[6],
+          items:[tea("Rooibos Clásico / Noches"),tea("Lavanda")]}
+      ]},
+    {title:t.categories[4],icon:ICONS.ice,color:ICON_COLORS[4],globalPrice:"4.00 €",
+      simpleItems:[
+        {name:i("Cold Brew Puro").name,desc:i("Cold Brew Puro").desc},
+        {name:i("Iced Latte").name,desc:i("Iced Latte").desc},
+        {name:i("Jugo de Naranja Natural").name,desc:i("Jugo de Naranja Natural").desc}
+      ]},
+    {title:t.categories[5],icon:ICONS.bubble,color:ICON_COLORS[5],globalPrice:"3.00 €",
+      simpleItems:[
+        {name:i("Coca-Cola").name,desc:i("Coca-Cola").desc},
+        {name:"Fanta",desc:""},
+        {name:"Nestea",desc:""},
+        {name:"7up",desc:""},
+        {name:"Tónica",desc:""},
+        {name:"Energizante",desc:""},
+        {name:i("Agua").name,desc:i("Agua").desc}
+      ]},
+    {title:t.categories[6],icon:ICONS.wine,color:ICON_COLORS[6],
       items:[
-        {name:i("Cerveza"),price:"S.M."},
-        {name:i("Tinto de Verano"),price:"S.M."},
-        {name:i("Vino Blanco"),price:"S.M."},
-        {name:i("Vino Tinto"),price:"S.M."}
-      ]
-    }
+        {name:i("Cerveza").name,desc:i("Cerveza").desc,price:"S.M."},
+        {name:i("Tinto de Verano").name,desc:i("Tinto de Verano").desc,price:"S.M."},
+        {name:i("Vino Blanco").name,desc:i("Vino Blanco").desc,price:"S.M."},
+        {name:i("Vino Tinto").name,desc:i("Vino Tinto").desc,price:"S.M."}
+      ]}
   ];
 }
 
-let currentLang = 'es';
-let currentTab  = 0;
+let currentLang='es', currentTab=0;
 
-function renderLangBar() {
-  document.getElementById('lang-bar').innerHTML = languages.map(l => `
+function renderLangBar(){
+  document.getElementById('lang-bar').innerHTML=languages.map(l=>`
     <button class="lang-btn ${l.code===currentLang?'active':''}" onclick="changeLang('${l.code}')">
       <span>${l.flag}</span><span>${l.name}</span>
     </button>`).join('');
 }
 
-function renderHeader() {
-  document.getElementById('subtitle').textContent = T[currentLang].subtitle;
+function renderHeader(){
+  document.getElementById('subtitle').textContent=T[currentLang].subtitle;
 }
 
-function renderTabs() {
-  const menu = getMenu(currentLang);
-  document.getElementById('tab-bar').innerHTML = menu.map((cat,idx) => `
+function renderTabs(){
+  const menu=getMenu(currentLang);
+  document.getElementById('tab-bar').innerHTML=menu.map((cat,idx)=>`
     <button class="tab-btn ${idx===currentTab?'active':''}" onclick="changeTab(${idx})" style="${ICON_COLORS[idx]}">
       ${cat.icon} ${cat.title}
     </button>`).join('');
 }
 
-function renderCard() {
-  const menu = getMenu(currentLang);
-  const cat  = menu[currentTab];
-  const card = document.getElementById('card-inner');
+function renderCard(){
+  const menu=getMenu(currentLang);
+  const cat=menu[currentTab];
+  const card=document.getElementById('card-inner');
+  let priceHTML=cat.globalPrice?`<span class="card-price-global">${cat.globalPrice}</span>`:'';
+  let bodyHTML='';
 
-  let priceHTML = cat.globalPrice ? `<span class="card-price-global">${cat.globalPrice}</span>` : '';
-  let bodyHTML  = '';
-
-  if (cat.subcategories) {
-    bodyHTML = `<div class="sub-grid">${cat.subcategories.map(sub=>`
+  if(cat.subcategories){
+    bodyHTML=`<div class="sub-grid">${cat.subcategories.map(sub=>`
       <div class="subcat">
         <div class="subcat-header">
           <div class="subcat-dot ${sub.dot}"></div>
@@ -658,30 +908,41 @@ function renderCard() {
         </div>
         <div class="subcat-profile">${sub.profile}</div>
         <ul>${sub.items.map(it=>`
-          <li><span>${it}</span><span class="p">${cat.globalPrice}</span></li>`).join('')}
+          <li>
+            <div class="subcat-li-top">
+              <span class="subcat-li-name">${it.name}</span>
+              <span class="subcat-li-price">${cat.globalPrice}</span>
+            </div>
+            ${it.desc?`<span class="subcat-li-desc">${it.desc}</span>`:''}
+          </li>`).join('')}
         </ul>
       </div>`).join('')}
     </div>`;
-  } else if (cat.simpleItems) {
-    bodyHTML = `<div class="items-grid">${cat.simpleItems.map(name=>`
+  } else if(cat.simpleItems){
+    bodyHTML=`<div class="items-grid">${cat.simpleItems.map(it=>`
       <div class="menu-item">
-        <span class="menu-item-name">${name}</span>
-        <span class="menu-item-price">${cat.globalPrice}</span>
+        <div class="menu-item-top">
+          <span class="menu-item-name">${it.name}</span>
+          <span class="menu-item-price">${cat.globalPrice}</span>
+        </div>
+        ${it.desc?`<span class="menu-item-desc">${it.desc}</span>`:''}
       </div>`).join('')}
     </div>`;
   } else {
-    bodyHTML = `<div class="items-grid">${cat.items.map(it=>`
+    bodyHTML=`<div class="items-grid">${cat.items.map(it=>`
       <div class="menu-item">
-        <span class="menu-item-name">${it.name}</span>
-        <span class="menu-item-price">${it.price}</span>
+        <div class="menu-item-top">
+          <span class="menu-item-name">${it.name}</span>
+          <span class="menu-item-price">${it.price}</span>
+        </div>
+        ${it.desc?`<span class="menu-item-desc">${it.desc}</span>`:''}
       </div>`).join('')}
     </div>`;
   }
 
-  const noteHTML = cat.notes ? `
-    <div class="card-note">${ICONS.info}<p>${cat.notes}</p></div>` : '';
+  const noteHTML=cat.notes?`<div class="card-note">${ICONS.info}<p>${cat.notes}</p></div>`:'';
 
-  card.innerHTML = `
+  card.innerHTML=`
     <div class="card-header">
       <div class="card-title" style="${ICON_COLORS[currentTab]}">${cat.icon} ${cat.title}</div>
       ${priceHTML}
@@ -690,21 +951,14 @@ function renderCard() {
     ${noteHTML}`;
 }
 
-function renderFooter() {
-  document.getElementById('footer-text').textContent =
+function renderFooter(){
+  document.getElementById('footer-text').textContent=
     `© ${new Date().getFullYear()} Escaramuza Coffee Bar · ${T[currentLang].footer}`;
 }
 
-function render() {
-  renderLangBar();
-  renderHeader();
-  renderTabs();
-  renderCard();
-  renderFooter();
-}
-
-function changeLang(code) { currentLang=code; currentTab=0; render(); }
-function changeTab(idx)   { currentTab=idx; renderTabs(); renderCard(); }
+function render(){renderLangBar();renderHeader();renderTabs();renderCard();renderFooter();}
+function changeLang(code){currentLang=code;currentTab=0;render();}
+function changeTab(idx){currentTab=idx;renderTabs();renderCard();}
 
 render();
 </script>
