@@ -4,653 +4,330 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Escaramuza – Menú</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f5f0e8; --paper: #faf8f4; --ink: #1a1208;
+      --brown: #3d2b10; --muted: #8a7660; --rule: #d9cebd;
+      --red: #c8293a; --gold: #b8924a; --white: #ffffff;
+    }
+    body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--ink); min-height:100vh; -webkit-font-smoothing:antialiased; }
 
-    body {
-      font-family: 'Georgia', serif;
-      background: #f9f6f1;
-      color: #2c1a0e;
-      min-height: 100vh;
-    }
+    /* LANG BAR */
+    #lang-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; padding:12px 20px; background:var(--ink); }
+    .lang-btn { display:flex; align-items:center; gap:5px; padding:5px 12px; border-radius:2px; border:1px solid rgba(255,255,255,0.15); cursor:pointer; font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; background:transparent; color:rgba(255,255,255,0.45); transition:all 0.2s; }
+    .lang-btn:hover { color:#fff; border-color:rgba(255,255,255,0.4); }
+    .lang-btn.active { background:var(--red); color:#fff; border-color:var(--red); }
 
-    #lang-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px;
-      background: #fff;
-      border-bottom: 1px solid #e8e0d5;
-    }
-    .lang-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 600;
-      background: #f5f0ea;
-      color: #5a3e28;
-      transition: all 0.2s;
-    }
-    .lang-btn:hover { background: #e8dfd3; }
-    .lang-btn.active { background: #2c1a0e; color: #fff; }
+    /* HEADER */
+    header { text-align:center; padding:52px 20px 0; }
+    header::after { content:''; display:block; width:1px; height:44px; background:var(--rule); margin:20px auto 0; }
+    header img { max-width:240px; width:65%; margin:0 auto 18px; display:block; }
+    #subtitle { font-family:'Jost',sans-serif; font-size:0.62rem; font-weight:500; letter-spacing:5px; text-transform:uppercase; color:var(--muted); }
 
-    header {
-      text-align: center;
-      padding: 40px 20px 28px;
-    }
-    header img {
-      max-width: 320px;
-      width: 80%;
-      margin: 0 auto 16px;
-      display: block;
-    }
-    .header-line {
-      width: 48px; height: 2px;
-      background: #c8a97e;
-      margin: 12px auto;
-    }
-    header p {
-      font-size: 0.78rem;
-      letter-spacing: 4px;
-      color: #9a7d5e;
-      font-style: italic;
-    }
+    /* TAB BAR */
+    #tab-bar { display:flex; flex-wrap:wrap; justify-content:center; gap:4px; padding:32px 20px 0; max-width:1020px; margin:0 auto; }
+    .tab-btn { display:flex; align-items:center; gap:7px; padding:10px 18px; border-radius:2px; border:1px solid var(--rule); background:transparent; color:var(--muted); font-family:'Jost',sans-serif; font-size:0.68rem; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.22s; }
+    .tab-btn svg { width:13px; height:13px; flex-shrink:0; }
+    .tab-btn:hover { background:var(--paper); color:var(--brown); border-color:var(--muted); }
+    .tab-btn.active { background:var(--ink); color:var(--cream); border-color:var(--ink); }
 
-    #tab-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      padding: 0 16px 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-    .tab-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 9px 18px;
-      border-radius: 999px;
-      border: 1.5px solid #ddd3c7;
-      background: #fff;
-      color: #7a6050;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.25s;
-      font-family: Georgia, serif;
-    }
-    .tab-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .tab-btn:hover { background: #f5ede3; }
-    .tab-btn.active {
-      background: #2c1a0e; color: #fff;
-      border-color: #2c1a0e;
-      box-shadow: 0 4px 14px rgba(44,26,14,0.18);
-    }
+    /* CARD */
+    #menu-card { max-width:980px; margin:0 auto 60px; padding:36px 20px 0; }
+    .card-inner { background:var(--paper); border:1px solid var(--rule); padding:clamp(28px,7vw,68px); min-height:460px; animation:fadeUp 0.3s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
 
-    #menu-card {
-      max-width: 900px;
-      margin: 0 auto 48px;
-      padding: 0 16px;
-    }
-    .card-inner {
-      background: #fff;
-      border-radius: 32px;
-      border: 1px solid #ece5db;
-      box-shadow: 0 8px 40px rgba(44,26,14,0.07);
-      padding: clamp(24px, 6vw, 56px);
-      min-height: 480px;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #f3ede5;
-      padding-bottom: 24px;
-      margin-bottom: 32px;
-    }
-    .card-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: clamp(1.4rem, 4vw, 1.9rem);
-      font-weight: 300;
-      color: #2c1a0e;
-    }
-    .card-title svg { width: 24px; height: 24px; flex-shrink: 0; }
-    .card-price-global {
-      font-size: 1.5rem;
-      color: #ccc0b0;
-      font-style: italic;
-      font-weight: 300;
-    }
+    /* CARD HEADER */
+    .card-header { display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:18px; margin-bottom:36px; border-bottom:1px solid var(--rule); position:relative; }
+    .card-header::after { content:''; position:absolute; bottom:-2px; left:0; width:40px; height:2px; background:var(--red); }
+    .card-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.7rem,5vw,2.5rem); font-weight:500; color:var(--ink); letter-spacing:-0.3px; display:flex; align-items:center; gap:13px; line-height:1; }
+    .card-title svg { width:20px; height:20px; flex-shrink:0; }
+    .card-price-global { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--muted); font-style:italic; font-weight:400; }
 
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px 56px;
-      align-items: start;
-    }
-    .menu-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid #f5f0ea;
-    }
-    
-    /* Destacado especial para la Milanesa */
-    .menu-item.highlighted-item {
-      background: #fffcf8;
-      border: 1.5px solid #c8a97e;
-      border-radius: 12px;
-      padding: 16px;
-      margin: -8px;
-      box-shadow: 0 4px 12px rgba(200, 169, 126, 0.15);
-    }
-    /* Clase para doble ancho y centrado */
-    .menu-item.full-width {
-      grid-column: 1 / -1;
-      text-align: center;
-      align-items: center;
-    }
-    .menu-item.full-width .menu-item-top {
-      justify-content: center;
-      width: 100%;
-    }
+    /* ITEMS */
+    .items-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(275px,1fr)); gap:0; }
+    .menu-item { display:flex; flex-direction:column; gap:5px; padding:17px 0; border-bottom:1px solid var(--rule); }
+    .menu-item:last-child { border-bottom:none; }
+    .menu-item-top { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+    .menu-item-name { font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:600; color:var(--ink); line-height:1.3; }
+    .menu-item-price { font-family:'Jost',sans-serif; color:var(--muted); font-size:0.8rem; font-weight:400; white-space:nowrap; flex-shrink:0; letter-spacing:0.3px; }
+    .menu-item-desc { font-family:'Jost',sans-serif; font-size:0.74rem; color:var(--muted); line-height:1.6; font-weight:300; }
+    .menu-item-options { font-family:'Jost',sans-serif; font-size:0.66rem; color:var(--gold); font-weight:500; letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
 
-    .menu-item-note {
-      font-size: 0.8rem;
-      color: #c8293a;
-      font-weight: bold;
-      margin-top: 6px;
-      background: #fdf2f2;
-      padding: 4px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      width: fit-content;
-    }
+    .section-block { margin-bottom:36px; }
 
-    .menu-item-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-    }
-    .menu-item-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #2c1a0e;
-      line-height: 1.4;
-    }
-    .menu-item-price {
-      color: #b0a090;
-      font-style: italic;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .menu-item-desc {
-      font-size: 0.8rem;
-      color: #9a8070;
-      line-height: 1.5;
-      font-style: italic;
-    }
-    .menu-item-options {
-      font-size: 0.78rem;
-      color: #c8a97e;
-      font-weight: 600;
-      margin-top: 2px;
-    }
+    /* COCKTAIL SECTIONS */
+    .cocktail-section { margin-bottom:36px; }
+    .cocktail-section-header { display:flex; align-items:baseline; gap:14px; margin-bottom:18px; padding-bottom:11px; border-bottom:1px solid var(--rule); position:relative; }
+    .cocktail-section-header::after { content:''; position:absolute; bottom:-1px; left:0; width:28px; height:1px; background:var(--red); }
+    .cocktail-section-title { font-family:'Jost',sans-serif; font-size:0.63rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--red); }
+    .cocktail-section-subtitle { font-family:'Cormorant Garamond',serif; font-size:0.88rem; font-style:italic; color:var(--muted); }
 
-    .section-block { margin-bottom: 36px; }
-    .section-block-title {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: #c8a97e; margin-bottom: 16px;
-      padding-bottom: 8px; border-bottom: 1px solid #f0e8dc;
-    }
+    /* TEAS */
+    .sub-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(275px,1fr)); gap:32px; }
+    .subcat { display:flex; flex-direction:column; gap:14px; }
+    .subcat-header { display:flex; align-items:center; gap:11px; }
+    .subcat-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .dot-black { background:#1a1208; } .dot-green { background:#4a7c59; }
+    .dot-gold  { background:#b8924a; } .dot-amber { background:#c8562a; }
+    .subcat-name { font-family:'Jost',sans-serif; font-size:0.63rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--ink); }
+    .subcat-tag  { font-family:'Jost',sans-serif; font-size:0.58rem; font-weight:400; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+    .subcat-profile { font-family:'Cormorant Garamond',serif; font-size:0.9rem; font-style:italic; color:var(--muted); line-height:1.5; border-left:2px solid var(--rule); padding-left:12px; }
+    .subcat ul { list-style:none; display:flex; flex-direction:column; gap:0; }
+    .subcat li { display:flex; flex-direction:column; gap:3px; padding:12px 0; border-bottom:1px solid var(--rule); }
+    .subcat li:last-child { border-bottom:none; }
+    .subcat-li-top { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+    .subcat-li-name { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:var(--ink); }
+    .subcat-li-price { font-family:'Jost',sans-serif; font-size:0.78rem; color:var(--muted); font-weight:300; }
+    .subcat-li-desc { font-family:'Jost',sans-serif; font-size:0.71rem; color:var(--muted); font-weight:300; line-height:1.5; }
 
-    .cocktail-section { margin-bottom: 36px; }
-    .cocktail-section-header {
-      display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px;
-      padding-bottom: 8px; border-bottom: 1px solid #f0e8dc;
-    }
-    .cocktail-section-title {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: #c8293a;
-    }
-    .cocktail-section-subtitle { font-size: 0.75rem; font-style: italic; color: #c8a97e; }
+    /* MILANESA BANNER */
+    .milanesa-banner { margin:36px auto 0; max-width:500px; background:var(--ink); border:1px solid rgba(184,146,74,0.35); padding:30px 38px; text-align:center; position:relative; overflow:hidden; }
+    .milanesa-banner::before { content:''; position:absolute; inset:7px; border:1px solid rgba(184,146,74,0.18); pointer-events:none; }
+    .milanesa-banner-eyebrow { font-family:'Jost',sans-serif; font-size:0.58rem; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+    .milanesa-banner-name { font-family:'Cormorant Garamond',serif; font-size:1.45rem; font-weight:600; color:#f5ead8; letter-spacing:0.3px; margin-bottom:6px; line-height:1.25; }
+    .milanesa-banner-rule { width:36px; height:1px; background:var(--gold); margin:14px auto; }
+    .milanesa-banner-desc { font-family:'Jost',sans-serif; font-size:0.73rem; font-weight:300; color:rgba(245,234,216,0.55); line-height:1.65; margin-bottom:16px; }
+    .milanesa-banner-deal { font-family:'Cormorant Garamond',serif; font-size:2.1rem; font-weight:600; color:var(--gold); letter-spacing:-0.5px; display:block; margin-bottom:14px; }
+    .milanesa-banner-time { font-family:'Jost',sans-serif; font-size:0.6rem; color:rgba(245,234,216,0.4); letter-spacing:2.5px; text-transform:uppercase; display:flex; align-items:center; justify-content:center; gap:7px; }
+    .milanesa-banner-time svg { width:11px; height:11px; flex-shrink:0; opacity:0.55; }
 
-    .sub-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px;
-    }
-    .subcat { display: flex; flex-direction: column; gap: 12px; }
-    .subcat-header { display: flex; align-items: center; gap: 12px; }
-    .subcat-dot { width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; }
-    .dot-black { background: #3f3f46; }
-    .dot-green { background: #10b981; }
-    .dot-gold  { background: #fbbf24; }
-    .dot-amber { background: #ea580c; }
-    .subcat-name { font-size: 0.85rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #2c1a0e; }
-    .subcat-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #9a8070; }
-    .subcat-profile {
-      font-size: 0.82rem; color: #7a6a58; font-style: italic; line-height: 1.5;
-      background: #f9f5f0; border-left: 3px solid #ddd3c7; padding: 10px 14px; border-radius: 0 8px 8px 0;
-    }
-    .subcat ul { list-style: none; display: flex; flex-direction: column; gap: 14px; padding-top: 4px; }
-    .subcat li { display: flex; flex-direction: column; gap: 3px; }
-    .subcat-li-top { display: flex; justify-content: space-between; align-items: baseline; }
-    .subcat-li-name { font-size: 0.95rem; font-weight: 600; color: #2c1a0e; }
-    .subcat-li-price { font-size: 0.85rem; color: #c0b0a0; font-style: italic; }
-    .subcat-li-desc { font-size: 0.78rem; color: #9a8070; font-style: italic; line-height: 1.4; }
+    /* AGREGADOS */
+    .agregados-box { margin-top:32px; padding:18px 22px; border:1px solid var(--rule); background:var(--cream); }
+    .agregados-title { font-family:'Jost',sans-serif; font-size:0.6rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:13px; }
+    .agregados-list { display:flex; flex-wrap:wrap; gap:7px; }
+    .agregado-chip { border:1px solid var(--rule); padding:5px 12px; font-family:'Jost',sans-serif; font-size:0.71rem; font-weight:400; color:var(--brown); display:flex; gap:6px; align-items:center; }
+    .agregado-chip span { color:var(--gold); font-weight:500; }
 
-    .agregados-box {
-      margin-top: 24px; padding: 16px 20px; background: #f9f5f0;
-      border: 1px solid #ece5db; border-radius: 16px;
-    }
-    .agregados-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #9a8070; margin-bottom: 10px; }
-    .agregados-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .agregado-chip { background: #fff; border: 1px solid #ddd3c7; border-radius: 999px; padding: 5px 12px; font-size: 0.78rem; color: #5a3e28; }
-    .agregado-chip span { color: #c8a97e; font-weight: 700; margin-left: 4px; }
+    /* CARD NOTE */
+    .card-note { margin-top:32px; padding:13px 17px; border-left:2px solid var(--gold); background:var(--cream); display:flex; align-items:flex-start; gap:11px; font-family:'Jost',sans-serif; font-size:0.73rem; font-weight:300; color:var(--muted); line-height:1.6; }
+    .card-note svg { width:15px; height:15px; color:var(--gold); flex-shrink:0; margin-top:2px; }
 
-    .card-note {
-      margin-top: 32px; padding: 16px 20px; background: #f9f5f0;
-      border: 1px solid #ece5db; border-radius: 20px; display: flex;
-      align-items: center; gap: 12px; font-size: 0.8rem; color: #7a6a58; font-weight: 500;
-    }
-    .card-note svg { width: 18px; height: 18px; color: #b0a090; flex-shrink: 0; }
+    /* FOOTER */
+    footer { text-align:center; padding:24px 20px 40px; font-family:'Jost',sans-serif; font-size:0.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--muted); border-top:1px solid var(--rule); max-width:980px; margin:0 auto; }
 
-    footer { text-align: center; padding: 20px; font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: #c0b0a0; }
-
-    @media (max-width: 520px) {
-      .items-grid { grid-template-columns: 1fr; }
-      .sub-grid   { grid-template-columns: 1fr; }
+    @media(max-width:580px){
+      .items-grid,.sub-grid{grid-template-columns:1fr}
+      .card-inner{padding:24px 18px}
+      .tab-btn{padding:8px 11px;font-size:0.62rem;letter-spacing:1px}
     }
   </style>
 </head>
 <body>
-
 <div id="lang-bar"></div>
-
 <header>
   <img src="Logo - Naranja.png" alt="Escaramuza"/>
-  <div class="header-line"></div>
   <p id="subtitle"></p>
 </header>
-
 <div id="tab-bar"></div>
 <div id="menu-card"><div class="card-inner" id="card-inner"></div></div>
 <footer id="footer-text"></footer>
 
 <script>
-const menuData = {
-  es: {
-    name: 'Español', flag: '🇪🇸', subtitle: "MENÚ DE BEBIDAS Y COCINA", footer: "Precios con IVA incluido.", supplement: "Suplemento leche de Avena o Almendra: +0,30 €", agregadosTitle: "+ Agregados",
-    tabs: ["Nuestra Cocina", "Obrador y Dulce", "Cafetería", "Matcha Bar", "Tés e Infusiones", "Zumos y Limonadas", "Vinos y Cervezas", "Bar de Autor", "Refrescos"],
-    cocktailSections: {
-      especiales: { title: "ESPECIALES", sub: "Nuestras creaciones exclusivas" }, clasica: { title: "MIXOLOGÍA CLÁSICA", sub: "Referentes internacionales" }, largos: { title: "TRAGOS LARGOS", sub: "Selección refrescante" }, vinosCervezas: { title: "VINOS & CERVEZAS", sub: "" }
-    },
-    menu: [
-      { // 0 COCINA
-        flatSections: [
-          { title: "Platos & Tostas",
-            items: [
-              {name:"French Toast", desc:"Brioche con frutos rojos, banana y helado.", price:"9.50 €"},
-              {name:"Oro Ibérico", desc:"Jamón y kaki sobre ricotta, nueces, cebolla caramelizada y miel (opción de miel picante si lo deseas).", price:"13.90 €"},
-              {name:"Benedictos", desc:"Huevos con salsa holandesa, aguacate, cebolla, rábanos y brotes.", price:"11.50 €"},
-              {name:"Champiñones", desc:"Champiñones salteados, burrata cremosa, cebolla caramelizada y piñones.", price:"10.50 €"},
-              {name:"Salmón", desc:"Salmón ahumado, aguacate con vinagreta de la casa y brotes.", price:"13.50 €"},
-              {name:"Aguacate", desc:"Aguacate, huevo, tomate cherry, rábano y sésamo sobre queso crema.", price:"9.50 €"},
-              {name:"Tosta de Tomate", desc:"Tomate fresco, aceite de oliva, brotes y albahaca.", price:"3.80 €"},
-              {name:"Tosta Queso y Miel", desc:"Combinación de queso, nueces crujientes y miel (opción de miel picante si lo deseas).", price:"6.50 €"},
-              {name:"Milanesa", desc:"Tierna milanesa de ternera (corte babilla) rebozada y dorada, acompañada con patatas.", price:"13.90 €", highlight: true, fullWidth: true, note: "A partir de las 11:30 am. Por 14.50 € incluye gaseosa o cerveza."}
-            ] }
-        ],
-        agregados: [ {name:"Huevo", price:"1.50 €"}, {name:"Jamón", price:"2.00 €"}, {name:"Aguacate", price:"2.50 €"}, {name:"Salmón", price:"4.50 €"}, {name:"Champiñones", price:"1.50 €"}, {name:"Tomate", price:"1.00 €"} ]
-      },
-      { // 1 DULCE
-        items: [
-          {name:"Cinnamon Roll", desc:"Esponjoso y recién horneado.", price:"4.50 €", options:"Nueces · Frutos Rojos · Lotus"},
-          {name:"Cookie", desc:"Crujiente por fuera, tierna por dentro.", price:"4.00 €", options:"Chispas de Chocolate · Lotus"},
-          {name:"Tarta de zanahoria", desc:"Bizcocho húmedo de zanahoria con frosting de queso crema.", price:"4.00 €"},
-          {name:"Pan de banana", desc:"Bizcocho esponjoso de plátano, jugoso y natural.", price:"4.00 €"},
-          {name:"Tarta de Queso con Brownie", desc:"Cremosa tarta de queso sobre base de brownie de chocolate.", price:"5.50 €"},
-          {name:"Tarta de manzana", desc:"Estilo crumble de manzana con un toque crujiente.", price:"4.00 €"},
-          {name:"Croissant de Almendras", desc:"Hojaldre crujiente relleno de crema de almendra.", price:"3.50 €"},
-          {name:"Alfajor", desc:"Masa de cookie, dulce de leche y corazón de frutos rojos. Crujiente y equilibrado.", price:"4.50 €"}
-        ]
-      },
-      { // 2 CAFETERÍA
-        items: [
-          {name:"Espresso Doble / Cortado", desc:"Concentrado y potente. El alma del café.", price:"2.80 €"},
-          {name:"Americano", desc:"Espresso suavizado con agua caliente. Limpio y largo.", price:"3.00 €"},
-          {name:"Flat White", desc:"Doble espresso con leche sedosa. Intenso y cremoso.", price:"3.20 €"},
-          {name:"Capuccino / Latte", desc:"Espresso con leche vaporizada y espuma aterciopelada.", price:"3.20 €"},
-          {name:"Chocolate Caliente", desc:"Cacao puro con leche caliente. Cremoso y reconfortante.", price:"4.00 €"},
-          {name:"Chai Latte", desc:"Especias orientales, canela y cardamomo con leche vaporizada.", price:"4.00 €"},
-          {name:"Cold Brew", desc:"Café macerado 24h en frío. Suave, bajo en acidez y refrescante.", price:"4.00 €"},
-          {name:"Iced Latte", desc:"Espresso sobre hielo con leche fría.", price:"4.00 €", options:"Vainilla · Caramelo · Coco"}
-        ]
-      },
-      { // 3 MATCHA
-        items: [
-          {name:"Matcha Latte Clásico", desc:"Matcha ceremonial con leche suave. Equilibrado y vegetal.", price:"4.90 €"},
-          {name:"Iced Matcha Mango", desc:"Matcha frío con coulis de mango tropical. Vibrante y refrescante.", price:"5.50 €"},
-          {name:"Iced Matcha Frutos Rojos", desc:"Matcha con frambuesa y frutos del bosque. Ácido y goloso.", price:"5.50 €"},
-          {name:"Iced Matcha Coco", desc:"Matcha con leche de coco. Suave, exótico y cremoso.", price:"5.50 €"},
-          {name:"Iced Matcha Maracuyá", desc:"Matcha con maracuyá. Un contraste tropical e intenso.", price:"5.50 €"},
-          {name:"Iced Matcha Escaramuza", desc:"Nuestra combinación estrella con dulce de leche y caramelo. Fresca, única y especial.", price:"5.50 €"}
-        ]
-      },
-      { // 4 TÉS
-        globalPrice: "3.80 €",
-        subcategories: [
-          { name:"GAMA NEGRA", tag:"Energía y Desayuno", dot:"dot-black", profile:"Alto contenido en teína, sabores robustos y terrosos.", items:[ {name:"English Breakfast Eco", desc:"Robusto y maltoso. El clásico del desayuno británico."}, {name:"Earl Grey", desc:"Té negro con bergamota. Aromático y elegante."}, {name:"Chai Negro", desc:"Especias, canela y pimienta. Intenso y reconfortante."} ] },
-          { name:"GAMA VERDE Y BLANCA", tag:"Antioxidante y Ligereza", dot:"dot-green", profile:"Teína moderada/baja, sabores florales y frescos.", items:[ {name:"Té Verde Jazmín", desc:"Delicado y floral. Perfumado con flores de jazmín."}, {name:"Té Verde Sakura", desc:"Suave y primaveral. Notas florales de cerezo japonés."}, {name:"Té Blanco Seda", desc:"Muy suave y dulce. El más delicado de nuestra carta."}, {name:"Noches de Toronto", desc:"Mezcla exclusiva. Fresco, frutal y envolvente."}, {name:"Silueta", desc:"Blend depurativo. Ligero y equilibrado."} ] },
-          { name:"GAMA DORADA", tag:"Bienestar y Digestión", dot:"dot-gold", profile:"Sin teína. Cítricos y medicinales.", items:[ {name:"Manzanilla", desc:"Clásica y suave. Digestiva y relajante."}, {name:"Jengibre y Limón", desc:"Estimulante y cítrica. Perfecta para activar el cuerpo."}, {name:"Jengibre y Cúrcuma", desc:"Antiinflamatoria y potente. Cálida y especiada."}, {name:"Infusión Inmunidad", desc:"Blend de hierbas para reforzar las defensas."}, {name:"Infusión Depurativa", desc:"Limpia y ligera. Ideal después de las comidas."}, {name:"Chai Digestivo", desc:"Especias suaves y cúrcuma. Reconfortante y saludable."} ] },
-          { name:"GAMA ÁMBAR Y FLORAL", tag:"Relajación", dot:"dot-amber", profile:"Sin teína. Dulces y cálidos.", items:[ {name:"Rooibos Clásico / Noches", desc:"Sin teína. Dulce y afrutado. Perfecto para la noche."}, {name:"Lavanda", desc:"Floral y relajante. El abrazo perfecto antes de dormir."} ] }
-        ]
-      },
-      { // 5 ZUMOS
-        globalPrice: "4.00 €",
-        items: [
-          {name:"Jugo de Naranja Natural", desc:"Naranjas exprimidas al momento. Puro y vitamínico."},
-          {name:"Limonada Clásica", desc:"Limón natural, agua y el punto justo de dulzor."},
-          {name:"Limonada de Frambuesa", desc:"Cítrica y frutal con un toque ácido de frambuesa fresca."},
-          {name:"Limonada de Mango", desc:"Tropical y refrescante con pulpa de mango natural."},
-          {name:"Limonada de Coco", desc:"Limón con leche de coco. Cremosa y sorprendente."},
-          {name:"Limonada de Maracuyá", desc:"Intensa y aromática. El sabor del verano en un vaso."},
-          {name:"Limonada de Menta y Jengibre", desc:"Fresca y especiada. Limón, menta y jengibre en armonía."}
-        ]
-      },
-      { // 6 VINOS
-        items: [ {name:"Cerveza Estrella Galicia", desc:"Especial o 0.0 Tostada.", price:"4.00 €"}, {name:"Copa de Vino Blanco", desc:"Selección disponible en Seco o Dulce.", price:"4.00 €"}, {name:"Copa de Vino Tinto", desc:"Selección de la casa con cuerpo y carácter.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"Tinto de la casa con refrescos y cítricos.", price:"4.00 €"} ]
-      },
-      { // 7 COCTELES
-        cocktailSections: [
-          { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Doble shot de café, vodka premium y licor artesano.", price:"11 €"}, {name:"Piña Colada", desc:"Ron blanco, coco, piña y un toque de lima. Suave y tropical.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin infusionado con mango, limón y soda fresca. Frutado y seco.", price:"10 €"}, {name:"Escaramuza Cocktail", desc:"Gin con vermouth blanco, limón y soda. Ligero y refrescante.", price:"10 €"} ] },
-          { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Vodka, lima y ginger beer. Perfil cítrico y picante.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco, soda y rodaja de naranja.", price:"9 €"}, {name:"Fernet con Cola", desc:"El serve rioplatense por excelencia. Amargo e intenso.", price:"9 €"}, {name:"Campari Spritz", desc:"Aperitivo italiano con notas amargas y burbuja fina.", price:"9 €"}, {name:"Cuba Libre", desc:"Ron añejo con cola y un toque de lima fresca.", price:"9 €"} ] },
-          { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Tequila reposado, naranja natural y granadina.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Vodka premium, naranja natural y granadina.", price:"9 €"}, {name:"Gin Cítrico", desc:"Ginebra equilibrada con cítricos frescos de temporada.", price:"9 €"} ] }
-        ]
-      },
-      { // 8 REFRESCOS
-        items: [ {name:"Coca-Cola", desc:"Normal o Zero. Bien fría.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Tónica", desc:"", price:"2.50 €"}, {name:"Energizante", desc:"", price:"3.00 €"}, {name:"Agua", desc:"Con o sin gas.", price:"2.40 €"} ]
-      }
-    ]
-  },
-  en: {
-    name: 'English', flag: '🇬🇧', subtitle: "DRINKS & FOOD MENU", footer: "Prices include VAT.", supplement: "Oat or Almond milk supplement: +0.30 €", agregadosTitle: "+ Add-ons",
-    tabs: ["Our Kitchen", "Bakery & Sweets", "Coffee Bar", "Matcha Bar", "Teas & Infusions", "Juices & Lemonades", "Wines & Beers", "Author's Bar", "Soft Drinks"],
-    cocktailSections: {
-      especiales: { title: "SPECIALS", sub: "Our exclusive creations" }, clasica: { title: "CLASSIC MIXOLOGY", sub: "International references" }, largos: { title: "LONG DRINKS", sub: "Refreshing selection" }, vinosCervezas: { title: "WINES & BEERS", sub: "" }
-    },
-    menu: [
-      { flatSections: [ { title: "Dishes & Toasts", items: [ {name:"French Toast", desc:"Brioche with red berries, banana, and ice cream.", price:"9.50 €"}, {name:"Iberian Gold", desc:"Ham and persimmon on ricotta, walnuts, caramelized onion, and honey (can be spicy upon request).", price:"13.90 €"}, {name:"Benedicts", desc:"Eggs with hollandaise sauce, avocado, onion, radishes, and sprouts.", price:"11.50 €"}, {name:"Mushrooms", desc:"Sautéed mushrooms, creamy burrata, caramelized onion, and pine nuts.", price:"10.50 €"}, {name:"Salmon", desc:"Smoked salmon, avocado with house vinaigrette, and sprouts.", price:"13.50 €"}, {name:"Avocado", desc:"Avocado, egg, cherry tomato, radish, and sesame on cream cheese.", price:"9.50 €"}, {name:"Tomato Toast", desc:"Fresh tomato, olive oil, sprouts, and basil.", price:"3.80 €"}, {name:"Cheese & Honey Toast", desc:"Combination of cheese, crunchy walnuts, and honey (can be spicy upon request).", price:"6.50 €"}, {name:"Milanesa", desc:"Tender breaded and golden veal milanesa, served with potatoes.", price:"13.90 €", highlight: true, fullWidth: true, note:"From 11:30 AM. 14.50 € includes a soft drink or beer."} ] } ], agregados: [ {name:"Egg", price:"1.50 €"}, {name:"Ham", price:"2.00 €"}, {name:"Avocado", price:"2.50 €"}, {name:"Salmon", price:"4.50 €"}, {name:"Mushrooms", price:"1.50 €"}, {name:"Tomato", price:"1.00 €"} ] },
-      { items: [ {name:"Cinnamon Roll", desc:"Fluffy and freshly baked.", price:"4.50 €", options:"Walnuts · Red Berries · Lotus"}, {name:"Cookie", desc:"Crispy on the outside, tender on the inside.", price:"4.00 €", options:"Chocolate Chips · Lotus"}, {name:"Carrot Cake", desc:"Moist carrot sponge cake with cream cheese frosting.", price:"4.00 €"}, {name:"Banana Bread", desc:"Fluffy banana sponge cake, juicy and natural.", price:"4.00 €"}, {name:"Cheesecake with Brownie", desc:"Creamy cheesecake on a chocolate brownie base.", price:"5.50 €"}, {name:"Apple Crumble Cake", desc:"Classic apple crumble cake.", price:"4.00 €"}, {name:"Almond Croissant", desc:"Crispy puff pastry filled with almond cream.", price:"3.50 €"}, {name:"Alfajor", desc:"Cookie dough, dulce de leche, and a red berry core. Crispy and balanced.", price:"4.50 €"} ] },
-      { items: [ {name:"Double Espresso / Macchiato", desc:"Concentrated and powerful. The soul of coffee.", price:"2.80 €"}, {name:"Americano", desc:"Espresso softened with hot water. Clean and long.", price:"3.00 €"}, {name:"Flat White", desc:"Double espresso with silky milk. Intense and creamy.", price:"3.20 €"}, {name:"Cappuccino / Latte", desc:"Espresso with steamed milk and velvety foam.", price:"3.20 €"}, {name:"Hot Chocolate", desc:"Pure cocoa with hot milk. Creamy and comforting.", price:"4.00 €"}, {name:"Chai Latte", desc:"Oriental spices, cinnamon, and cardamom with steamed milk.", price:"4.00 €"}, {name:"Cold Brew", desc:"Coffee cold-steeped for 24h. Smooth, low acidity, refreshing.", price:"4.00 €"}, {name:"Iced Latte", desc:"Espresso over ice with cold milk.", price:"4.00 €", options:"Vanilla · Caramel · Coconut"} ] },
-      { items: [ {name:"Classic Matcha Latte", desc:"Ceremonial matcha with smooth milk. Balanced and vegetal.", price:"4.90 €"}, {name:"Iced Matcha Mango", desc:"Cold matcha with tropical mango coulis. Vibrant and refreshing.", price:"5.50 €"}, {name:"Iced Matcha Red Berries", desc:"Matcha with raspberry and forest fruits. Tart and sweet.", price:"5.50 €"}, {name:"Iced Matcha Coconut", desc:"Matcha with coconut milk. Smooth, exotic, and creamy.", price:"5.50 €"}, {name:"Iced Matcha Passion Fruit", desc:"Matcha with passion fruit. A tropical and intense contrast.", price:"5.50 €"}, {name:"Iced Matcha Escaramuza", desc:"Our star combination with dulce de leche and caramel. Fresh, unique, and special.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"BLACK RANGE", tag:"Energy & Breakfast", dot:"dot-black", profile:"High in theine, robust and earthy flavors.", items:[ {name:"Organic English Breakfast", desc:"Robust and malty. The British breakfast classic."}, {name:"Earl Grey", desc:"Black tea with bergamot. Aromatic and elegant."}, {name:"Black Chai", desc:"Spices, cinnamon, and pepper. Intense and comforting."} ] }, { name:"GREEN & WHITE RANGE", tag:"Antioxidant & Lightness", dot:"dot-green", profile:"Moderate/low theine, floral and fresh flavors.", items:[ {name:"Jasmine Green Tea", desc:"Delicate and floral. Scented with jasmine flowers."}, {name:"Sakura Green Tea", desc:"Soft and spring-like. Floral notes of Japanese cherry blossom."}, {name:"Silk White Tea", desc:"Very soft and sweet. The most delicate on our menu."}, {name:"Toronto Nights", desc:"Exclusive blend. Fresh, fruity, and enveloping."}, {name:"Silhouette", desc:"Purifying blend. Light and balanced."} ] }, { name:"GOLDEN RANGE", tag:"Wellness & Digestion", dot:"dot-gold", profile:"Theine-free. Citrusy and medicinal.", items:[ {name:"Chamomile", desc:"Classic and mild. Digestive and relaxing."}, {name:"Ginger & Lemon", desc:"Stimulating and citrusy. Perfect for activating the body."}, {name:"Ginger & Turmeric", desc:"Anti-inflammatory and powerful. Warm and spicy."}, {name:"Immunity Infusion", desc:"Herbal blend to boost defenses."}, {name:"Purifying Infusion", desc:"Clean and light. Ideal after meals."}, {name:"Digestive Chai", desc:"Mild spices and turmeric. Comforting and healthy."} ] }, { name:"AMBER & FLORAL RANGE", tag:"Relaxation", dot:"dot-amber", profile:"Theine-free. Sweet and warm.", items:[ {name:"Classic Rooibos / Nights", desc:"Theine-free. Sweet and fruity. Perfect for the night."}, {name:"Lavender", desc:"Floral and relaxing. The perfect hug before sleep."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Fresh Orange Juice", desc:"Freshly squeezed oranges. Pure and vitamin-rich."}, {name:"Classic Lemonade", desc:"Fresh lemon, water, and just the right touch of sweetness."}, {name:"Raspberry Lemonade", desc:"Citrusy and fruity with a tart touch of fresh raspberry."}, {name:"Mango Lemonade", desc:"Tropical and refreshing with natural mango pulp."}, {name:"Coconut Lemonade", desc:"Lemon with coconut milk. Creamy and surprising."}, {name:"Passion Fruit Lemonade", desc:"Intense and aromatic. The taste of summer in a glass."}, {name:"Mint & Ginger Lemonade", desc:"Fresh and spicy. Lemon, mint, and ginger in harmony."} ] },
-      { items: [ {name:"Estrella Galicia Beer", desc:"Special or 0.0 Toasted.", price:"4.00 €"}, {name:"Glass of White Wine", desc:"Selection available in Dry or Sweet.", price:"4.00 €"}, {name:"Glass of Red Wine", desc:"House selection with body and character.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"House red wine with soda and citrus.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Double shot of coffee, premium vodka, and artisan liqueur.", price:"11 €"}, {name:"Piña Colada", desc:"White rum, coconut, pineapple, and a touch of lime. Smooth and tropical.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin infused with mango, lemon, and fresh soda. Fruity and dry.", price:"10 €"}, {name:"Escaramuza Cocktail", desc:"Gin with white vermouth, lemon, and soda. Light and refreshing.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Vodka, lime, and ginger beer. Citrusy and spicy profile.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco, soda, and orange slice.", price:"9 €"}, {name:"Fernet with Cola", desc:"The quintessential River Plate serve. Bitter and intense.", price:"9 €"}, {name:"Campari Spritz", desc:"Italian aperitif with bitter notes and fine bubbles.", price:"9 €"}, {name:"Cuba Libre", desc:"Aged rum with cola and a touch of fresh lime.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Reposado tequila, fresh orange, and grenadine.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Premium vodka, fresh orange, and grenadine.", price:"9 €"}, {name:"Citrus Gin", desc:"Balanced gin with fresh seasonal citrus.", price:"9 €"} ] } ] },
-      { items: [ {name:"Coca-Cola", desc:"Regular or Zero. Ice cold.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Tonic Water", desc:"", price:"2.50 €"}, {name:"Energy Drink", desc:"", price:"3.00 €"}, {name:"Water", desc:"Sparkling or still.", price:"2.40 €"} ] }
-    ]
-  },
-  de: {
-    name: 'Deutsch', flag: '🇩🇪', subtitle: "GETRÄNKE & SPEISEKARTE", footer: "Preise inkl. MwSt.", supplement: "Zuschlag Hafer- oder Mandelmilch: +0,30 €", agregadosTitle: "+ Extras",
-    tabs: ["Unsere Küche", "Bäckerei & Süßes", "Kaffeehaus", "Matcha Bar", "Tee & Aufgüsse", "Säfte & Limonaden", "Wein & Bier", "Autor-Bar", "Erfrischungen"],
-    cocktailSections: { especiales: { title: "SPECIALS", sub: "Unsere exklusiven Kreationen" }, clasica: { title: "KLASSISCHE MIXOLOGIE", sub: "Internationale Referenzen" }, largos: { title: "LONGDRINKS", sub: "Erfrischende Auswahl" }, vinosCervezas: { title: "WEINE & BIERE", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "Gerichte & Toasts", items: [ {name:"French Toast", desc:"Brioche mit Beeren und Eis.", price:"9.50 €"}, {name:"Iberisches Gold", desc:"Schinken auf Ricotta, Walnüsse, Honig (auf Wunsch scharf).", price:"13.90 €"}, {name:"Eggs Benedict", desc:"Mit Sauce Hollandaise und Avocado.", price:"11.50 €"}, {name:"Champignons", desc:"Gebraten, mit Burrata.", price:"10.50 €"}, {name:"Lachs", desc:"Räucherlachs mit Avocado.", price:"13.50 €"}, {name:"Avocado Toast", desc:"Mit Ei und Kirschtomaten.", price:"9.50 €"}, {name:"Tomaten Toast", desc:"Mit Olivenöl.", price:"3.80 €"}, {name:"Käse & Honig Toast", desc:"Mit Walnüssen (Honig auf Wunsch scharf).", price:"6.50 €"}, {name:"Milanesa", desc:"Paniertes Kalbsschnitzel mit Kartoffeln.", price:"13.90 €", highlight: true, fullWidth: true, note:"Ab 11:30 Uhr. Für 14.50 € inkl. Erfrischungsgetränk oder Bier."} ] } ], agregados: [ {name:"Ei", price:"1.50 €"}, {name:"Schinken", price:"2.00 €"}, {name:"Avocado", price:"2.50 €"}, {name:"Lachs", price:"4.50 €"}, {name:"Champignons", price:"1.50 €"}, {name:"Tomate", price:"1.00 €"} ] },
-      { items: [ {name:"Zimtrolle", desc:"Frisch gebacken.", price:"4.50 €", options:"Walnüsse · Beeren · Lotus"}, {name:"Cookie", desc:"Außen knusprig.", price:"4.00 €", options:"Schoko · Lotus"}, {name:"Carrot Cake", desc:"Mit Frischkäse-Frosting.", price:"4.00 €"}, {name:"Banana Bread", desc:"Saftig.", price:"4.00 €"}, {name:"Cheesecake", desc:"Auf Brownie-Boden.", price:"5.50 €"}, {name:"Apfel-Crumble Kuchen", desc:"Klassischer Apfelstreusel.", price:"4.00 €"}, {name:"Mandel-Croissant", desc:"Gefüllt.", price:"3.50 €"}, {name:"Alfajor", desc:"Keksteig, Dulce de Leche und ein Kern aus roten Beeren. Knusprig und ausgewogen.", price:"4.50 €"} ] },
-      { items: [ {name:"Doppelter Espresso / Macchiato", desc:"Konzentriert und kräftig. Die Seele des Kaffees.", price:"2.80 €"}, {name:"Americano", desc:"Espresso verlängert mit heißem Wasser.", price:"3.00 €"}, {name:"Flat White", desc:"Doppelter Espresso mit samtiger Milch.", price:"3.20 €"}, {name:"Cappuccino / Latte", desc:"Espresso mit aufgeschäumter Milch.", price:"3.20 €"}, {name:"Heiße Schokolade", desc:"Reiner Kakao mit heißer Milch.", price:"4.00 €"}, {name:"Chai Latte", desc:"Orientalische Gewürze, Zimt, Kardamom mit Milch.", price:"4.00 €"}, {name:"Cold Brew", desc:"24h kalt gebrühter Kaffee. Erfrischend.", price:"4.00 €"}, {name:"Iced Latte", desc:"Espresso auf Eis mit kalter Milch.", price:"4.00 €", options:"Vanille · Karamell · Kokos"} ] },
-      { items: [ {name:"Classic Matcha Latte", desc:"Zeremonieller Matcha mit Milch.", price:"4.90 €"}, {name:"Iced Matcha Mango", desc:"Kalter Matcha mit Mango-Coulis.", price:"5.50 €"}, {name:"Iced Matcha Waldbeeren", desc:"Matcha mit Himbeere. Säuerlich süß.", price:"5.50 €"}, {name:"Iced Matcha Kokos", desc:"Matcha mit Kokosmilch. Exotisch.", price:"5.50 €"}, {name:"Iced Matcha Maracuja", desc:"Matcha mit Passionsfrucht.", price:"5.50 €"}, {name:"Iced Matcha Escaramuza", desc:"Unsere frische Hauskreation mit Dulce de Leche und Karamell.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"SCHWARZER TEE", tag:"Energie", dot:"dot-black", profile:"Hoher Teingehalt.", items:[ {name:"English Breakfast", desc:"Kräftig."}, {name:"Earl Grey", desc:"Mit Bergamotte."}, {name:"Black Chai", desc:"Mit Gewürzen."} ] }, { name:"GRÜNER & WEISSER TEE", tag:"Antioxidantien", dot:"dot-green", profile:"Wenig Tein.", items:[ {name:"Jasmin Grüntee", desc:"Blumig."}, {name:"Sakura Grüntee", desc:"Kirschblüte."}, {name:"Seidenweißer Tee", desc:"Sehr mild."}, {name:"Toronto Nights", desc:"Fruchtig."}, {name:"Silhoutte", desc:"Reinigend."} ] }, { name:"GOLDENER TEE", tag:"Wellness", dot:"dot-gold", profile:"Kein Tein.", items:[ {name:"Kamille", desc:"Entspannend."}, {name:"Ingwer & Zitrone", desc:"Anregend."}, {name:"Ingwer & Kurkuma", desc:"Entzündungshemmend."}, {name:"Immun-Aufguss", desc:"Kräutermischung."}, {name:"Detox", desc:"Reinigend."}, {name:"Digestive Chai", desc:"Gesund."} ] }, { name:"BERNSTEIN & BLUMIG", tag:"Entspannung", dot:"dot-amber", profile:"Kein Tein.", items:[ {name:"Rooibos", desc:"Süßlich."}, {name:"Lavendel", desc:"Beruhigend."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Frischer Orangensaft", desc:"Frisch gepresst."}, {name:"Klassische Limonade", desc:"Zitrone, Wasser, perfekte Süße."}, {name:"Himbeer-Limonade", desc:"Fruchtig mit frischer Himbeere."}, {name:"Mango-Limonade", desc:"Tropisch mit Mangomark."}, {name:"Kokos-Limonade", desc:"Zitrone mit Kokosmilch."}, {name:"Maracuja-Limonade", desc:"Intensiv und aromatisch."}, {name:"Minz-Ingwer-Limonade", desc:"Frisch und würzig."} ] },
-      { items: [ {name:"Bier Estrella Galicia", desc:"Normal oder Alkoholfrei.", price:"4.00 €"}, {name:"Glas Weißwein", desc:"Trocken / Lieblich.", price:"4.00 €"}, {name:"Glas Rotwein", desc:"Hauswein.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"Rotwein mit Limonade.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Wodka, Kaffeelikör.", price:"11 €"}, {name:"Piña Colada", desc:"Rum, Kokos, Ananas.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin, Mango, Soda.", price:"10 €"}, {name:"Escaramuza Cocktail", desc:"Hauskreation.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Wodka, Ginger Beer.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco.", price:"9 €"}, {name:"Fernet Cola", desc:"Argentinisch.", price:"9 €"}, {name:"Campari Spritz", desc:"Bitter.", price:"9 €"}, {name:"Cuba Libre", desc:"Rum, Cola.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Tequila, Orange.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Wodka, Orange.", price:"9 €"}, {name:"Citrus Gin", desc:"Gin, Zitrusfrüchte.", price:"9 €"} ] } ] },
-      { items: [ {name:"Coca-Cola", desc:"Normal o Zero.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Tonic", desc:"", price:"2.50 €"}, {name:"Energy Drink", desc:"", price:"3.00 €"}, {name:"Wasser", desc:"Mit/ohne Kohlensäure.", price:"2.40 €"} ] }
-    ]
-  },
-  ja: {
-    name: '日本語', flag: '🇯🇵', subtitle: "ドリンク＆フードメニュー", footer: "税込価格", supplement: "オーツミルクまたはアーモンドミルク: +0.30 €", agregadosTitle: "+ トッピング",
-    tabs: ["キッチン", "ベーカリー", "カフェ", "抹茶バー", "ティー", "ジュース＆レモネード", "ワイン＆ビール", "バー", "ソフトドリンク"],
-    cocktailSections: { especiales: { title: "スペシャル", sub: "オリジナルカクテル" }, clasica: { title: "クラシックカクテル", sub: "定番カクテル" }, largos: { title: "ロングドリンク", sub: "爽やかなセレクション" }, vinosCervezas: { title: "ワイン＆ビール", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "料理＆トースト", items: [ {name:"フレンチトースト", desc:"ベリー、バナナ、アイスクリーム添え。", price:"9.50 €"}, {name:"イベリコゴールド", desc:"生ハム、柿、リコッタチーズ、蜂蜜（スパイシーな蜂蜜も可）。", price:"13.90 €"}, {name:"エッグベネディクト", desc:"オランデーズソースとアボカド。", price:"11.50 €"}, {name:"マッシュルーム", desc:"炒めキノコとクリーミーなブッラータ。", price:"10.50 €"}, {name:"サーモン", desc:"スモークサーモンとアボカド。", price:"13.50 €"}, {name:"アボカド", desc:"アボカド、卵、チェリートマト。", price:"9.50 €"}, {name:"トマトトースト", desc:"フレッシュトマトとオリーブオイル。", price:"3.80 €"}, {name:"チーズ＆ハニートースト", desc:"チーズ、クルミ、蜂蜜（スパイシーな蜂蜜も可）。", price:"6.50 €"}, {name:"ミラネーゼ", desc:"柔らかい仔牛のカツレツ、ポテト添え。", price:"13.90 €", highlight: true, fullWidth: true, note:"11:30 AMより。14.50 €でソフトドリンクまたはビール付き。"} ] } ], agregados: [ {name:"卵", price:"1.50 €"}, {name:"生ハム", price:"2.00 €"}, {name:"アボカド", price:"2.50 €"}, {name:"サーモン", price:"4.50 €"}, {name:"マッシュルーム", price:"1.50 €"}, {name:"トマト", price:"1.00 €"} ] },
-      { items: [ {name:"シナモンロール", desc:"焼きたてふわふわ。", price:"4.50 €", options:"クルミ · ベリー · ロータス"}, {name:"クッキー", desc:"外はサクサク、中はしっとり。", price:"4.00 €", options:"チョコチップ · ロータス"}, {name:"キャロットケーキ", desc:"クリームチーズフロスティング。", price:"4.00 €"}, {name:"バナナブレッド", desc:"ジューシーなバナナケーキ。", price:"4.00 €"}, {name:"ブラウニーチーズケーキ", desc:"ブラウニーベースのチーズケーキ。", price:"5.50 €"}, {name:"アップルクランブルケーキ", desc:"サクサクのアップルクランブル。", price:"4.00 €"}, {name:"アーモンドクロワッサン", desc:"アーモンドクリーム入り。", price:"3.50 €"}, {name:"アルファホール", desc:"クッキー生地、ドゥルセ・デ・レチェ、赤い果実のコア。サクサクでバランスの取れた味わい。", price:"4.50 €"} ] },
-      { items: [ {name:"エスプレッソ / マキアート", desc:"濃厚で力強いコーヒーの魂。", price:"2.80 €"}, {name:"アメリカーノ", desc:"エスプレッソのお湯割り。スッキリ。", price:"3.00 €"}, {name:"フラットホワイト", desc:"ダブルエスプレッソとシルキーなミルク。", price:"3.20 €"}, {name:"カプチーノ / ラテ", desc:"スチームミルクとベルベットの泡。", price:"3.20 €"}, {name:"ホットチョコレート", desc:"ピュアカカオとホットミルク。", price:"4.00 €"}, {name:"チャイラテ", desc:"東洋のスパイス、シナモン、カルダモン。", price:"4.00 €"}, {name:"コールドブリュー", desc:"24時間水出しコーヒー。爽やか。", price:"4.00 €"}, {name:"アイスラテ", desc:"氷入りエスプレッソと冷たいミルク。", price:"4.00 €", options:"バニラ · キャラメル · ココナッツ"} ] },
-      { items: [ {name:"抹茶ラテ", desc:"儀式用抹茶とまろやかなミルク。", price:"4.90 €"}, {name:"アイス抹茶マンゴー", desc:"冷たい抹茶とトロピカルマンゴー。", price:"5.50 €"}, {name:"アイス抹茶ベリー", desc:"抹茶とラズベリー。甘酸っぱい。", price:"5.50 €"}, {name:"アイス抹茶ココナッツ", desc:"ココナッツミルク使用。エキゾチック。", price:"5.50 €"}, {name:"アイス抹茶パッションフルーツ", desc:"トロピカルで濃厚なコントラスト。", price:"5.50 €"}, {name:"アイス抹茶エスカラムサ", desc:"当店の看板メニュー。ドゥルセ・デ・レチェとキャラメル入り。フレッシュで特別。", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"ブラックティー", tag:"朝のエネルギー", dot:"dot-black", profile:"カフェイン多め、力強い風味。", items:[ {name:"イングリッシュブレックファスト", desc:"力強いモルトの香り。"}, {name:"アールグレイ", desc:"ベルガモットの香り。エレガント。"}, {name:"ブラックチャイ", desc:"スパイスとシナモン。濃厚。"} ] }, { name:"グリーン＆ホワイト", tag:"抗酸化＆軽やか", dot:"dot-green", profile:"カフェイン少なめ、フローラル。", items:[ {name:"ジャスミン緑茶", desc:"繊細でフローラル。"}, {name:"桜緑茶", desc:"春らしい桜の香り。"}, {name:"シルク白茶", desc:"最も繊細で甘いお茶。"}, {name:"トロントナイツ", desc:"フルーティーな特製ブレンド。"}, {name:"シルエット", desc:"デトックスブレンド。"} ] }, { name:"ハーブティー", tag:"健康＆消化", dot:"dot-gold", profile:"ノンカフェイン。シトラス系。", items:[ {name:"カモミール", desc:"リラックス効果。"}, {name:"ジンジャーレモン", desc:"体を活性化させる刺激。"}, {name:"ジンジャーターメリック", desc:"抗炎症作用。スパイシー。"}, {name:"免疫インフュージョン", desc:"免疫力を高めるハーブ。"}, {name:"デトックスインフュージョン", desc:"食後に最適。"}, {name:"消化チャイ", desc:"マイルドなスパイス。"} ] }, { name:"アンバー＆フローラル", tag:"リラックス", dot:"dot-amber", profile:"ノンカフェイン。甘く温かい。", items:[ {name:"ルイボス", desc:"甘くフルーティー。夜に最適。"}, {name:"ラベンダー", desc:"寝る前の最高のリラックス。"} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"フレッシュオレンジジュース", desc:"絞りたてオレンジ。ビタミン豊富。"}, {name:"クラシックレモネード", desc:"フレッシュレモンと程よい甘さ。"}, {name:"ラズベリーレモネード", desc:"ラズベリーの酸味が効いたフルーティーな味。"}, {name:"マンゴーレモネード", desc:"天然マンゴー果肉入りでトロピカル。"}, {name:"ココナッツレモネード", desc:"ココナッツミルク入り。クリーミー。"}, {name:"パッションフルーツレモネード", desc:"夏を感じる濃厚なアロマ。"}, {name:"ミントジンジャーレモネード", desc:"爽やかでスパイシー。"} ] },
-      { items: [ {name:"エストレージャ・ガリシア ビール", desc:"通常またはノンアルコール。", price:"4.00 €"}, {name:"グラスワイン 白", desc:"辛口 / 甘口。", price:"4.00 €"}, {name:"グラスワイン 赤", desc:"ハウスワイン。", price:"6.00 €"}, {name:"ティント・デ・ベラーノ", desc:"赤ワインのソーダ割り。", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"エスプレッソマティーニ", desc:"ウォッカとコーヒーリキュール。", price:"11 €"}, {name:"ピニャコラーダ", desc:"ラム、ココナッツ、パイナップル。", price:"10 €"}, {name:"マンゴージンフィズ", desc:"ジン、マンゴー、ソーダ。", price:"10 €"}, {name:"エスカラムサ カクテル", desc:"当店のオリジナル。", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"モスコミュール", desc:"ウォッカ、ジンジャービア。", price:"10 €"}, {name:"アペロールスプリッツ", desc:"アペロール、プロセッコ。", price:"9 €"}, {name:"フェルネットコーラ", desc:"苦味のあるアルゼンチンスタイル。", price:"9 €"}, {name:"カンパリスプリッツ", desc:"イタリアンビター。", price:"9 €"}, {name:"キューバリブレ", desc:"ラム＆コーラ。", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"テキーラサンライズ", desc:"テキーラ、オレンジ。", price:"9 €"}, {name:"ウォッカサンライズ", desc:"ウォッカ、オレンジ。", price:"9 €"}, {name:"シトラスジン", desc:"ジンと柑橘類。", price:"9 €"} ] } ] },
-      { items: [ {name:"コカ・コーラ", desc:"ノーマル / ゼロ。", price:"2.50 €"}, {name:"ファンタ", desc:"", price:"2.50 €"}, {name:"ネスティー", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"トニック", desc:"", price:"2.50 €"}, {name:"エナジードリンク", desc:"", price:"3.00 €"}, {name:"ミネラルウォーター", desc:"炭酸あり / なし。", price:"2.40 €"} ] }
-    ]
-  },
-  fr: {
-    name: 'Français', flag: '🇫🇷', subtitle: "MENU BOISSONS & CUISINE", footer: "Prix TTC.", supplement: "Lait d'avoine ou d'amande : +0,30 €", agregadosTitle: "+ Suppléments",
-    tabs: ["Notre Cuisine", "Boulangerie & Douceurs", "Cafétéria", "Bar à Matcha", "Thés & Infusions", "Jus & Limonades", "Vins & Bières", "Bar d'Auteur", "Rafraîchissements"],
-    cocktailSections: { especiales: { title: "SPÉCIAUX", sub: "Nos créations exclusives" }, clasica: { title: "MIXOLOGIE CLASSIQUE", sub: "Références internationales" }, largos: { title: "LONG DRINKS", sub: "Sélection rafraîchissante" }, vinosCervezas: { title: "VINS & BIÈRES", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "Plats & Toasts", items: [ {name:"Pain Perdu", desc:"Brioche, fruits rouges, glace.", price:"9.50 €"}, {name:"Or Ibérique", desc:"Jambon, kaki, ricotta, noix, miel (peut être épicé sur demande).", price:"13.90 €"}, {name:"Œufs Bénédicte", desc:"Avocat, sauce hollandaise.", price:"11.50 €"}, {name:"Champignons", desc:"Sautés, burrata crémeuse.", price:"10.50 €"}, {name:"Saumon", desc:"Saumon fumé, avocat.", price:"13.50 €"}, {name:"Toast Avocat", desc:"Œuf, tomates cerises.", price:"9.50 €"}, {name:"Toast Tomate", desc:"Huile d'olive, basilic.", price:"3.80 €"}, {name:"Toast Fromage & Miel", desc:"Avec noix (miel épicé sur demande).", price:"6.50 €"}, {name:"Milanaise", desc:"Escalope de veau panée avec frites.", price:"13.90 €", highlight: true, fullWidth: true, note:"À partir de 11h30. Pour 14,50 €, inclut un soda ou une bière."} ] } ], agregados: [ {name:"Œuf", price:"1.50 €"}, {name:"Jambon", price:"2.00 €"}, {name:"Avocado", price:"2.50 €"}, {name:"Saumon", price:"4.50 €"}, {name:"Champignons", price:"1.50 €"}, {name:"Tomate", price:"1.00 €"} ] },
-      { items: [ {name:"Cinnamon Roll", desc:"Moelleux, tout juste sorti du four.", price:"4.50 €", options:"Noix · Fruits Rouges · Lotus"}, {name:"Cookie", desc:"Croustillant et fondant.", price:"4.00 €", options:"Pépites Choco · Lotus"}, {name:"Carrot Cake", desc:"Glaçage cream cheese.", price:"4.00 €"}, {name:"Banana Bread", desc:"Cake à la banane.", price:"4.00 €"}, {name:"Cheesecake Brownie", desc:"Cheesecake sur base brownie.", price:"5.50 €"}, {name:"Gâteau aux pommes façon crumble", desc:"Crumble aux pommes classique.", price:"4.00 €"}, {name:"Croissant aux Amandes", desc:"Garni de crème d'amande.", price:"3.50 €"}, {name:"Alfajor", desc:"Pâte à cookie, dulce de leche et cœur aux fruits rouges. Croustillant et équilibré.", price:"4.50 €"} ] },
-      { items: [ {name:"Double Espresso / Noisette", desc:"Concentré et puissant.", price:"2.80 €"}, {name:"Americano", desc:"Espresso adouci à l'eau chaude.", price:"3.00 €"}, {name:"Flat White", desc:"Double espresso avec lait soyeux.", price:"3.20 €"}, {name:"Cappuccino / Latte", desc:"Espresso avec lait mousseux.", price:"3.20 €"}, {name:"Chocolat Chaud", desc:"Cacao pur et lait chaud.", price:"4.00 €"}, {name:"Chai Latte", desc:"Épices, cannelle, cardamome et lait.", price:"4.00 €"}, {name:"Cold Brew", desc:"Café infusé à froid 24h.", price:"4.00 €"}, {name:"Iced Latte", desc:"Espresso sur glace et lait froid.", price:"4.00 €", options:"Vanille · Caramel · Coco"} ] },
-      { items: [ {name:"Matcha Latte Classique", desc:"Matcha de cérémonie et lait.", price:"4.90 €"}, {name:"Iced Matcha Mangue", desc:"Matcha froid au coulis de mangue.", price:"5.50 €"}, {name:"Iced Matcha Fruits Rouges", desc:"Matcha et framboise.", price:"5.50 €"}, {name:"Iced Matcha Coco", desc:"Matcha au lait de coco.", price:"5.50 €"}, {name:"Iced Matcha Fruit de la Passion", desc:"Contraste tropical.", price:"5.50 €"}, {name:"Iced Matcha Escaramuza", desc:"Notre combinaison star avec dulce de leche et caramel.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"GAMME NOIRE", tag:"Énergie", dot:"dot-black", profile:"Riche en théine.", items:[ {name:"English Breakfast", desc:"Robuste."}, {name:"Earl Grey", desc:"À la bergamote."}, {name:"Chai Noir", desc:"Épicé."} ] }, { name:"GAMME VERTE & BLANCHE", tag:"Légèreté", dot:"dot-green", profile:"Théine modérée.", items:[ {name:"Thé Vert Jasmin", desc:"Floral."}, {name:"Thé Vert Sakura", desc:"Fleur de cerisier."}, {name:"Thé Blanc Soie", desc:"Très doux."}, {name:"Nuits de Toronto", desc:"Fruité."}, {name:"Silhouette", desc:"Détox."} ] }, { name:"GAMME DORÉE", tag:"Bien-être", dot:"dot-gold", profile:"Sans théine.", items:[ {name:"Camomille", desc:"Apaisante."}, {name:"Gingembre Citron", desc:"Stimulant."}, {name:"Gingembre Curcuma", desc:"Anti-inflammatoire."}, {name:"Infusion Immunité", desc:"Plantes."}, {name:"Infusion Détox", desc:"Légère."}, {name:"Chai Digestif", desc:"Doux."} ] }, { name:"GAMME AMBRÉE", tag:"Relaxation", dot:"dot-amber", profile:"Sans théine.", items:[ {name:"Rooibos", desc:"Fruité et doux."}, {name:"Lavande", desc:"Relaxante."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Jus d'Orange Frais", desc:"Pressé à la minute."}, {name:"Limonade Classique", desc:"Citron frais et juste ce qu'il faut de sucre."}, {name:"Limonade Framboise", desc:"Touche fruitée et acidulée."}, {name:"Limonade Mangue", desc:"Tropicale à la pulpe de mangue."}, {name:"Limonade Coco", desc:"Citron et lait de coco."}, {name:"Limonade Passion", desc:"Intense et aromatique."}, {name:"Limonade Menthe Gingembre", desc:"Fraîche et épicée."} ] },
-      { items: [ {name:"Bière Estrella Galicia", desc:"Normale ou 0.0.", price:"4.00 €"}, {name:"Verre de Vin Blanc", desc:"Sec ou Doux.", price:"4.00 €"}, {name:"Verre de Vin Rouge", desc:"Vin de la maison.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"Vin rouge et limonade.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Vodka, liqueur de café.", price:"11 €"}, {name:"Piña Colada", desc:"Rhum, coco, ananas.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin, mangue, soda.", price:"10 €"}, {name:"Cocktail Escaramuza", desc:"Notre création.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Vodka, ginger beer.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco.", price:"9 €"}, {name:"Fernet Cola", desc:"Le classique argentin.", price:"9 €"}, {name:"Campari Spritz", desc:"Amer italien.", price:"9 €"}, {name:"Cuba Libre", desc:"Rhum, cola.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Téquila, orange.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Vodka, orange.", price:"9 €"}, {name:"Gin Agrumes", desc:"Gin aux agrumes.", price:"9 €"} ] } ] },
-      { items: [ {name:"Coca-Cola", desc:"Normal ou Zero.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Tonic", desc:"", price:"2.50 €"}, {name:"Boisson Énergisante", desc:"", price:"3.00 €"}, {name:"Eau", desc:"Plate ou gazeuse.", price:"2.40 €"} ] }
-    ]
-  },
-  it: {
-    name: 'Italiano', flag: '🇮🇹', subtitle: "MENU BEVANDE & CUCINA", footer: "Prezzi IVA inclusa.", supplement: "Latte di avena o mandorla: +0,30 €", agregadosTitle: "+ Aggiunte",
-    tabs: ["La Nostra Cucina", "Forno & Dolci", "Caffetteria", "Matcha Bar", "Tè e Infusi", "Succhi & Limonati", "Vini e Birre", "Bar d'Autore", "Bibite"],
-    cocktailSections: { especiales: { title: "SPECIALI", sub: "Le nostre creazioni esclusive" }, clasica: { title: "MIXOLOGIA CLASSICA", sub: "Riferimenti internazionali" }, largos: { title: "LONG DRINK", sub: "Selezione rinfrescante" }, vinosCervezas: { title: "VINI & BIRRE", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "Piatti & Toast", items: [ {name:"French Toast", desc:"Brioche, frutti rossi, gelato.", price:"9.50 €"}, {name:"Oro Iberico", desc:"Prosciutto, cachi, ricotta, noci, miele (può essere piccante su richiesta).", price:"13.90 €"}, {name:"Uova alla Benedict", desc:"Avocado, salsa olandese.", price:"11.50 €"}, {name:"Funghi", desc:"Funghi saltati, burrata cremosa.", price:"10.50 €"}, {name:"Salmone", desc:"Salmone affumicato, avocado.", price:"13.50 €"}, {name:"Avocado Toast", desc:"Uovo, pomodorini.", price:"9.50 €"}, {name:"Toast al Pomodoro", desc:"Olio d'oliva, basilico.", price:"3.80 €"}, {name:"Toast Formaggio e Miele", desc:"Con noci (miele piccante su richiesta).", price:"6.50 €"}, {name:"Cotoletta Milanese", desc:"Vitello impanato con patatine.", price:"13.90 €", highlight: true, fullWidth: true, note:"Dalle 11:30. A 14,50 € include bibita o birra."} ] } ], agregados: [ {name:"Uovo", price:"1.50 €"}, {name:"Prosciutto", price:"2.00 €"}, {name:"Avocado", price:"2.50 €"}, {name:"Salmone", price:"4.50 €"}, {name:"Funghi", price:"1.50 €"}, {name:"Pomodoro", price:"1.00 €"} ] },
-      { items: [ {name:"Cinnamon Roll", desc:"Soffice e appena sfornato.", price:"4.50 €", options:"Noci · Frutti Rossi · Lotus"}, {name:"Cookie", desc:"Croccante fuori, morbido dentro.", price:"4.00 €", options:"Gocce di Cioccolato · Lotus"}, {name:"Carrot Cake", desc:"Torta di carote con frosting.", price:"4.00 €"}, {name:"Banana Bread", desc:"Soffice plumcake alla banana.", price:"4.00 €"}, {name:"Cheesecake Brownie", desc:"Cheesecake su base di brownie.", price:"5.50 €"}, {name:"Torta di mele crumble", desc:"Classico crumble di mele.", price:"4.00 €"}, {name:"Croissant alle Mandorle", desc:"Ripieno di crema alle mandorle.", price:"3.50 €"}, {name:"Alfajor", desc:"Impasto biscotto, dulce de leche e cuore di frutti rossi. Croccante ed equilibrato.", price:"4.50 €"} ] },
-      { items: [ {name:"Espresso Doppio / Macchiato", desc:"Concentrato. L'anima del caffè.", price:"2.80 €"}, {name:"Americano", desc:"Espresso ammorbidito con acqua calda.", price:"3.00 €"}, {name:"Flat White", desc:"Doppio espresso con latte setoso.", price:"3.20 €"}, {name:"Cappuccino / Latte", desc:"Espresso con latte montato.", price:"3.20 €"}, {name:"Cioccolata Calda", desc:"Cacao puro con latte caldo.", price:"4.00 €"}, {name:"Chai Latte", desc:"Spezie, cannella, cardamomo e latte.", price:"4.00 €"}, {name:"Cold Brew", desc:"Caffè estratto a freddo 24h.", price:"4.00 €"}, {name:"Iced Latte", desc:"Espresso con ghiaccio e latte.", price:"4.00 €", options:"Vaniglia · Caramello · Cocco"} ] },
-      { items: [ {name:"Matcha Latte Classico", desc:"Matcha cerimoniale e latte.", price:"4.90 €"}, {name:"Iced Matcha Mango", desc:"Matcha freddo con coulis di mango.", price:"5.50 €"}, {name:"Iced Matcha Frutti Rossi", desc:"Matcha e lampone.", price:"5.50 €"}, {name:"Iced Matcha Cocco", desc:"Matcha con latte di cocco.", price:"5.50 €"}, {name:"Iced Matcha Maracuja", desc:"Matcha e frutto della passione.", price:"5.50 €"}, {name:"Iced Matcha Escaramuza", desc:"La nostra combinazione stella con dulce de leche e caramello.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"GAMMA NERA", tag:"Energia", dot:"dot-black", profile:"Ricco di teina.", items:[ {name:"English Breakfast", desc:"Robusto."}, {name:"Earl Grey", desc:"Al bergamotto."}, {name:"Chai Nero", desc:"Speziato."} ] }, { name:"GAMMA VERDE E BIANCA", tag:"Leggerezza", dot:"dot-green", profile:"Poca teina.", items:[ {name:"Tè Verde Gelsomino", desc:"Floreale."}, {name:"Tè Verde Sakura", desc:"Fiori di ciliegio."}, {name:"Tè Bianco Seta", desc:"Molto delicato."}, {name:"Notti di Toronto", desc:"Fruttato."}, {name:"Silhoutte", desc:"Depurativo."} ] }, { name:"GAMMA DORATA", tag:"Benessere", dot:"dot-gold", profile:"Senza teina.", items:[ {name:"Camomilla", desc:"Rilassante."}, {name:"Zenzero e Limone", desc:"Stimolante."}, {name:"Zenzero e Curcuma", desc:"Antinfiammatorio."}, {name:"Infuso Immunità", desc:"Erbe."}, {name:"Infuso Depurativo", desc:"Leggero."}, {name:"Chai Digestivo", desc:"Speziato."} ] }, { name:"GAMMA AMBRATA", tag:"Relax", dot:"dot-amber", profile:"Senza teina.", items:[ {name:"Rooibos", desc:"Dolce e fruttato."}, {name:"Lavanda", desc:"Rilassante."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Spremuta d'Arancia", desc:"Spremuta al momento."}, {name:"Limonata Classica", desc:"Limone, acqua e il giusto dolce."}, {name:"Limonata al Lampone", desc:"Agrumata e fruttata."}, {name:"Limonata al Mango", desc:"Tropicale con polpa di mango."}, {name:"Limonata al Cocco", desc:"Limone con latte di cocco."}, {name:"Limonata al Maracuja", desc:"Intensa e aromatica."}, {name:"Limonata Menta e Zenzero", desc:"Fresca e speziata."} ] },
-      { items: [ {name:"Birra Estrella Galicia", desc:"Normale o Analcolica.", price:"4.00 €"}, {name:"Calice di Vino Bianco", desc:"Secco o Dolce.", price:"4.00 €"}, {name:"Calice di Vino Rosso", desc:"Vino della casa.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"Vino rosso e gassosa.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Vodka, liquore al caffè.", price:"11 €"}, {name:"Piña Colada", desc:"Rum, cocco, ananas.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin, mango, soda.", price:"10 €"}, {name:"Cocktail Escaramuza", desc:"Creazione della casa.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Vodka, ginger beer.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco.", price:"9 €"}, {name:"Fernet Cola", desc:"Classico argentino.", price:"9 €"}, {name:"Campari Spritz", desc:"Amaro italiano.", price:"9 €"}, {name:"Cuba Libre", desc:"Rum, cola.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Tequila, arancia.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Vodka, arancia.", price:"9 €"}, {name:"Gin agli Agrumi", desc:"Gin e agrumi.", price:"9 €"} ] } ] },
-      { items: [ {name:"Coca-Cola", desc:"Normale o Zero.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Acqua Tonica", desc:"", price:"2.50 €"}, {name:"Energy Drink", desc:"", price:"3.00 €"}, {name:"Acqua", desc:"Naturale o frizzante.", price:"2.40 €"} ] }
-    ]
-  },
-  nl: {
-    name: 'Nederlands', flag: '🇳🇱', subtitle: "DRANKEN & SPIJSKAART", footer: "Prijzen incl. BTW.", supplement: "Haver- of amandelmelk: +0,30 €", agregadosTitle: "+ Extra's",
-    tabs: ["Onze Keuken", "Bakkerij & Zoet", "Koffiebar", "Matchabar", "Thee & Infusies", "Sappen & Limonades", "Wijn & Bier", "Auteurs Bar", "Frisdranken"],
-    cocktailSections: { especiales: { title: "SPECIALS", sub: "Onze exclusieve creaties" }, clasica: { title: "KLASSIEKE MIXOLOGIE", sub: "Internationale referenties" }, largos: { title: "LONG DRINKS", sub: "Verfrissende selectie" }, vinosCervezas: { title: "WIJNEN & BIEREN", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "Gerechten & Toast", items: [ {name:"Wentelteefjes (French Toast)", desc:"Brioche, rood fruit, ijs.", price:"9.50 €"}, {name:"Iberisch Goud", desc:"Ham, kaki, ricotta, honing (kan pittig zijn op verzoek).", price:"13.90 €"}, {name:"Eggs Benedict", desc:"Met Hollandaisesaus, avocado.", price:"11.50 €"}, {name:"Champignons", desc:"Gebakken paddenstoelen, burrata.", price:"10.50 €"}, {name:"Zalm", desc:"Gerookte zalm, avocado.", price:"13.50 €"}, {name:"Avocado Toast", desc:"Ei, cherrytomaat.", price:"9.50 €"}, {name:"Tomaten Toast", desc:"Olijfolie, basilicum.", price:"3.80 €"}, {name:"Kaas & Honing Toast", desc:"Met walnoten (pittige honing mogelijk).", price:"6.50 €"}, {name:"Milanesa", desc:"Gepaneerd kalfsvlees met friet.", price:"13.90 €", highlight: true, fullWidth: true, note:"Vanaf 11:30 uur. Voor 14,50 € inclusief frisdrank of bier."} ] } ], agregados: [ {name:"Ei", price:"1.50 €"}, {name:"Ham", price:"2.00 €"}, {name:"Avocado", price:"2.50 €"}, {name:"Zalm", price:"4.50 €"}, {name:"Champignons", price:"1.50 €"}, {name:"Tomaat", price:"1.00 €"} ] },
-      { items: [ {name:"Kaneelbroodje", desc:"Vers gebakken.", price:"4.50 €", options:"Walnoten · Rood Fruit · Lotus"}, {name:"Cookie", desc:"Krokant van buiten.", price:"4.00 €", options:"Chocochips · Lotus"}, {name:"Carrot Cake", desc:"Met cream cheese frosting.", price:"4.00 €"}, {name:"Banana Bread", desc:"Smeuïg bananenbrood.", price:"4.00 €"}, {name:"Cheesecake Brownie", desc:"Cheesecake op browniebodem.", price:"5.50 €"}, {name:"Appel-kruimeltaart", desc:"Klassieke appelkruimel.", price:"4.00 €"}, {name:"Amandelcroissant", desc:"Gevuld met amandelcrème.", price:"3.50 €"}, {name:"Alfajor", desc:"Koekjesdeeg, dulce de leche en een kern van rood fruit. Knapperig en in balans.", price:"4.50 €"} ] },
-      { items: [ {name:"Dubbele Espresso / Macchiato", desc:"Geconcentreerd en krachtig.", price:"2.80 €"}, {name:"Americano", desc:"Espresso met heet water.", price:"3.00 €"}, {name:"Flat White", desc:"Dubbele espresso met zijdezachte melk.", price:"3.20 €"}, {name:"Cappuccino / Latte", desc:"Espresso met opgeschuimde melk.", price:"3.20 €"}, {name:"Warme Chocolademelk", desc:"Pure cacao met warme melk.", price:"4.00 €"}, {name:"Chai Latte", desc:"Specerijen, kaneel, kardemom.", price:"4.00 €"}, {name:"Cold Brew", desc:"24u koud gezette koffie.", price:"4.00 €"}, {name:"Iced Latte", desc:"Espresso op ijs met koude melk.", price:"4.00 €", options:"Vanille · Karamel · Kokos"} ] },
-      { items: [ {name:"Klassieke Matcha Latte", desc:"Ceremoniële matcha met melk.", price:"4.90 €"}, {name:"Iced Matcha Mango", desc:"Koude matcha met mango.", price:"5.50 €"}, {name:"Iced Matcha Bosvruchten", desc:"Matcha met framboos.", price:"5.50 €"}, {name:"Iced Matcha Kokos", desc:"Matcha met kokosmelk.", price:"5.50 €"}, {name:"Iced Matcha Passievrucht", desc:"Tropisch contrast.", price:"5.50 €"}, {name:"Iced Matcha Escaramuza", desc:"Onze stercombinatie met dulce de leche en karamel.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"ZWARTE THEE", tag:"Energie", dot:"dot-black", profile:"Veel theïne.", items:[ {name:"English Breakfast", desc:"Robuust."}, {name:"Earl Grey", desc:"Met bergamot."}, {name:"Zwarte Chai", desc:"Kruidig."} ] }, { name:"GROENE & WITTE THEE", tag:"Lichtheid", dot:"dot-green", profile:"Weinig theïne.", items:[ {name:"Jasmijn Groene Thee", desc:"Bloemig."}, {name:"Sakura Groene Thee", desc:"Kersenbloesem."}, {name:"Zijden Witte Thee", desc:"Zeer zacht."}, {name:"Toronto Nights", desc:"Fruitig."}, {name:"Silhoutte", desc:"Zuiverend."} ] }, { name:"GOUDEN THEE", tag:"Welzijn", dot:"dot-gold", profile:"Zonder theïne.", items:[ {name:"Kamille", desc:"Ontspannend."}, {name:"Gember & Citroen", desc:"Stimulerend."}, {name:"Gember & Kurkuma", desc:"Ontstekingsremmend."}, {name:"Immuun Infusie", desc:"Kruiden."}, {name:"Detox Infusie", desc:"Licht."}, {name:"Spijsverterings Chai", desc:"Gezond."} ] }, { name:"AMBER & BLOEMIG", tag:"Ontspanning", dot:"dot-amber", profile:"Zonder theïne.", items:[ {name:"Rooibos", desc:"Zoet en fruitig."}, {name:"Lavendel", desc:"Rustgevend."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Vers Sinaasappelsap", desc:"Vers geperst."}, {name:"Klassieke Limonade", desc:"Citroen, water, precies zoet genoeg."}, {name:"Frambozenlimonade", desc:"Fruitig en friszuur."}, {name:"Mangolimonade", desc:"Tropisch met mangopulp."}, {name:"Kokoslimonade", desc:"Citroen met kokosmelk."}, {name:"Passievrucht Limonade", desc:"Intens en aromatisch."}, {name:"Munt & Gember Limonade", desc:"Fris en kruidig."} ] },
-      { items: [ {name:"Estrella Galicia Bier", desc:"Normaal of 0.0.", price:"4.00 €"}, {name:"Glas Witte Wijn", desc:"Droog of Zoet.", price:"4.00 €"}, {name:"Glas Rode Wijn", desc:"Huiswijn.", price:"6.00 €"}, {name:"Tinto de Verano", desc:"Rode wijn met frisdrank.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Espresso Martini", desc:"Wodka, koffielikeur.", price:"11 €"}, {name:"Piña Colada", desc:"Rum, kokos, ananas.", price:"10 €"}, {name:"Mango Gin Fizz", desc:"Gin, mango, soda.", price:"10 €"}, {name:"Escaramuza Cocktail", desc:"Onze creatie.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Moscow Mule", desc:"Wodka, ginger beer.", price:"10 €"}, {name:"Aperol Spritz", desc:"Aperol, Prosecco.", price:"9 €"}, {name:"Fernet Cola", desc:"Argentijns bitter.", price:"9 €"}, {name:"Campari Spritz", desc:"Italiaanse bitter.", price:"9 €"}, {name:"Cuba Libre", desc:"Rum, cola.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Tequila Sunrise", desc:"Tequila, sinaasappel.", price:"9 €"}, {name:"Vodka Sunrise", desc:"Wodka, sinaasappel.", price:"9 €"}, {name:"Citrus Gin", desc:"Gin met citrus.", price:"9 €"} ] } ] },
-      { items: [ {name:"Coca-Cola", desc:"Normaal of Zero.", price:"2.50 €"}, {name:"Fanta", desc:"", price:"2.50 €"}, {name:"Nestea", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Tonic", desc:"", price:"2.50 €"}, {name:"Energiedrank", desc:"", price:"3.00 €"}, {name:"Water", desc:"Plat of bruisend.", price:"2.40 €"} ] }
-    ]
-  },
-  ru: {
-    name: 'Русский', flag: '🇷🇺', subtitle: "МЕНЮ НАПИТКОВ И КУХНИ", footer: "Цены с НДС.", supplement: "Овсяное или миндальное молоко: +0,30 €", agregadosTitle: "+ Добавки",
-    tabs: ["Наша Кухня", "Пекарня и Сладкое", "Кофейня", "Матча-бар", "Чай", "Соки и Лимонады", "Вино и Пиво", "Авторский Бар", "Прохладительные"],
-    cocktailSections: { especiales: { title: "АВТОРСКИЕ", sub: "Наши эксклюзивные коктейли" }, clasica: { title: "КЛАССИЧЕСКАЯ МИКСОЛОГИЯ", sub: "Международные классики" }, largos: { title: "ЛОНГ ДРИНК", sub: "Освежающий выбор" }, vinosCervezas: { title: "ВИНА И ПИВО", sub: "" } },
-    menu: [
-      { flatSections: [ { title: "Блюда и Тосты", items: [ {name:"Французский Тост", desc:"Бриошь, ягоды, банан, мороженое.", price:"9.50 €"}, {name:"Иберийское Золото", desc:"Хамон, хурма, рикотта, орехи, мед (может быть острым по желанию).", price:"13.90 €"}, {name:"Яйца Бенедикт", desc:"Авокадо, голландский соус.", price:"11.50 €"}, {name:"Грибы", desc:"Обжаренные шампиньоны, буррата.", price:"10.50 €"}, {name:"Лосось", desc:"Копченый лосось, авокадо.", price:"13.50 €"}, {name:"Тост с Авокадо", desc:"Яйцо, черри.", price:"9.50 €"}, {name:"Тост с Томатом", desc:"Оливковое масло, базилик.", price:"3.80 €"}, {name:"Тост Сыр и Мед", desc:"С грецкими орехами (мед может быть острым).", price:"6.50 €"}, {name:"Миланеса", desc:"Телячья отбивная в панировке с картофелем.", price:"13.90 €", highlight: true, fullWidth: true, note:"С 11:30. За 14,50 € включает газировку или пиво."} ] } ], agregados: [ {name:"Яйцо", price:"1.50 €"}, {name:"Хамон", price:"2.00 €"}, {name:"Авокадо", price:"2.50 €"}, {name:"Лосось", price:"4.50 €"}, {name:"Грибы", price:"1.50 €"}, {name:"Томат", price:"1.00 €"} ] },
-      { items: [ {name:"Синнабон", desc:"Свежеиспеченный.", price:"4.50 €", options:"Орехи · Ягоды · Лотус"}, {name:"Печенье", desc:"Хрустящее.", price:"4.00 €", options:"Шоколад · Лотус"}, {name:"Морковный Торт", desc:"С крем-чизом.", price:"4.00 €"}, {name:"Банановый Хлеб", desc:"Влажный кекс.", price:"4.00 €"}, {name:"Чизкейк Брауни", desc:"Чизкейк на основе брауни.", price:"5.50 €"}, {name:"Яблочный крамбл", desc:"Классический яблочный крамбл.", price:"4.00 €"}, {name:"Миндальный Круассан", desc:"С миндальным кремом.", price:"3.50 €"}, {name:"Альфахор", desc:"Песочное тесто, вареная сгущенка и сердцевина из красных ягод. Хрустящий и сбалансированный.", price:"4.50 €"} ] },
-      { items: [ {name:"Двойной Эспрессо / Макиато", desc:"Насыщенный и крепкий.", price:"2.80 €"}, {name:"Американо", desc:"Эспрессо с горячей водой.", price:"3.00 €"}, {name:"Флэт Уайт", desc:"Двойной эспрессо с шелковистым молоком.", price:"3.20 €"}, {name:"Капучино / Латте", desc:"Эспрессо со вспененным молоком.", price:"3.20 €"}, {name:"Горячий Шоколад", desc:"Натуральное какао с молоком.", price:"4.00 €"}, {name:"Чай Латте", desc:"Пряности, корица и кардамон.", price:"4.00 €"}, {name:"Колд Брю", desc:"Холодный кофе 24-часовой выдержки.", price:"4.00 €"}, {name:"Айс Латте", desc:"Эспрессо со льдом и холодным молоком.", price:"4.00 €", options:"Ваниль · Карамель · Кокос"} ] },
-      { items: [ {name:"Матча Латте Классика", desc:"Церемониальный матча с молоком.", price:"4.90 €"}, {name:"Айс Матча Манго", desc:"Матча со льдом и пюре манго.", price:"5.50 €"}, {name:"Айс Матча Ягоды", desc:"Матча с малиной.", price:"5.50 €"}, {name:"Айс Матча Кокос", desc:"Матча с кокосовым молоком.", price:"5.50 €"}, {name:"Айс Матча Маракуйя", desc:"Тропический контраст.", price:"5.50 €"}, {name:"Айс Матча Escaramuza", desc:"Наше фирменное сочетание с дульсе де лече и карамелью.", price:"5.50 €"} ] },
-      { globalPrice: "3.80 €", subcategories: [ { name:"ЧЕРНЫЙ ЧАЙ", tag:"Энергия", dot:"dot-black", profile:"Высокое содержание теина.", items:[ {name:"Английский Завтрак", desc:"Крепкий классический."}, {name:"Эрл Грей", desc:"С бергамотом."}, {name:"Черный Чай со Специями", desc:"Пряный."} ] }, { name:"ЗЕЛЕНЫЙ И БЕЛЫЙ ЧАЙ", tag:"Антиоксиданты", dot:"dot-green", profile:"Легкий, мало теина.", items:[ {name:"Зеленый Чай с Жасмином", desc:"Цветочный."}, {name:"Зеленый Чай Сакура", desc:"Вишневый цвет."}, {name:"Белый Чай Шелк", desc:"Очень нежный."}, {name:"Ночи Торонто", desc:"Фруктовый."}, {name:"Силуэт", desc:"Очищающий."} ] }, { name:"ЗОЛОТАЯ ЛИНИЯ", tag:"Здоровье", dot:"dot-gold", profile:"Без теина. Травяные.", items:[ {name:"Ромашка", desc:"Успокаивающая."}, {name:"Имбирь и Лимон", desc:"Бодрящий."}, {name:"Имбирь и Куркума", desc:"Противовоспалительный."}, {name:"Иммунный Сбор", desc:"Травы."}, {name:"Детокс Сбор", desc:"Легкий."}, {name:"Чай для Пищеварения", desc:"Со специями."} ] }, { name:"ЯНТАРНАЯ ЛИНИЯ", tag:"Релакс", dot:"dot-amber", profile:"Без теина.", items:[ {name:"Ройбуш", desc:"Сладкий и фруктовый."}, {name:"Лаванда", desc:"Расслабляющая."} ] } ] },
-      { globalPrice: "4.00 €", items: [ {name:"Свежевыжатый Апельсиновый Сок", desc:"Только свежие апельсины."}, {name:"Классический Лимонад", desc:"Лимон, вода и идеальная сладость."}, {name:"Малиновый Лимонад", desc:"Ягодный с кислинкой."}, {name:"Манго Лимонад", desc:"Тропический с мякотью манго."}, {name:"Кокосовый Лимонад", desc:"Лимон с кокосовым молоком."}, {name:"Маракуйя Лимонад", desc:"Яркий аромат лета."}, {name:"Мятно-имбирный Лимонад", desc:"Освежающий и пряный."} ] },
-      { items: [ {name:"Пиво Estrella Galicia", desc:"Светлое или 0.0.", price:"4.00 €"}, {name:"Бокал Белого Вина", desc:"Сухое или Сладкое.", price:"4.00 €"}, {name:"Бокал Красного Вина", desc:"Домашнее вино.", price:"6.00 €"}, {name:"Тинто де Верано", desc:"Вино с лимонадом.", price:"4.00 €"} ] },
-      { cocktailSections: [ { key: "especiales", price: "10 €", items: [ {name:"Эспрессо Мартини", desc:"Водка, кофейный ликер.", price:"11 €"}, {name:"Пина Колада", desc:"Ром, кокос, ананас.", price:"10 €"}, {name:"Манго Джин Физз", desc:"Джин, манго, содовая.", price:"10 €"}, {name:"Коктейль Escaramuza", desc:"Фирменный.", price:"10 €"} ] }, { key: "clasica", price: "9 € / 10 €", items: [ {name:"Московский Мул", desc:"Водка, имбирное пиво.", price:"10 €"}, {name:"Апероль Шприц", desc:"Апероль, Просекко.", price:"9 €"}, {name:"Фернет с Колой", desc:"Аргентинская классика.", price:"9 €"}, {name:"Кампари Шприц", desc:"Итальянский биттер.", price:"9 €"}, {name:"Куба Либре", desc:"Ром, кола.", price:"9 €"} ] }, { key: "largos", price: "9 €", items: [ {name:"Текила Санрайз", desc:"Текила, апельсин.", price:"9 €"}, {name:"Водка Санрайз", desc:"Водка, апельсин.", price:"9 €"}, {name:"Цитрусовый Джин", desc:"Джин с цитрусовыми.", price:"9 €"} ] } ] },
-      { items: [ {name:"Кока-Кола", desc:"Обычная или Зеро.", price:"2.50 €"}, {name:"Фанта", desc:"", price:"2.50 €"}, {name:"Нести", desc:"", price:"2.70 €"}, {name:"7up", desc:"", price:"2.50 €"}, {name:"Тоник", desc:"", price:"2.50 €"}, {name:"Энергетик", desc:"", price:"3.00 €"}, {name:"Вода", desc:"С газом или без.", price:"2.40 €"} ] }
-    ]
-  }
-};
-
-const ICONS = {
-  coffee: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2v2m4-2v2m4-2v2M3 8h18l-1.5 10.5A2 2 0 0117.51 20H6.49a2 2 0 01-1.99-1.5L3 8zm15 0a3 3 0 013 3v0a3 3 0 01-3 3h-1"/></svg>`,
-  leaf:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3C7 3 3 7.5 3 12c0 3.87 2.5 7.17 6 8.48V21h6v-.52C18.5 19.17 21 15.87 21 12c0-4.5-4-9-9-9z"/></svg>`,
-  drop:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25s-7.5 8.25-7.5 12a7.5 7.5 0 0015 0c0-3.75-7.5-12-7.5-12z"/></svg>`,
-  wind:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8h11a4 4 0 000-8H3m0 8v0m0 0H3m15 4H3m18 0a4 4 0 01-4 4H3"/></svg>`,
-  cake:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2V9h18v6zM3 9V7a2 2 0 012-2h1m4-2v2m4-2v2M7 5V3m10 2V3"/></svg>`,
-  food:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v11a3 3 0 006 0V3M9 8h6M3 20h18"/></svg>`,
-  bubble: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="10" r="1.5" fill="currentColor"/><path stroke-linecap="round" d="M9 15s1 2 3 2 3-2 3-2"/></svg>`,
-  wine:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h8l1 7a5 5 0 01-10 0L8 3zm4 7v7m-3 4h6"/></svg>`,
+const languages=[{code:'es',name:'Español',flag:'🇪🇸'},{code:'en',name:'English',flag:'🇬🇧'},{code:'de',name:'Deutsch',flag:'🇩🇪'},{code:'ja',name:'日本語',flag:'🇯🇵'},{code:'fr',name:'Français',flag:'🇫🇷'},{code:'it',name:'Italiano',flag:'🇮🇹'},{code:'nl',name:'Nederlands',flag:'🇳🇱'},{code:'ru',name:'Русский',flag:'🇷🇺'}];
+const ICONS={
+  coffee:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 2v2m4-2v2m4-2v2M3 8h18l-1.5 10.5A2 2 0 0117.51 20H6.49a2 2 0 01-1.99-1.5L3 8zm15 0a3 3 0 013 3v0a3 3 0 01-3 3h-1"/></svg>`,
+  leaf:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3C7 3 3 7.5 3 12c0 3.87 2.5 7.17 6 8.48V21h6v-.52C18.5 19.17 21 15.87 21 12c0-4.5-4-9-9-9z"/></svg>`,
+  drop:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2.25s-7.5 8.25-7.5 12a7.5 7.5 0 0015 0c0-3.75-7.5-12-7.5-12z"/></svg>`,
+  wind:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8h11a4 4 0 000-8H3m0 8v0m0 0H3m15 4H3m18 0a4 4 0 01-4 4H3"/></svg>`,
+  cake:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 01-2 2H5a2 2 0 01-2-2V9h18v6zM3 9V7a2 2 0 012-2h1m4-2v2m4-2v2M7 5V3m10 2V3"/></svg>`,
+  food:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v11a3 3 0 006 0V3M9 8h6M3 20h18"/></svg>`,
+  bubble:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><circle cx="15" cy="10" r="1.5" fill="currentColor"/><path stroke-linecap="round" d="M9 15s1 2 3 2 3-2 3-2"/></svg>`,
+  wine:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h8l1 7a5 5 0 01-10 0L8 3zm4 7v7m-3 4h6"/></svg>`,
   cocktail:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 6-9 4-1 8H9l-1-8L3 3zm9 10v8"/></svg>`,
-  info:   `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>`
+  info:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>`,
+  clock:`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"/></svg>`
 };
 
-const TAB_ICONS = [ICONS.food, ICONS.cake, ICONS.coffee, ICONS.leaf, ICONS.wind, ICONS.drop, ICONS.wine, ICONS.cocktail, ICONS.bubble];
-const ICON_COLORS = ['color:#be123c', 'color:#b45309', 'color:#92400e', 'color:#16a34a', 'color:#d97706', 'color:#2563eb', 'color:#b91c1c', 'color:#7c3aed', 'color:#06b6d4'];
+const TR={
+  es:{subtitle:"MENÚ DE BEBIDAS Y COCINA",footer:"Precios con IVA incluido.",supplement:"Suplemento leche de Avena o Almendra: +0,30 €",tabs:["Nuestra Cocina","Obrador y Dulce","Cafetería","Matcha Bar","Zumos y Limonadas","Tés e Infusiones","Refrescos","Vinos y Cervezas","Bar de Autor"],agregadosTitle:"+ Agregados",milanesaEyebrow:"Oferta del mediodía",milanesaName:"Milanesa con guarnición + Gaseosa",milanesaDesc:"Tierna milanesa de ternera rebozada y dorada, acompañada con patatas y refresco a elegir.",milanesaTime:"Disponible a partir de las 11:30 h",cocktailSections:{especiales:{title:"ESPECIALES",sub:"Nuestras creaciones exclusivas"},clasica:{title:"MIXOLOGÍA CLÁSICA",sub:"Referentes internacionales"},largos:{title:"TRAGOS LARGOS",sub:"Selección refrescante"}}},
+  en:{subtitle:"DRINKS & FOOD MENU",footer:"Prices include VAT.",supplement:"Oat or Almond milk supplement: +0.30 €",tabs:["Our Kitchen","Bakery & Sweets","Coffee Bar","Matcha Bar","Juices & Lemonades","Teas & Infusions","Soft Drinks","Wines & Beers","Author's Bar"],agregadosTitle:"+ Add-ons",milanesaEyebrow:"Midday special",milanesaName:"Schnitzel with sides + Soft drink",milanesaDesc:"Tender breaded and golden veal escalope, served with potatoes and a soft drink of your choice.",milanesaTime:"Available from 11:30 am",cocktailSections:{especiales:{title:"SPECIALS",sub:"Our exclusive creations"},clasica:{title:"CLASSIC MIXOLOGY",sub:"International references"},largos:{title:"LONG DRINKS",sub:"Refreshing selection"}}},
+  de:{subtitle:"GETRÄNKE & SPEISEKARTE",footer:"Preise inkl. MwSt.",supplement:"Aufpreis Hafer- oder Mandelmilch: +0,30 €",tabs:["Unsere Küche","Bäckerei & Süßes","Kaffeebar","Matcha-Bar","Säfte & Limonaden","Tees & Aufgüsse","Erfrischungen","Wein & Bier","Autorbar"],agregadosTitle:"+ Extras",milanesaEyebrow:"Mittagsangebot",milanesaName:"Schnitzel mit Beilage + Getränk",milanesaDesc:"Zartes paniertes und goldbraunes Kalbsschnitzel, serviert mit Kartoffeln und einem Erfrischungsgetränk nach Wahl.",milanesaTime:"Erhältlich ab 11:30 Uhr",cocktailSections:{especiales:{title:"SIGNATURE COCKTAILS",sub:"Unsere exklusiven Kreationen"},clasica:{title:"KLASSISCHE COCKTAILS",sub:"Internationale Klassiker"},largos:{title:"LONGDRINKS",sub:"Erfrischende Auswahl"}}},
+  ja:{subtitle:"ドリンク・フードメニュー",footer:"税込価格",supplement:"オーツミルクまたはアーモンドミルクへの変更：+0.30 €",tabs:["フード","ベーカリー＆スイーツ","コーヒー","抹茶バー","ジュース＆レモネード","ティー＆ハーブティー","ソフトドリンク","ワイン＆ビール","カクテルバー"],agregadosTitle:"+ トッピング",milanesaEyebrow:"ランチスペシャル",milanesaName:"ミラネーサ＋付け合わせ＋ドリンク",milanesaDesc:"やわらかいパン粉揚げの仔牛カツレツ、ポテト添え、お好みのソフトドリンク付き。",milanesaTime:"11時30分より提供",cocktailSections:{especiales:{title:"シグネチャーカクテル",sub:"オリジナルレシピ"},clasica:{title:"クラシックカクテル",sub:"世界の定番"},largos:{title:"ロングドリンク",sub:"爽やかなセレクション"}}},
+  fr:{subtitle:"CARTE DES BOISSONS & CUISINE",footer:"Prix TTC.",supplement:"Supplément lait d'avoine ou d'amande : +0,30 €",tabs:["Notre Cuisine","Boulangerie & Pâtisseries","Café","Bar à Matcha","Jus & Limonades","Thés & Infusions","Boissons fraîches","Vins & Bières","Bar de Création"],agregadosTitle:"+ Suppléments",milanesaEyebrow:"Formule du midi",milanesaName:"Escalope avec garniture + Boisson",milanesaDesc:"Tendre escalope de veau panée et dorée, accompagnée de pommes de terre et d'une boisson fraîche au choix.",milanesaTime:"Disponible à partir de 11h30",cocktailSections:{especiales:{title:"COCKTAILS SIGNATURE",sub:"Nos créations exclusives"},clasica:{title:"MIXOLOGIE CLASSIQUE",sub:"Les grandes références"},largos:{title:"LONG DRINKS",sub:"Sélection rafraîchissante"}}},
+  it:{subtitle:"CARTA BEVANDE & CUCINA",footer:"Prezzi IVA inclusa.",supplement:"Supplemento latte d'avena o mandorla: +0,30 €",tabs:["La Nostra Cucina","Forno & Dolci","Caffetteria","Matcha Bar","Succhi & Limonate","Tè e Infusi","Bibite","Vini e Birre","Cocktail Bar"],agregadosTitle:"+ Aggiunte",milanesaEyebrow:"Offerta di mezzogiorno",milanesaName:"Cotoletta con contorno + Bibita",milanesaDesc:"Tenera cotoletta di vitello impanata e dorata, servita con patate e una bibita a scelta.",milanesaTime:"Disponibile dalle 11:30",cocktailSections:{especiales:{title:"SIGNATURE",sub:"Le nostre creazioni esclusive"},clasica:{title:"COCKTAIL CLASSICI",sub:"I grandi classici internazionali"},largos:{title:"LONG DRINK",sub:"Selezione rinfrescante"}}},
+  nl:{subtitle:"DRANKEN & SPIJSKAART",footer:"Prijzen incl. btw.",supplement:"Toeslag haver- of amandelmelk: +0,30 €",tabs:["Onze Keuken","Bakkerij & Gebak","Koffiebar","Matchabar","Sappen & Limonades","Thee & Kruidenthee","Frisdranken","Wijn & Bier","Cocktailbar"],agregadosTitle:"+ Extra's",milanesaEyebrow:"Middagaanbieding",milanesaName:"Schnitzel met bijgerecht + Frisdrank",milanesaDesc:"Malse gepaneerde en goudbruin gebakken kalfslap, geserveerd met aardappelen en een frisdrank naar keuze.",milanesaTime:"Beschikbaar vanaf 11:30 uur",cocktailSections:{especiales:{title:"SIGNATURE COCKTAILS",sub:"Onze exclusieve creaties"},clasica:{title:"KLASSIEKE COCKTAILS",sub:"Internationale klassiekers"},largos:{title:"LONG DRINKS",sub:"Verfrissende selectie"}}},
+  ru:{subtitle:"МЕНЮ НАПИТКОВ И КУХНИ",footer:"Цены указаны с учётом НДС.",supplement:"Овсяное или миндальное молоко: +0,30 €",tabs:["Наша Кухня","Пекарня и Сладкое","Кофейня","Матча-бар","Соки и Лимонады","Чай и Травяные чаи","Напитки","Вино и Пиво","Авторский бар"],agregadosTitle:"+ Добавки",milanesaEyebrow:"Обеденное предложение",milanesaName:"Шницель с гарниром + Напиток",milanesaDesc:"Нежный панированный телячий шницель, поданный с картофелем и безалкогольным напитком на выбор.",milanesaTime:"Доступно с 11:30",cocktailSections:{especiales:{title:"АВТОРСКИЕ КОКТЕЙЛИ",sub:"Наши эксклюзивные рецепты"},clasica:{title:"КЛАССИЧЕСКАЯ БАРНАЯ",sub:"Мировая классика"},largos:{title:"ЛОНГ-ДРИНКИ",sub:"Освежающий выбор"}}}
+};
 
-let currentLang = 'es';
-let currentTab  = 0;
+const ICON_COLORS=['color:#be123c','color:#b45309','color:#92400e','color:#4a7c59','color:#2563eb','color:#d97706','color:#0891b2','color:#991b1b','color:#6d28d9'];
 
-function renderLangBar() {
-  const codes = Object.keys(menuData);
-  document.getElementById('lang-bar').innerHTML = codes.map(code => `
-    <button class="lang-btn ${code === currentLang ? 'active' : ''}" onclick="changeLang('${code}')">
-      <span>${menuData[code].flag}</span><span>${menuData[code].name}</span>
-    </button>`).join('');
+function getMenu(lang){
+  const t=TR[lang]||TR.es,tabs=t.tabs,L=lang;
+  function d(o){return o[L]||o['es'];}
+  return[
+    {title:tabs[0],icon:ICONS.food,color:ICON_COLORS[0],
+     flatSections:[{title:"Platos & Tostas",items:[
+       {name:"French Toast",       desc:d({es:"Brioche con frutos rojos, banana y helado.",en:"Brioche with red berries, banana and ice cream.",de:"Brioche mit roten Beeren, Banane und Eis.",ja:"ブリオッシュ、ベリー、バナナ、アイスクリーム添え。",fr:"Brioche aux fruits rouges, banane et glace.",it:"Brioche con frutti di bosco, banana e gelato.",nl:"Brioche met rood fruit, banaan en ijs.",ru:"Бриошь с красными ягодами, бананом и мороженым."}),price:"9.50 €"},
+       {name:"Oro Ibérico",        desc:d({es:"Jamón y kaki sobre ricotta, nueces, cebolla caramelizada y miel.",en:"Iberian ham and persimmon on ricotta, walnuts, caramelised onion and honey.",de:"Iberischer Schinken und Kaki auf Ricotta, Walnüssen, karamellisierten Zwiebeln und Honig.",ja:"イベリコハムと柿のリコッタチーズ乗せ、クルミ、キャラメライズドオニオン、蜂蜜。",fr:"Jambon ibérique et kaki sur ricotta, noix, oignon caramélisé et miel.",it:"Prosciutto iberico e cachi su ricotta, noci, cipolla caramellata e miele.",nl:"Iberische ham en kaki op ricotta, walnoten, gekaramelliseerde ui en honing.",ru:"Иберийская ветчина и хурма на рикотте с грецкими орехами, карамелизованным луком и мёдом."}),price:"13.90 €"},
+       {name:"Salmón",             desc:d({es:"Salmón ahumado, aguacate con vinagreta de la casa y brotes.",en:"Smoked salmon, avocado with house vinaigrette and sprouts.",de:"Geräucherter Lachs, Avocado mit Hausvinaigrette und Sprossen.",ja:"スモークサーモン、アボカドのビネグレットソース、スプラウト添え。",fr:"Saumon fumé, avocat à la vinaigrette maison et pousses.",it:"Salmone affumicato, avocado con vinaigrette della casa e germogli.",nl:"Gerookte zalm, avocado met huisvinaigrette en scheuten.",ru:"Копчёный лосось, авокадо с домашним винегретом и ростками."}),price:"13.50 €"},
+       {name:"Benedictos",         desc:d({es:"Huevos con salsa holandesa, aguacate, cebolla, rábanos y brotes.",en:"Eggs with hollandaise sauce, avocado, onion, radishes and sprouts.",de:"Eier mit Sauce hollandaise, Avocado, Zwiebeln, Radieschen und Sprossen.",ja:"エッグベネディクト、オランデーズソース、アボカド、玉ねぎ、ラディッシュ、スプラウト。",fr:"Œufs à la sauce hollandaise, avocat, oignon, radis et pousses.",it:"Uova con salsa olandese, avocado, cipolla, ravanelli e germogli.",nl:"Eieren met hollandaisesaus, avocado, ui, radijs en scheuten.",ru:"Яйца пашот с голландским соусом, авокадо, луком, редисом и ростками."}),price:"11.50 €"},
+       {name:"Champiñones",        desc:d({es:"Champiñones salteados, burrata cremosa, cebolla caramelizada y piñones.",en:"Sautéed mushrooms, creamy burrata, caramelised onion and pine nuts.",de:"Sautierte Pilze, cremige Burrata, karamellisierte Zwiebeln und Pinienkerne.",ja:"炒めマッシュルーム、クリーミーなブッラータ、キャラメライズドオニオン、松の実。",fr:"Champignons sautés, burrata crémeuse, oignon caramélisé et pignons de pin.",it:"Funghi saltati, burrata cremosa, cipolla caramellata e pinoli.",nl:"Gebakken champignons, romige burrata, gekaramelliseerde ui en pijnboompitten.",ru:"Жареные грибы, сливочная буррата, карамелизованный лук и кедровые орехи."}),price:"10.50 €"},
+       {name:"Aguacate",           desc:d({es:"Aguacate, huevo, tomate cherry, rábano y sésamo sobre queso crema.",en:"Avocado, egg, cherry tomato, radish and sesame on cream cheese.",de:"Avocado, Ei, Cherrytomaten, Radieschen und Sesam auf Frischkäse.",ja:"アボカド、卵、チェリートマト、ラディッシュ、胡麻のクリームチーズ乗せ。",fr:"Avocat, œuf, tomate cerise, radis et sésame sur fromage frais.",it:"Avocado, uovo, pomodorini, ravanello e sesamo su crema di formaggio.",nl:"Avocado, ei, kerstomaat, radijs en sesam op roomkaas.",ru:"Авокадо, яйцо, черри, редис и кунжут на сливочном сыре."}),price:"9.50 €"},
+       {name:"Tosta de Tomate",    desc:d({es:"Tomate fresco, aceite de oliva, brotes y albahaca.",en:"Fresh tomato, olive oil, sprouts and basil.",de:"Frische Tomaten, Olivenöl, Sprossen und Basilikum.",ja:"フレッシュトマト、オリーブオイル、スプラウト、バジル。",fr:"Tomate fraîche, huile d'olive, pousses et basilic.",it:"Pomodoro fresco, olio d'oliva, germogli e basilico.",nl:"Verse tomaat, olijfolie, scheuten en basilicum.",ru:"Свежий томат, оливковое масло, ростки и базилик."}),price:"3.80 €"},
+       {name:"Tosta Queso y Miel", desc:d({es:"Combinación de queso, nueces crujientes y miel.",en:"Cheese, crunchy walnuts and honey.",de:"Käse, knusprige Walnüsse und Honig.",ja:"チーズ、クルミ、蜂蜜の組み合わせ。",fr:"Fromage, noix croquantes et miel.",it:"Formaggio, noci croccanti e miele.",nl:"Kaas, krokante walnoten en honing.",ru:"Сыр, хрустящие грецкие орехи и мёд."}),price:"6.50 €"},
+       {name:"Tosta Mermelada",    desc:d({es:"Tosta artesanal con mantequilla y mermelada de temporada.",en:"Artisan toast with butter and seasonal jam.",de:"Handwerkliches Toastbrot mit Butter und Saisonmarmelade.",ja:"手作りトースト、バター、季節のジャム添え。",fr:"Toast artisanal avec beurre et confiture de saison.",it:"Pane tostato artigianale con burro e marmellata di stagione.",nl:"Ambachtelijke toast met boter en seizoensconfiture.",ru:"Ремесленный тост с маслом и сезонным джемом."}),price:"5.50 €"},
+       {name:"Milanesa",           desc:d({es:"Tierna milanesa de ternera rebozada y dorada, acompañada con patatas.",en:"Tender breaded and golden veal escalope, served with potatoes.",de:"Zartes paniertes und goldbraunes Kalbsschnitzel, mit Kartoffeln serviert.",ja:"サクサクに揚げたやわらかい仔牛のカツレツ、ポテト添え。",fr:"Escalope de veau panée et dorée, servie avec des pommes de terre.",it:"Tenera cotoletta di vitello impanata e dorata, servita con patate.",nl:"Malse gepaneerde en goudbruin gebakken kalfslap, geserveerd met aardappelen.",ru:"Нежный панированный телячий шницель, поданный с картофелем."}),price:"13.90 €"}
+     ]}],
+     milanesaBanner:true,
+     agregados:[{name:"Huevo",price:"1.50 €"},{name:"Huevo revuelto",price:"2.50 €"},{name:"Jamón",price:"2.00 €"},{name:"Aguacate",price:"2.50 €"},{name:"Salmón",price:"4.50 €"},{name:"Champiñones",price:"1.50 €"},{name:"Tomate",price:"1.00 €"},{name:"Mantequilla",price:"1.00 €"},{name:"Mermelada",price:"1.50 €"}],
+     agregadosTitle:t.agregadosTitle},
+    {title:tabs[1],icon:ICONS.cake,color:ICON_COLORS[1],items:[
+      {name:"Cinnamon Roll",              desc:d({es:"Esponjoso y recién horneado.",en:"Fluffy and freshly baked.",de:"Fluffig und frisch gebacken.",ja:"ふわふわの焼きたて。",fr:"Moelleux et fraîchement cuit.",it:"Soffice e appena sfornato.",nl:"Luchtig en vers gebakken.",ru:"Пышный, только из духовки."}),price:"4.20 €",options:"Nueces · Frutos Rojos · Lotus"},
+      {name:"Cookie",                     desc:d({es:"Crujiente por fuera, tierna por dentro.",en:"Crispy on the outside, soft on the inside.",de:"Außen knusprig, innen weich.",ja:"外はサクサク、中はしっとり。",fr:"Croustillant dehors, moelleux dedans.",it:"Croccante fuori, morbida dentro.",nl:"Knapperig van buiten, zacht van binnen.",ru:"Хрустящая снаружи, мягкая внутри."}),price:"4.00 €",options:"Chispas de Chocolate · Lotus"},
+      {name:"Carrot Cake",                desc:d({es:"Bizcocho húmedo de zanahoria con frosting de queso crema.",en:"Moist carrot sponge with cream cheese frosting.",de:"Saftiger Karottenkuchen mit Frischkäse-Frosting.",ja:"しっとりキャロットケーキ、クリームチーズフロスティング。",fr:"Gâteau moelleux à la carotte et glaçage au fromage frais.",it:"Torta soffice di carote con frosting al formaggio fresco.",nl:"Vochtige worteltaart met roomkaas-frosting.",ru:"Влажный морковный бисквит с глазурью из сливочного сыра."}),price:"4.00 €"},
+      {name:"Banana Bread",               desc:d({es:"Bizcocho esponjoso de plátano, jugoso y natural.",en:"Fluffy banana loaf, moist and natural.",de:"Lockeres Bananenbrot, saftig und natürlich.",ja:"ふわふわのバナナブレッド、しっとりナチュラル。",fr:"Cake à la banane moelleux, juteux et naturel.",it:"Pan di banana soffice, umido e naturale.",nl:"Luchtig bananenbrood, sappig en naturel.",ru:"Пышный банановый кекс, сочный и натуральный."}),price:"4.00 €"},
+      {name:"Tarta de Queso con Brownie", desc:d({es:"Cremosa tarta de queso sobre base de brownie de chocolate.",en:"Creamy cheesecake on a chocolate brownie base.",de:"Cremige Käsekuchen auf Schokoladen-Brownie-Boden.",ja:"チョコレートブラウニーベースのクリーミーなチーズケーキ。",fr:"Cheesecake crémeux sur base brownie au chocolat.",it:"Cremosa cheesecake su base di brownie al cioccolato.",nl:"Romige cheesecake op chocolade brownbodem.",ru:"Нежный чизкейк на шоколадном брауни."}),price:"5.50 €"},
+      {name:"Tarta de Manzana",           desc:d({es:"Tarta casera de manzana con canela.",en:"Homemade apple tart with cinnamon.",de:"Hausgemachter Apfelkuchen mit Zimt.",ja:"シナモン風味の手作りアップルタルト。",fr:"Tarte maison aux pommes et cannelle.",it:"Torta casalinga di mele e cannella.",nl:"Huisgemaakte appeltaart met kaneel.",ru:"Домашний яблочный пирог с корицей."}),price:"4.00 €"},
+      {name:"Croissant de Almendras",     desc:d({es:"Hojaldre crujiente relleno de crema de almendra.",en:"Crispy puff pastry filled with almond cream.",de:"Knuspriges Blätterteiggebäck mit Mandelcreme.",ja:"サクサクのパイ生地にアーモンドクリームを詰めたクロワッサン。",fr:"Feuilleté croustillant fourré à la crème d'amande.",it:"Sfoglia croccante ripiena di crema di mandorle.",nl:"Knapperig bladerdeeg gevuld met amandelcrème.",ru:"Хрустящий слоёный рог с миндальным кремом."}),price:"4.50 €"},
+      {name:"Brownie",                    desc:d({es:"Intenso, húmedo y con corazón de chocolate.",en:"Rich, moist and with a chocolate heart.",de:"Intensiv, saftig und mit Schokoladenkern.",ja:"濃厚でしっとり、チョコレートたっぷり。",fr:"Intense, moelleux et au cœur de chocolat.",it:"Intenso, umido e con cuore di cioccolato.",nl:"Intens, vochtig en met een chocoladehart.",ru:"Насыщенный, влажный, с шоколадной начинкой."}),price:"4.00 €"},
+      {name:"Alfajor",                    desc:d({es:"Galleta argentina rellena de dulce de leche y frutos rojos.",en:"Argentine cookie filled with dulce de leche and red berries.",de:"Argentinisches Gebäck gefüllt mit Dulce de Leche und Beeren.",ja:"アルゼンチンのクッキー、ドゥルセ・デ・レチェと赤いベリー詰め。",fr:"Biscuit argentin fourré au dulce de leche et fruits rouges.",it:"Biscotto argentino ripieno di dulce de leche e frutti di bosco.",nl:"Argentijnse koek gevuld met dulce de leche en rood fruit.",ru:"Аргентинское печенье с дульсе де лече и красными ягодами."}),price:"4.50 €"}
+    ]},
+    {title:tabs[2],icon:ICONS.coffee,color:ICON_COLORS[2],notes:t.supplement,items:[
+      {name:"Espresso Doble / Cortado",desc:d({es:"Concentrado y potente. El alma del café.",en:"Concentrated and powerful. The soul of coffee.",de:"Konzentriert und kräftig. Die Seele des Kaffees.",ja:"濃厚でパワフル。コーヒーの魂。",fr:"Concentré et puissant. L'âme du café.",it:"Concentrato e potente. L'anima del caffè.",nl:"Geconcentreerd en krachtig. De ziel van de koffie.",ru:"Концентрированный и насыщенный. Душа кофе."}),price:"2.80 €"},
+      {name:"Americano",               desc:d({es:"Espresso suavizado con agua caliente. Limpio y largo.",en:"Espresso softened with hot water. Clean and long.",de:"Espresso mit heißem Wasser verlängert. Klar und lang.",ja:"エスプレッソをお湯で割った、クリーンで飲みやすいコーヒー。",fr:"Espresso allongé à l'eau chaude. Propre et long.",it:"Espresso allungato con acqua calda. Pulito e lungo.",nl:"Espresso verlengd met heet water. Helder en lang.",ru:"Эспрессо, разбавленный горячей водой. Мягкий и длинный."}),price:"3.00 €"},
+      {name:"Flat White",              desc:d({es:"Doble espresso con leche sedosa. Intenso y cremoso.",en:"Double espresso with silky milk. Intense and creamy.",de:"Doppelter Espresso mit seidiger Milch. Intensiv und cremig.",ja:"ダブルエスプレッソにシルキーなミルク。濃厚でクリーミー。",fr:"Double espresso au lait soyeux. Intense et crémeux.",it:"Doppio espresso con latte setoso. Intenso e cremoso.",nl:"Dubbele espresso met zijdezachte melk. Intens en romig.",ru:"Двойной эспрессо с шелковистым молоком. Насыщенный и кремовый."}),price:"3.20 €"},
+      {name:"Capuccino / Latte",       desc:d({es:"Espresso con leche vaporizada y espuma aterciopelada.",en:"Espresso with steamed milk and velvety foam.",de:"Espresso mit aufgeschäumter Milch und samtigem Schaum.",ja:"エスプレッソにスチームミルクと滑らかなフォーム。",fr:"Espresso au lait vapeur et mousse veloutée.",it:"Espresso con latte vaporizzato e schiuma vellutata.",nl:"Espresso met gestoomde melk en fluweelzacht schuim.",ru:"Эспрессо с паровым молоком и бархатистой пенкой."}),price:"3.20 €"},
+      {name:"Café Bombón",             desc:d({es:"Espresso con leche condensada. Dulce, intenso y muy nuestro.",en:"Espresso with condensed milk. Sweet, intense and very ours.",de:"Espresso mit Kondensmilch. Süß, intensiv und sehr eigen.",ja:"エスプレッソにコンデンスミルク。甘くて濃厚。",fr:"Espresso au lait concentré sucré. Doux, intense et bien à nous.",it:"Espresso con latte condensato. Dolce, intenso e tutto nostro.",nl:"Espresso met gecondenseerde melk. Zoet, intens en heel van ons.",ru:"Эспрессо со сгущённым молоком. Сладкий, насыщенный, очень наш."}),price:"3.20 €"},
+      {name:"Chocolate Caliente",      desc:d({es:"Cacao puro con leche caliente. Cremoso y reconfortante.",en:"Pure cocoa with hot milk. Creamy and comforting.",de:"Reiner Kakao mit heißer Milch. Cremig und wärmend.",ja:"純粋なカカオとホットミルク。クリーミーで心温まる。",fr:"Cacao pur au lait chaud. Crémeux et réconfortant.",it:"Cacao puro con latte caldo. Cremoso e confortante.",nl:"Pure cacao met warme melk. Romig en troostend.",ru:"Чистый какао с горячим молоком. Кремовый и согревающий."}),price:"4.00 €"},
+      {name:"Chai Latte",              desc:d({es:"Especias orientales, canela y cardamomo con leche vaporizada.",en:"Eastern spices, cinnamon and cardamom with steamed milk.",de:"Orientalische Gewürze, Zimt und Kardamom mit Dampfmilch.",ja:"東洋のスパイス、シナモン、カルダモムのスチームミルク。",fr:"Épices orientales, cannelle et cardamome au lait vapeur.",it:"Spezie orientali, cannella e cardamomo con latte vaporizzato.",nl:"Oosterse kruiden, kaneel en kardemom met gestoomde melk.",ru:"Восточные пряности, корица и кардамом с паровым молоком."}),price:"4.00 €"},
+      {name:"Cold Brew",               desc:d({es:"Café macerado 24h en frío. Suave, bajo en acidez y refrescante.",en:"Coffee cold-steeped for 24h. Smooth, low-acid and refreshing.",de:"24h kaltgebrühter Kaffee. Sanft, säurearm und erfrischend.",ja:"24時間コールドブリュー。まろやかで低酸味、さわやか。",fr:"Café infusé à froid 24h. Doux, peu acide et rafraîchissant.",it:"Caffè macerato 24h a freddo. Morbido, poco acido e rinfrescante.",nl:"24u koud gezette koffie. Zacht, weinig zuur en verfrissend.",ru:"Кофе холодного заваривания 24ч. Мягкий, без кислинки, освежающий."}),price:"4.00 €"},
+      {name:"Iced Caramel",            desc:d({es:"Espresso sobre hielo con leche fría y sirope de caramelo.",en:"Espresso over ice with cold milk and caramel syrup.",de:"Espresso auf Eis mit kalter Milch und Karamellsirup.",ja:"エスプレッソ、氷、冷たいミルク、キャラメルシロップ。",fr:"Espresso sur glace avec lait froid et sirop de caramel.",it:"Espresso su ghiaccio con latte freddo e sciroppo di caramello.",nl:"Espresso op ijs met koude melk en karamelsiroop.",ru:"Эспрессо со льдом, холодным молоком и карамельным сиропом."}),price:"4.00 €"},
+      {name:"Iced Vanilla",            desc:d({es:"Espresso sobre hielo con leche fría y sirope de vainilla.",en:"Espresso over ice with cold milk and vanilla syrup.",de:"Espresso auf Eis mit kalter Milch und Vanillesirup.",ja:"エスプレッソ、氷、冷たいミルク、バニラシロップ。",fr:"Espresso sur glace avec lait froid et sirop de vanille.",it:"Espresso su ghiaccio con latte freddo e sciroppo di vaniglia.",nl:"Espresso op ijs met koude melk en vanillesiroop.",ru:"Эспрессо со льдом, холодным молоком и ванильным сиропом."}),price:"4.00 €"}
+    ]},
+    {title:tabs[3],icon:ICONS.leaf,color:ICON_COLORS[3],items:[
+      {name:"Matcha Caliente",          desc:d({es:"Matcha ceremonial con leche vaporizada. Equilibrado y vegetal.",en:"Ceremonial matcha with steamed milk. Balanced and vegetal.",de:"Zeremonieller Matcha mit Dampfmilch. Ausgewogen und grünlich.",ja:"抹茶（儀式用）とスチームミルク。バランス良く草木の風味。",fr:"Matcha cérémoniel au lait vapeur. Équilibré et végétal.",it:"Matcha cerimoniale con latte vaporizzato. Equilibrato e vegetale.",nl:"Ceremoniële matcha met gestoomde melk. Evenwichtig en plantaardig.",ru:"Церемониальный матча с паровым молоком. Сбалансированный и растительный."}),price:"4.90 €"},
+      {name:"Iced Matcha",              desc:d({es:"Matcha ceremonial sobre hielo con leche fría. Suave y refrescante.",en:"Ceremonial matcha over ice with cold milk. Smooth and refreshing.",de:"Zeremonieller Matcha auf Eis mit kalter Milch. Sanft und erfrischend.",ja:"抹茶（儀式用）の氷入り、冷たいミルク。まろやかでさわやか。",fr:"Matcha cérémoniel sur glace au lait froid. Doux et rafraîchissant.",it:"Matcha cerimoniale su ghiaccio con latte freddo. Morbido e rinfrescante.",nl:"Ceremoniële matcha op ijs met koude melk. Zacht en verfrissend.",ru:"Церемониальный матча со льдом и холодным молоком. Мягкий и освежающий."}),price:"4.90 €"},
+      {name:"Iced Matcha Mango",        desc:d({es:"Matcha frío con coulis de mango tropical. Vibrante y refrescante.",en:"Iced matcha with tropical mango coulis. Vibrant and refreshing.",de:"Eismatcha mit tropischem Mangokoulis. Lebhaft und erfrischend.",ja:"アイス抹茶と南国マンゴーのクーリ。鮮やかでさわやか。",fr:"Matcha glacé au coulis de mangue tropicale. Vif et rafraîchissant.",it:"Matcha freddo con coulis di mango tropicale. Vivace e rinfrescante.",nl:"IJsmatcha met tropische mangocoulis. Levendig en verfrissend.",ru:"Холодный матча с тропическим манговым кули. Яркий и освежающий."}),price:"5.50 €"},
+      {name:"Iced Matcha Frutos Rojos", desc:d({es:"Matcha con frambuesa y frutos del bosque. Ácido y goloso.",en:"Matcha with raspberry and forest berries. Tangy and indulgent.",de:"Matcha mit Himbeere und Waldbeeren. Säuerlich und köstlich.",ja:"抹茶とラズベリー、森のベリー。酸味があって甘い。",fr:"Matcha à la framboise et fruits des bois. Acidulé et gourmand.",it:"Matcha con lampone e frutti di bosco. Acidulo e goloso.",nl:"Matcha met framboos en bosvruchten. Pittig en smaakvol.",ru:"Матча с малиной и лесными ягодами. Кислый и лакомый."}),price:"5.50 €"},
+      {name:"Iced Matcha Coco",         desc:d({es:"Matcha con leche de coco. Suave, exótico y cremoso.",en:"Matcha with coconut milk. Smooth, exotic and creamy.",de:"Matcha mit Kokosmilch. Sanft, exotisch und cremig.",ja:"抹茶とコナッツミルク。まろやかでエキゾチック、クリーミー。",fr:"Matcha au lait de coco. Doux, exotique et crémeux.",it:"Matcha con latte di cocco. Morbido, esotico e cremoso.",nl:"Matcha met kokosmelk. Zacht, exotisch en romig.",ru:"Матча с кокосовым молоком. Мягкий, экзотический и кремовый."}),price:"5.50 €"},
+      {name:"Iced Matcha Maracuyá",     desc:d({es:"Matcha con maracuyá. Un contraste tropical e intenso.",en:"Matcha with passion fruit. A tropical and intense contrast.",de:"Matcha mit Maracuja. Ein tropischer und intensiver Kontrast.",ja:"抹茶とパッションフルーツ。トロピカルで印象的なコントラスト。",fr:"Matcha au fruit de la passion. Un contraste tropical et intense.",it:"Matcha con maracuja. Un contrasto tropicale e intenso.",nl:"Matcha met passievrucht. Een tropisch en intens contrast.",ru:"Матча с маракуйей. Тропический и насыщенный контраст."}),price:"5.50 €"},
+      {name:"Iced Matcha Escaramuza",   desc:d({es:"Nuestra combinación estrella. Fresca, única y especial.",en:"Our star combination. Fresh, unique and special.",de:"Unsere Starkombi. Frisch, einzigartig und besonders.",ja:"当店の看板メニュー。フレッシュで独自のスペシャルドリンク。",fr:"Notre combinaison vedette. Fraîche, unique et spéciale.",it:"La nostra combinazione stella. Fresca, unica e speciale.",nl:"Onze sterrencombinatie. Fris, uniek en bijzonder.",ru:"Наша звёздная комбинация. Свежая, уникальная и особенная."}),price:"5.50 €"}
+    ]},
+    {title:tabs[4],icon:ICONS.drop,color:ICON_COLORS[4],globalPrice:"4.00 €",items:[
+      {name:"Jugo de Naranja Natural",      desc:d({es:"Naranjas exprimidas al momento. Puro y vitamínico.",en:"Freshly squeezed oranges. Pure and vitamin-packed.",de:"Frisch gepresste Orangen. Pur und vitaminreich.",ja:"絞りたてのオレンジジュース。ピュアでビタミン豊富。",fr:"Oranges pressées à l'instant. Pur et vitaminé.",it:"Arance spremute al momento. Puro e vitaminico.",nl:"Versgeperste sinaasappelen. Puur en vitaminenrijk.",ru:"Свежевыжатый апельсиновый сок. Чистый и витаминный."})},
+      {name:"Limonada Clásica",             desc:d({es:"Limón natural, agua y el punto justo de dulzor.",en:"Natural lemon, water and just the right sweetness.",de:"Natürliche Zitrone, Wasser und die perfekte Süße.",ja:"天然レモン、水、ちょうどよい甘さ。",fr:"Citron naturel, eau et juste ce qu'il faut de douceur.",it:"Limone naturale, acqua e la giusta dolcezza.",nl:"Natuurlijk citroen, water en net de juiste zoetheid.",ru:"Натуральный лимон, вода и нужная доля сладости."})},
+      {name:"Limonada de Frambuesa",        desc:d({es:"Cítrica y frutal con un toque ácido de frambuesa fresca.",en:"Citrusy and fruity with a tangy touch of fresh raspberry.",de:"Zitrusfruchtig mit einem sauren Hauch frischer Himbeere.",ja:"柑橘系でフルーティ、フレッシュラズベリーの酸味。",fr:"Citronnée et fruitée avec une touche acidulée de framboise fraîche.",it:"Agrumata e fruttata con un tocco acidulo di lampone fresco.",nl:"Citrusachtig en fruitig met een zure toets verse framboos.",ru:"Цитрусовый и фруктовый, с кислинкой свежей малины."})},
+      {name:"Limonada de Mango",            desc:d({es:"Tropical y refrescante con pulpa de mango natural.",en:"Tropical and refreshing with natural mango pulp.",de:"Tropisch und erfrischend mit natürlichem Mangopüree.",ja:"南国的でさわやか、天然マンゴーの果肉入り。",fr:"Tropicale et rafraîchissante à la pulpe de mangue naturelle.",it:"Tropicale e rinfrescante con polpa di mango naturale.",nl:"Tropisch en verfrissend met natuurlijk mangopulp.",ru:"Тропический и освежающий, с натуральной мякотью манго."})},
+      {name:"Limonada de Coco",             desc:d({es:"Limón con leche de coco. Cremosa y sorprendente.",en:"Lemon with coconut milk. Creamy and surprising.",de:"Zitrone mit Kokosmilch. Cremig und überraschend.",ja:"レモンとココナッツミルク。クリーミーで意外性がある。",fr:"Citron au lait de coco. Crémeuse et surprenante.",it:"Limone con latte di cocco. Cremosa e sorprendente.",nl:"Citroen met kokosmelk. Romig en verrassend.",ru:"Лимон с кокосовым молоком. Кремовый и неожиданный."})},
+      {name:"Limonada de Maracuyá",         desc:d({es:"Intensa y aromática. El sabor del verano en un vaso.",en:"Intense and aromatic. The taste of summer in a glass.",de:"Intensiv und aromatisch. Der Geschmack des Sommers im Glas.",ja:"濃厚で香り豊か。夏の味がグラスの中に。",fr:"Intense et aromatique. Le goût de l'été dans un verre.",it:"Intensa e aromatica. Il sapore dell'estate in un bicchiere.",nl:"Intens en aromatisch. De smaak van de zomer in een glas.",ru:"Насыщенный и ароматный. Вкус лета в стакане."})},
+      {name:"Limonada de Menta y Jengibre", desc:d({es:"Fresca y especiada. Limón, menta y jengibre en armonía.",en:"Fresh and spiced. Lemon, mint and ginger in harmony.",de:"Frisch und würzig. Zitrone, Minze und Ingwer im Einklang.",ja:"フレッシュでスパイシー。レモン、ミント、生姜のハーモニー。",fr:"Fraîche et épicée. Citron, menthe et gingembre en harmonie.",it:"Fresca e speziata. Limone, menta e zenzero in armonia.",nl:"Fris en gekruid. Citroen, munt en gember in harmonie.",ru:"Свежий и пряный. Лимон, мята и имбирь в гармонии."})}
+    ]},
+    {title:tabs[5],icon:ICONS.wind,color:ICON_COLORS[5],globalPrice:"3.80 €",subcategories:[
+      {name:"GAMA NEGRA",tag:"Energía y Desayuno",dot:"dot-black",profile:"Alto contenido en teína, sabores robustos y terrosos.",items:[
+        {name:"English Breakfast Eco",desc:d({es:"Robusto y maltoso. El clásico del desayuno británico.",en:"Robust and malty. The classic British breakfast tea.",de:"Kräftig und malzig. Der klassische britische Frühstückstee.",ja:"力強くモルティ。英国式朝食の定番紅茶。",fr:"Robuste et malté. Le classique du petit-déjeuner britannique.",it:"Robusto e maltato. Il classico della colazione britannica.",nl:"Robuust en moutig. De klassieke Britse ontbijttee.",ru:"Крепкий и солодовый. Классический английский завтрак."})},
+        {name:"Earl Grey",desc:d({es:"Té negro con bergamota. Aromático y elegante.",en:"Black tea with bergamot. Aromatic and elegant.",de:"Schwarzer Tee mit Bergamotte. Aromatisch und elegant.",ja:"ベルガモット入り紅茶。アロマティックでエレガント。",fr:"Thé noir à la bergamote. Aromatique et élégant.",it:"Tè nero alla bergamotta. Aromatico ed elegante.",nl:"Zwarte thee met bergamot. Aromatisch en elegant.",ru:"Чёрный чай с бергамотом. Ароматный и элегантный."})},
+        {name:"Chai Negro",desc:d({es:"Especias, canela y pimienta. Intenso y reconfortante.",en:"Spices, cinnamon and pepper. Intense and comforting.",de:"Gewürze, Zimt und Pfeffer. Intensiv und wärmend.",ja:"スパイス、シナモン、胡椒。濃厚で心温まる。",fr:"Épices, cannelle et poivre. Intense et réconfortant.",it:"Spezie, cannella e pepe. Intenso e confortante.",nl:"Kruiden, kaneel en peper. Intens en troostend.",ru:"Пряности, корица и перец. Насыщенный и согревающий."})}
+      ]},
+      {name:"GAMA VERDE Y BLANCA",tag:"Antioxidante y Ligereza",dot:"dot-green",profile:"Teína moderada/baja, sabores florales y frescos.",items:[
+        {name:"Té Verde Jazmín",desc:d({es:"Delicado y floral. Perfumado con flores de jazmín.",en:"Delicate and floral. Perfumed with jasmine flowers.",de:"Zart und blumig. Mit Jasminblüten parfümiert.",ja:"繊細でフローラル。ジャスミンの花の香り。",fr:"Délicat et floral. Parfumé aux fleurs de jasmin.",it:"Delicato e floreale. Profumato con fiori di gelsomino.",nl:"Delicaat en bloemig. Geparfumeerd met jasmijnbloemen.",ru:"Нежный и цветочный. Ароматизирован цветами жасмина."})},
+        {name:"Té Verde Sakura",desc:d({es:"Suave y primaveral. Notas florales de cerezo japonés.",en:"Soft and spring-like. Floral notes of Japanese cherry.",de:"Sanft und frühlingshaft. Blumige Noten der japanischen Kirsche.",ja:"やさしく春らしい。日本の桜のフローラルな風味。",fr:"Doux et printanier. Notes florales de cerisier japonais.",it:"Morbido e primaverile. Note floreali di ciliegio giapponese.",nl:"Zacht en lentachtig. Bloemige noten van Japanse kers.",ru:"Мягкий и весенний. Цветочные ноты японской сакуры."})},
+        {name:"Té Blanco Seda",desc:d({es:"Muy suave y dulce. El más delicado de nuestra carta.",en:"Very soft and sweet. The most delicate on our menu.",de:"Sehr sanft und süß. Der Zarteste unserer Karte.",ja:"とても柔らかく甘い。当店のメニューで最も繊細。",fr:"Très doux et sucré. Le plus délicat de notre carte.",it:"Molto morbido e dolce. Il più delicato della nostra carta.",nl:"Zeer zacht en zoet. De meest delicate van onze kaart.",ru:"Очень мягкий и сладкий. Самый деликатный в нашем меню."})},
+        {name:"Noches de Toronto",desc:d({es:"Mezcla exclusiva. Fresco, frutal y envolvente.",en:"Exclusive blend. Fresh, fruity and enveloping.",de:"Exklusive Mischung. Frisch, fruchtig und umhüllend.",ja:"独自のブレンド。フレッシュ、フルーティ、包み込むような風味。",fr:"Mélange exclusif. Frais, fruité et enveloppant.",it:"Miscela esclusiva. Fresco, fruttato e avvolgente.",nl:"Exclusieve blend. Fris, fruitig en omhullend.",ru:"Эксклюзивная смесь. Свежая, фруктовая и обволакивающая."})},
+        {name:"Silueta",desc:d({es:"Blend depurativo. Ligero y equilibrado.",en:"Cleansing blend. Light and balanced.",de:"Entschlackende Mischung. Leicht und ausgewogen.",ja:"デトックスブレンド。軽くてバランスよい。",fr:"Mélange dépuratif. Léger et équilibré.",it:"Miscela depurativa. Leggera ed equilibrata.",nl:"Zuiverende blend. Licht en evenwichtig.",ru:"Очищающий купаж. Лёгкий и сбалансированный."})}
+      ]},
+      {name:"GAMA DORADA",tag:"Bienestar y Digestión",dot:"dot-gold",profile:"Sin teína. Cítricos y medicinales.",items:[
+        {name:"Manzanilla",desc:d({es:"Clásica y suave. Digestiva y relajante.",en:"Classic and mild. Digestive and relaxing.",de:"Klassisch und sanft. Verdauungsfördernd und entspannend.",ja:"クラシックでおだやか。消化を助け、リラックス効果。",fr:"Classique et douce. Digestive et relaxante.",it:"Classica e delicata. Digestiva e rilassante.",nl:"Klassiek en zacht. Digestief en ontspannend.",ru:"Классическая и мягкая. Пищеварительная и расслабляющая."})},
+        {name:"Jengibre y Limón",desc:d({es:"Estimulante y cítrica. Perfecta para activar el cuerpo.",en:"Stimulating and citrusy. Perfect to wake the body up.",de:"Anregend und zitrisch. Ideal um den Körper zu aktivieren.",ja:"刺激的で柑橘系。体を目覚めさせるのに最適。",fr:"Stimulante et citronnée. Parfaite pour activer le corps.",it:"Stimolante e agrumata. Perfetta per attivare il corpo.",nl:"Stimulerend en citrusachtig. Perfect om het lichaam te activeren.",ru:"Тонизирующий и цитрусовый. Идеален для пробуждения тела."})},
+        {name:"Jengibre y Cúrcuma",desc:d({es:"Antiinflamatoria y potente. Cálida y especiada.",en:"Anti-inflammatory and powerful. Warm and spiced.",de:"Entzündungshemmend und kräftig. Warm und würzig.",ja:"抗炎症作用があり、力強い。温かくスパイシー。",fr:"Anti-inflammatoire et puissante. Chaude et épicée.",it:"Antinfiammatoria e potente. Calda e speziata.",nl:"Ontstekingsremmend en krachtig. Warm en gekruid.",ru:"Противовоспалительный и мощный. Тёплый и пряный."})},
+        {name:"Infusión Inmunidad",desc:d({es:"Blend de hierbas para reforzar las defensas.",en:"Herbal blend to strengthen the immune system.",de:"Kräutermischung zur Stärkung der Abwehrkräfte.",ja:"免疫力を高めるハーブブレンド。",fr:"Mélange d'herbes pour renforcer les défenses.",it:"Miscela di erbe per rafforzare le difese immunitarie.",nl:"Kruidenblend om de weerstand te versterken.",ru:"Травяной купаж для укрепления иммунитета."})},
+        {name:"Infusión Depurativa",desc:d({es:"Limpia y ligera. Ideal después de las comidas.",en:"Clean and light. Ideal after meals.",de:"Reinigend und leicht. Ideal nach den Mahlzeiten.",ja:"すっきり軽やか。食後に最適。",fr:"Propre et légère. Idéale après les repas.",it:"Pulita e leggera. Ideale dopo i pasti.",nl:"Schoon en licht. Ideaal na de maaltijden.",ru:"Очищающий и лёгкий. Идеален после еды."})},
+        {name:"Chai Digestivo",desc:d({es:"Especias suaves y cúrcuma. Reconfortante y saludable.",en:"Mild spices and turmeric. Comforting and healthy.",de:"Milde Gewürze und Kurkuma. Wärmend und gesund.",ja:"やさしいスパイスとターメリック。心地よく健康的。",fr:"Épices douces et curcuma. Réconfortant et sain.",it:"Spezie delicate e curcuma. Confortante e salutare.",nl:"Milde kruiden en kurkuma. Troostend en gezond.",ru:"Мягкие пряности и куркума. Согревающий и полезный."})}
+      ]},
+      {name:"GAMA ÁMBAR Y FLORAL",tag:"Relajación",dot:"dot-amber",profile:"Sin teína. Dulces y cálidos.",items:[
+        {name:"Rooibos Clásico / Noches",desc:d({es:"Sin teína. Dulce y afrutado. Perfecto para la noche.",en:"Caffeine-free. Sweet and fruity. Perfect for the evening.",de:"Koffeinfrei. Süß und fruchtig. Perfekt für den Abend.",ja:"カフェインなし。甘くてフルーティ。夜にぴったり。",fr:"Sans théine. Doux et fruité. Parfait pour le soir.",it:"Senza teina. Dolce e fruttato. Perfetto per la sera.",nl:"Cafeïnevrij. Zoet en fruitig. Perfect voor de avond.",ru:"Без кофеина. Сладкий и фруктовый. Идеален на вечер."})},
+        {name:"Lavanda",desc:d({es:"Floral y relajante. El abrazo perfecto antes de dormir.",en:"Floral and relaxing. The perfect hug before sleep.",de:"Blumig und entspannend. Die perfekte Umarmung vor dem Schlaf.",ja:"フローラルでリラックス。眠りにつく前の最高の抱擁。",fr:"Floral et relaxant. Le parfait câlin avant le sommeil.",it:"Floreale e rilassante. Il perfetto abbraccio prima del sonno.",nl:"Bloemig en ontspannend. De perfecte knuffel voor het slapengaan.",ru:"Цветочный и расслабляющий. Идеальные объятия перед сном."})}
+      ]}
+    ]},
+    {title:tabs[6],icon:ICONS.bubble,color:ICON_COLORS[6],globalPrice:"2.50 €",items:[
+      {name:"Coca-Cola",    desc:d({es:"Normal o Zero. Bien fría.",en:"Regular or Zero. Ice cold.",de:"Normal oder Zero. Eiskalt.",ja:"普通またはゼロ。よく冷えた。",fr:"Classique ou Zéro. Bien fraîche.",it:"Normale o Zero. Bella fredda.",nl:"Normaal of Zero. IJskoud.",ru:"Обычная или Зеро. Очень холодная."}),price:"2.50 €"},
+      {name:"Fanta Naranja",desc:"",price:"2.50 €"},{name:"Fanta Limón",desc:"",price:"2.50 €"},
+      {name:"7up",          desc:"",price:"2.50 €"},{name:"Tónica",desc:"",price:"2.50 €"},
+      {name:"Energizante",  desc:"",price:"3.00 €"},
+      {name:"Agua",         desc:d({es:"Con o sin gas.",en:"Still or sparkling.",de:"Still oder mit Kohlensäure.",ja:"炭酸あり・なし。",fr:"Plate ou gazeuse.",it:"Naturale o frizzante.",nl:"Still of bruisend.",ru:"Без газа или с газом."}),price:"2.40 €"},
+      {name:"Té de Limón",  desc:d({es:"Refrescante y cítrico.",en:"Refreshing and citrusy.",de:"Erfrischend und zitrisch.",ja:"さわやかで柑橘系。",fr:"Rafraîchissant et citronné.",it:"Rinfrescante e agrumato.",nl:"Verfrissend en citrusachtig.",ru:"Освежающий и цитрусовый."}),price:"2.70 €"}
+    ]},
+    {title:tabs[7],icon:ICONS.wine,color:ICON_COLORS[7],items:[
+      {name:"Cerveza Estrella Galicia", desc:d({es:"Especial o 0.0 Tostada.",en:"Especial or 0.0 Tostada.",de:"Especial oder 0.0 Tostada.",ja:"エスペシャルまたは0.0トスタダ。",fr:"Especial ou 0.0 Tostada.",it:"Especial o 0.0 Tostada.",nl:"Especial of 0.0 Tostada.",ru:"Especial или 0.0 Tostada."}),price:"4.00 €"},
+      {name:"Copa de Vino Blanco",      desc:d({es:"Selección disponible en Seco o Dulce.",en:"Available dry or sweet.",de:"Trocken oder lieblich erhältlich.",ja:"辛口または甘口。",fr:"Disponible en sec ou doux.",it:"Disponibile secco o dolce.",nl:"Beschikbaar droog of zoet.",ru:"Сухое или сладкое."}),price:"4.00 €"},
+      {name:"Beronia Rioja",            desc:d({es:"Vino tinto Rioja. Suave, fresco y de carácter accesible.",en:"Rioja red wine. Smooth, fresh and easy-drinking.",de:"Rotwein Rioja. Sanft, frisch und zugänglich.",ja:"リオハの赤ワイン。まろやかでフレッシュ、飲みやすい。",fr:"Vin rouge Rioja. Souple, frais et facile à boire.",it:"Vino rosso Rioja. Morbido, fresco e di carattere accessibile.",nl:"Rode wijn Rioja. Zacht, fris en toegankelijk.",ru:"Красное вино Риоха. Мягкое, свежее и питкое."}),price:"6.00 €"},
+      {name:"Pradorey Ribera del Duero",desc:d({es:"Ribera del Duero robusto e intenso, con notas de fruta madura y roble.",en:"Robust and intense Ribera del Duero, with notes of ripe fruit and oak.",de:"Kräftiger und intensiver Ribera del Duero, mit Noten von reifer Frucht und Eiche.",ja:"力強くて濃厚なリベラ・デル・ドゥエロ、完熟果実とオークのニュアンス。",fr:"Ribera del Duero robuste et intense, aux notes de fruits mûrs et de chêne.",it:"Ribera del Duero robusto e intenso, con note di frutta matura e rovere.",nl:"Robuuste en intense Ribera del Duero, met tonen van rijp fruit en eik.",ru:"Крепкое и интенсивное Рибера дель Дуэро, с нотами спелых фруктов и дуба."}),price:"6.00 €"},
+      {name:"Castillo de Haro Rioja",   desc:d({es:"Rioja clásico y elegante, equilibrado con taninos suaves.",en:"Classic and elegant Rioja, balanced with soft tannins.",de:"Klassischer und eleganter Rioja, ausgewogen mit sanften Tanninen.",ja:"クラシックでエレガントなリオハ、やわらかいタンニンでバランスよい。",fr:"Rioja classique et élégant, équilibré avec des tanins souples.",it:"Rioja classico ed elegante, equilibrato con tannini morbidi.",nl:"Klassieke en elegante Rioja, gebalanceerd met zachte tannines.",ru:"Классическая и элегантная Риоха, сбалансированная с мягкими танинами."}),price:"6.00 €"},
+      {name:"Tinto de Verano",          desc:d({es:"Tinto de la casa con refrescos y cítricos.",en:"House red wine with soda and citrus.",de:"Hauswein mit Sprudel und Zitrusfrüchten.",ja:"ハウスレッドワインにソーダと柑橘。",fr:"Rouge maison avec soda et agrumes.",it:"Rosso della casa con bibita e agrumi.",nl:"Huisrode wijn met frisdrank en citrus.",ru:"Домашнее красное с газировкой и цитрусами."}),price:"4.50 €"}
+    ]},
+    {title:tabs[8],icon:ICONS.cocktail,color:ICON_COLORS[8],cocktailSections:[
+      {key:"especiales",price:"10 €",items:[
+        {name:"Espresso Martini",    desc:"Doble shot de café, vodka premium y licor artesano.",             price:"11 €"},
+        {name:"Piña Colada",         desc:"Ron blanco, coco, piña y un toque de lima. Suave y tropical.",    price:"10 €"},
+        {name:"Mango Gin Fizz",      desc:"Gin infusionado con mango, limón y soda fresca. Frutado y seco.", price:"10 €"},
+        {name:"Escaramuza Cocktail", desc:"Gin con vermouth blanco, limón y soda. Ligero y refrescante.",    price:"10 €"}
+      ]},
+      {key:"clasica",price:"9 € / 10 €",items:[
+        {name:"Moscow Mule",         desc:"Vodka, lima y ginger beer. Perfil cítrico y picante.",            price:"10 €"},
+        {name:"Aperol Spritz",       desc:"Aperol, Prosecco, soda y rodaja de naranja.",                     price:"9 €"},
+        {name:"Fernet con Cola",     desc:"El serve rioplatense por excelencia. Amargo e intenso.",          price:"9 €"},
+        {name:"Campari Spritz",      desc:"Aperitivo italiano con notas amargas y burbuja fina.",            price:"9 €"},
+        {name:"Cuba Libre",          desc:"Ron añejo con cola y un toque de lima fresca.",                   price:"9 €"},
+        {name:"Gin Tonic",           desc:"Ginebra premium con tónica y botánicos de temporada.",           price:"9 €"},
+        {name:"Whiscola",            desc:"Whisky Red Label con cola. Directo y sin artificios.",            price:"9 €"},
+        {name:"Whisky on the Rocks", desc:"Jack Daniel's servido sobre hielo.",                              price:"10 €"},
+        {name:"Jäger Redbull",       desc:"Jägermeister con Red Bull. Intenso y energético.",               price:"9 €"},
+        {name:"Shots",               desc:"Jäger, Tequila o Baileys. Un chupito a tu gusto.",               price:"4.50 €"}
+      ]},
+      {key:"largos",price:"9 €",items:[
+        {name:"Tequila Sunrise",     desc:"Tequila reposado, naranja natural y granadina.",                  price:"9 €"},
+        {name:"Vodka Sunrise",       desc:"Vodka premium, naranja natural y granadina.",                     price:"9 €"},
+        {name:"Gin Cítrico",         desc:"Ginebra equilibrada con cítricos frescos de temporada.",          price:"9 €"}
+      ]}
+    ]}
+  ];
 }
 
-function renderHeader() {
-  document.getElementById('subtitle').textContent = menuData[currentLang].subtitle;
+let currentLang='es',currentTab=0;
+
+function renderLangBar(){document.getElementById('lang-bar').innerHTML=languages.map(l=>`<button class="lang-btn ${l.code===currentLang?'active':''}" onclick="changeLang('${l.code}')"><span>${l.flag}</span><span>${l.name}</span></button>`).join('');}
+function renderHeader(){document.getElementById('subtitle').textContent=(TR[currentLang]||TR.es).subtitle;}
+function renderTabs(){const menu=getMenu(currentLang);document.getElementById('tab-bar').innerHTML=menu.map((cat,idx)=>`<button class="tab-btn ${idx===currentTab?'active':''}" onclick="changeTab(${idx})">${cat.icon} ${cat.title}</button>`).join('');}
+
+function itemHTML(it,globalPrice){
+  const price=it.price||globalPrice||'';
+  return`<div class="menu-item"><div class="menu-item-top"><span class="menu-item-name">${it.name}</span><span class="menu-item-price">${price}</span></div>${it.desc?`<span class="menu-item-desc">${it.desc}</span>`:''}${it.options?`<span class="menu-item-options">${it.options}</span>`:''}</div>`;
 }
 
-function renderTabs() {
-  const t = menuData[currentLang];
-  document.getElementById('tab-bar').innerHTML = t.tabs.map((tabName, idx) => `
-    <button class="tab-btn ${idx === currentTab ? 'active' : ''}" onclick="changeTab(${idx})" style="${ICON_COLORS[idx]}">
-      ${TAB_ICONS[idx]} ${tabName}
-    </button>`).join('');
-}
-
-function itemHTML(it, globalPrice) {
-  const price = it.price || globalPrice || '';
-  const extraClass = (it.highlight ? ' highlighted-item' : '') + (it.fullWidth ? ' full-width' : '');
-  return `
-    <div class="menu-item${extraClass}">
-      <div class="menu-item-top">
-        <span class="menu-item-name">${it.name}</span>
-        <span class="menu-item-price">${price}</span>
-      </div>
-      ${it.desc ? `<span class="menu-item-desc">${it.desc}</span>` : ''}
-      ${it.options ? `<span class="menu-item-options">● ${it.options}</span>` : ''}
-      ${it.note ? `<span class="menu-item-note">${it.note}</span>` : ''}
-    </div>`;
-}
-
-function renderCard() {
-  const t = menuData[currentLang];
-  const catData = t.menu[currentTab];
-  let bodyHTML = '';
-
-  if (catData.cocktailSections) {
-    bodyHTML = catData.cocktailSections.map(sec => {
-      const info = t.cocktailSections[sec.key];
-      return `
-        <div class="cocktail-section">
-          <div class="cocktail-section-header">
-            <span class="cocktail-section-title">${info.title}</span>
-            ${info.sub ? `<span class="cocktail-section-subtitle">— ${info.sub} — ${sec.price}</span>` : ''}
-          </div>
-          <div class="items-grid">
-            ${sec.items.map(it => itemHTML(it)).join('')}
-          </div>
-        </div>`;
+function renderCard(){
+  const menu=getMenu(currentLang),cat=menu[currentTab],t=TR[currentLang]||TR.es;
+  let body='';
+  if(cat.cocktailSections){
+    body=cat.cocktailSections.map(sec=>{
+      const info=t.cocktailSections[sec.key]||{title:sec.key,sub:''};
+      return`<div class="cocktail-section"><div class="cocktail-section-header"><span class="cocktail-section-title">${info.title}</span>${info.sub?`<span class="cocktail-section-subtitle">— ${info.sub} — ${sec.price}</span>`:''}</div><div class="items-grid">${sec.items.map(it=>itemHTML(it)).join('')}</div></div>`;
     }).join('');
-
-  } else if (catData.subcategories) {
-    bodyHTML = `<div class="sub-grid">${catData.subcategories.map(sub => `
-      <div class="subcat">
-        <div class="subcat-header">
-          <div class="subcat-dot ${sub.dot}"></div>
-          <div>
-            <div class="subcat-name">${sub.name}</div>
-            <div class="subcat-tag">${sub.tag}</div>
-          </div>
-        </div>
-        <div class="subcat-profile">${sub.profile}</div>
-        <ul>${sub.items.map(it => `
-          <li>
-            <div class="subcat-li-top">
-              <span class="subcat-li-name">${it.name}</span>
-              <span class="subcat-li-price">${catData.globalPrice}</span>
-            </div>
-            ${it.desc ? `<span class="subcat-li-desc">${it.desc}</span>` : ''}
-          </li>`).join('')}
-        </ul>
-      </div>`).join('')}
-    </div>`;
-
-  } else if (catData.flatSections) {
-    bodyHTML = catData.flatSections.map(sec => `
-      <div class="section-block">
-        <div class="items-grid">
-          ${sec.items.map(it => itemHTML(it)).join('')}
-        </div>
-      </div>`).join('');
-
-    if (catData.agregados) {
-      bodyHTML += `
-        <div class="agregados-box">
-          <div class="agregados-title">${t.agregadosTitle}</div>
-          <div class="agregados-list">
-            ${catData.agregados.map(a => `
-              <div class="agregado-chip">${a.name}<span>${a.price}</span></div>`).join('')}
-          </div>
-        </div>`;
+  }else if(cat.subcategories){
+    body=`<div class="sub-grid">${cat.subcategories.map(sub=>`<div class="subcat"><div class="subcat-header"><div class="subcat-dot ${sub.dot}"></div><div><div class="subcat-name">${sub.name}</div><div class="subcat-tag">${sub.tag}</div></div></div><div class="subcat-profile">${sub.profile}</div><ul>${sub.items.map(it=>`<li><div class="subcat-li-top"><span class="subcat-li-name">${it.name}</span><span class="subcat-li-price">${cat.globalPrice}</span></div>${it.desc?`<span class="subcat-li-desc">${it.desc}</span>`:''}</li>`).join('')}</ul></div>`).join('')}</div>`;
+  }else if(cat.flatSections){
+    body=cat.flatSections.map(sec=>`<div class="section-block"><div class="items-grid">${sec.items.map(it=>itemHTML(it)).join('')}</div></div>`).join('');
+    if(cat.milanesaBanner){
+      body+=`<div class="milanesa-banner"><div class="milanesa-banner-eyebrow">${t.milanesaEyebrow}</div><div class="milanesa-banner-name">${t.milanesaName}</div><div class="milanesa-banner-rule"></div><div class="milanesa-banner-desc">${t.milanesaDesc}</div><span class="milanesa-banner-deal">14,50 €</span><div class="milanesa-banner-time">${ICONS.clock}${t.milanesaTime}</div></div>`;
     }
-
-  } else {
-    bodyHTML = `<div class="items-grid">
-      ${catData.items.map(it => itemHTML(it, catData.globalPrice)).join('')}
-    </div>`;
+    if(cat.agregados){
+      body+=`<div class="agregados-box"><div class="agregados-title">${cat.agregadosTitle}</div><div class="agregados-list">${cat.agregados.map(a=>`<div class="agregado-chip">${a.name}<span>${a.price}</span></div>`).join('')}</div></div>`;
+    }
+  }else{
+    body=`<div class="items-grid">${cat.items.map(it=>itemHTML(it,cat.globalPrice)).join('')}</div>`;
   }
-
-  const priceHTML = (catData.globalPrice && !catData.subcategories) ? `<span class="card-price-global">${catData.globalPrice}</span>` : '';
-  
-  // Mostrar la nota del suplemento solo en Cafetería y Matcha Bar (índices 2 y 3)
-  const noteHTML = ((currentTab === 2 || currentTab === 3) && t.supplement) ? `<div class="card-note">${ICONS.info}<p>${t.supplement}</p></div>` : '';
-
-  document.getElementById('card-inner').innerHTML = `
-    <div class="card-header">
-      <div class="card-title" style="${ICON_COLORS[currentTab]}">${TAB_ICONS[currentTab]} ${t.tabs[currentTab]}</div>
-      ${priceHTML}
-    </div>
-    ${bodyHTML}
-    ${noteHTML}`;
+  const priceHTML=(cat.globalPrice&&!cat.subcategories)?`<span class="card-price-global">${cat.globalPrice}</span>`:'';
+  const noteHTML=cat.notes?`<div class="card-note">${ICONS.info}<p>${cat.notes}</p></div>`:'';
+  const inner=document.getElementById('card-inner');
+  inner.innerHTML=`<div class="card-header"><div class="card-title">${cat.icon} ${cat.title}</div>${priceHTML}</div>${body}${noteHTML}`;
+  inner.style.animation='none';inner.offsetHeight;inner.style.animation='';
 }
-
-function renderFooter() {
-  document.getElementById('footer-text').textContent = `© ${new Date().getFullYear()} Escaramuza Coffee Bar · ${menuData[currentLang].footer}`;
-}
-
-function render() {
-  renderLangBar();
-  renderHeader();
-  renderTabs();
-  renderCard();
-  renderFooter();
-}
-
-function changeLang(code) { currentLang = code; currentTab = 0; render(); }
-function changeTab(idx)   { currentTab = idx; renderTabs(); renderCard(); }
-
+function renderFooter(){document.getElementById('footer-text').textContent=`© ${new Date().getFullYear()} Escaramuza Coffee Bar · ${(TR[currentLang]||TR.es).footer}`;}
+function render(){renderLangBar();renderHeader();renderTabs();renderCard();renderFooter();}
+function changeLang(code){currentLang=code;currentTab=0;render();}
+function changeTab(idx){currentTab=idx;renderTabs();renderCard();}
 render();
 </script>
 </body>
